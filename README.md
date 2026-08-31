@@ -1,4 +1,4 @@
-# DevHandler v2
+# DevHandler Redesign
 
 Frontend code for the DevHandler website redesign on Adobe Experience Manager
 Edge Delivery Services. Page content is authored in Google Docs.
@@ -26,6 +26,28 @@ authoritative for a site registered through AEM Site Admin.
 The Drive folder must be shared with `helix@adobe.com` as **Editor** and should
 contain native Google Docs named `index`, `nav`, and `footer`. Preview and
 publish each document separately with AEM Sidekick before testing the site URL.
+
+Before the first preview, convert the uploaded `index.docx` and `footer.docx`
+files to native Google Docs and create a native Google Doc named `nav`. Keep the
+names extensionless in Drive: `index`, `nav`, and `footer`.
+
+## First deployment
+
+1. Push `main`. The first commit containing `fstab.yaml` lets AEM Code Sync
+   bootstrap the site and its Google Drive content source.
+2. Confirm the AEM Code Sync GitHub App explicitly has access to
+   `devhandler-company/devhandler-com-redesign`. If the repository was renamed,
+   open the app configuration and save its repository selection again.
+3. Wait for this code URL to return CSS instead of `404`:
+   `https://main--devhandler-com-redesign--devhandler-company.aem.page/styles/styles.css`.
+4. In [AEM Site Admin](https://tools.aem.live/tools/site-admin/index.html),
+   confirm the site uses this GitHub repository and the intended Google Drive
+   folder.
+5. Open the preview URL, invoke AEM Sidekick, and select **Add this project**.
+6. In Google Drive, preview `nav`, `footer`, and `index`, then publish all three.
+
+If step 3 still returns `404`, Code Sync has not provisioned the renamed
+repository. Reconfigure the GitHub App before troubleshooting document content.
 
 ## Installation
 
