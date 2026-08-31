@@ -19,11 +19,13 @@ Create or update the canonical site configuration in
 - Content source type: Google Drive
 - Content source URL: the private DevHandler Google Drive site-root folder
 
-Keep the content-source URL in AEM configuration rather than the public code
-repository. The Drive folder must be shared with `helix@adobe.com` as **Editor**
-and should contain native Google Docs named `index`, `nav`, and `footer`.
-Preview and publish each document separately with AEM Sidekick before testing
-the site URL.
+`fstab.yaml` also records the Google Drive mount for compatibility with the
+traditional document-mode setup. The Configuration Service remains
+authoritative for a site registered through AEM Site Admin.
+
+The Drive folder must be shared with `helix@adobe.com` as **Editor** and should
+contain native Google Docs named `index`, `nav`, and `footer`. Preview and
+publish each document separately with AEM Sidekick before testing the site URL.
 
 ## Installation
 
@@ -52,6 +54,7 @@ from this checkout and uses previewed content from the configured EDS site.
 - `scripts/`: shared page loading and decoration logic
 - `styles/`: global and lazy-loaded styles
 - `head.html`: site-wide head markup
+- `fstab.yaml`: compatibility Google Drive mount
 
 Do not edit `scripts/aem.js`; it is vendored from the Adobe boilerplate.
 
