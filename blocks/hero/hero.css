@@ -1,37 +1,79 @@
 .hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
+  box-sizing: border-box;
+  max-width: calc(var(--grid-max-width) + var(--grid-margin-desktop) + var(--grid-margin-desktop));
+  margin-inline: auto;
+  padding: var(--spacing-20) clamp(var(--grid-margin-mobile), 8vw, var(--grid-margin-desktop));
 }
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  isolation: isolate;
+  display: grid;
+  place-items: end start;
+  min-height: clamp(420px, 70svh, 720px);
+  box-sizing: border-box;
+  overflow: hidden;
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  padding: clamp(var(--spacing-32), 6vw, var(--spacing-80));
+  background: var(--bg-hero-dark);
+  color: var(--text-primary);
+}
+
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 15%, var(--bg-hero-dark) 100%);
+  content: '';
+}
+
+.hero > div,
+.hero > div > div {
+  display: contents;
+}
+
+.hero p {
+  margin: 0;
 }
 
 .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+  max-width: 18ch;
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--type-display-hero-font-family);
+  font-size: clamp(
+    var(--type-display-subsection-font-size),
+    11vw,
+    var(--type-display-hero-font-size)
+  );
+  font-weight: var(--type-display-hero-font-weight);
+  letter-spacing: var(--type-display-hero-letter-spacing);
+  line-height: var(--type-display-hero-line-height);
+  text-wrap: balance;
 }
 
 .hero picture {
   position: absolute;
-  z-index: -1;
+  z-index: -2;
   inset: 0;
-  object-fit: cover;
   box-sizing: border-box;
 }
 
 .hero img {
-  object-fit: cover;
+  display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 640px;
+  }
+
+  .hero::after {
+    background: linear-gradient(90deg, var(--bg-hero-dark) 0%, transparent 78%);
   }
 }
