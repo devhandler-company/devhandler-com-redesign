@@ -1,0 +1,1518 @@
+{
+  "source": {
+    "file": "Dev Handler (Amina)",
+    "exportedAt": "2026-09-01T08:48:33.801Z",
+    "figFileVersion": 106
+  },
+  "variableCount": 112,
+  "collections": [
+    {
+      "name": "Variable collection",
+      "modes": [
+        "Mode 1"
+      ],
+      "source": {
+        "id": "guid:1:55",
+        "key": "8026ab574831d8a6703404606b78d9090bdf359d",
+        "linkedLibrary": true
+      },
+      "variables": [
+        {
+          "name": "White",
+          "type": "color",
+          "description": null,
+          "source": {
+            "id": "guid:1:56",
+            "key": "44c240d53666fcb0f32d4f18f21c3f5c7b3f3a51",
+            "linkedLibrary": true
+          },
+          "values": {
+            "Mode 1": "#fff"
+          }
+        },
+        {
+          "name": "Grey",
+          "type": "color",
+          "description": null,
+          "source": {
+            "id": "guid:1:71",
+            "key": "00ecc8e7c51a681806c1c58aaab958752eeef466",
+            "linkedLibrary": true
+          },
+          "values": {
+            "Mode 1": "#929292"
+          }
+        },
+        {
+          "name": "Aquamarine",
+          "type": "color",
+          "description": null,
+          "source": {
+            "id": "guid:1:72",
+            "key": "b3f9a955bd3e156de1bd8ace3c77cec63dc69cb2",
+            "linkedLibrary": true
+          },
+          "values": {
+            "Mode 1": "#4ce1ba"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎨 Primitives",
+      "modes": [
+        "Default"
+      ],
+      "source": {
+        "id": "guid:55:1753",
+        "key": null,
+        "linkedLibrary": false
+      },
+      "variables": [
+        {
+          "name": "color/bg/base",
+          "type": "color",
+          "description": "Main background — darkest surface",
+          "source": {
+            "id": "guid:55:1754",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#11110f"
+          }
+        },
+        {
+          "name": "color/bg/surface",
+          "type": "color",
+          "description": "Card / elevated surface background",
+          "source": {
+            "id": "guid:55:1755",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1c1e20"
+          }
+        },
+        {
+          "name": "color/bg/surface-dark",
+          "type": "color",
+          "description": "Dark header/footer background",
+          "source": {
+            "id": "guid:55:1756",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1c1e21"
+          }
+        },
+        {
+          "name": "color/bg/overlay-dark",
+          "type": "color",
+          "description": "Deep overlay / hero dark",
+          "source": {
+            "id": "guid:55:1757",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0a1628"
+          }
+        },
+        {
+          "name": "color/bg/device",
+          "type": "color",
+          "description": "Device frame background",
+          "source": {
+            "id": "guid:55:1758",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0b0e14"
+          }
+        },
+        {
+          "name": "color/brand/primary",
+          "type": "color",
+          "description": "DevHandler Blue — primary CTA",
+          "source": {
+            "id": "guid:55:1759",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0062f7"
+          }
+        },
+        {
+          "name": "color/brand/primary-alt",
+          "type": "color",
+          "description": "DevHandler Blue alternate shade",
+          "source": {
+            "id": "guid:55:1760",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0063f8"
+          }
+        },
+        {
+          "name": "color/brand/mint",
+          "type": "color",
+          "description": "Mint accent — highlights &amp; tags",
+          "source": {
+            "id": "guid:55:1761",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#52edb6"
+          }
+        },
+        {
+          "name": "color/brand/mint-light",
+          "type": "color",
+          "description": "Light mint tint",
+          "source": {
+            "id": "guid:55:1762",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#4ce1ba"
+          }
+        },
+        {
+          "name": "color/brand/blue-light",
+          "type": "color",
+          "description": "Light blue accent — chip/pill",
+          "source": {
+            "id": "guid:55:1763",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#6eb4ff"
+          }
+        },
+        {
+          "name": "color/neutral/white",
+          "type": "color",
+          "description": "Pure white",
+          "source": {
+            "id": "guid:55:1764",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#fff"
+          }
+        },
+        {
+          "name": "color/neutral/100",
+          "type": "color",
+          "description": "Light neutral background",
+          "source": {
+            "id": "guid:55:1765",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#f5f5f5"
+          }
+        },
+        {
+          "name": "color/neutral/200",
+          "type": "color",
+          "description": "Divider / border light",
+          "source": {
+            "id": "guid:55:1766",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#e8e8e8"
+          }
+        },
+        {
+          "name": "color/neutral/300",
+          "type": "color",
+          "description": "Subtle border / placeholder",
+          "source": {
+            "id": "guid:55:1767",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#e7e7e7"
+          }
+        },
+        {
+          "name": "color/neutral/400",
+          "type": "color",
+          "description": "Muted / disabled element",
+          "source": {
+            "id": "guid:55:1768",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#d9d9d9"
+          }
+        },
+        {
+          "name": "color/neutral/450",
+          "type": "color",
+          "description": "Light stroke",
+          "source": {
+            "id": "guid:55:1769",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#d7d7d7"
+          }
+        },
+        {
+          "name": "color/neutral/500",
+          "type": "color",
+          "description": "Placeholder text / step stroke",
+          "source": {
+            "id": "guid:55:1770",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#bfbfbf"
+          }
+        },
+        {
+          "name": "color/neutral/600",
+          "type": "color",
+          "description": "Secondary text / muted label",
+          "source": {
+            "id": "guid:55:1771",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#9ca3a8"
+          }
+        },
+        {
+          "name": "color/neutral/650",
+          "type": "color",
+          "description": "Icon secondary / stroke button muted",
+          "source": {
+            "id": "guid:55:1772",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#a2aec1"
+          }
+        },
+        {
+          "name": "color/neutral/700",
+          "type": "color",
+          "description": "Review label / meta text",
+          "source": {
+            "id": "guid:55:1773",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#929292"
+          }
+        },
+        {
+          "name": "color/neutral/800",
+          "type": "color",
+          "description": "Dark secondary body",
+          "source": {
+            "id": "guid:55:1774",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#222"
+          }
+        },
+        {
+          "name": "color/neutral/850",
+          "type": "color",
+          "description": "Dark body text",
+          "source": {
+            "id": "guid:55:1775",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1a1a1a"
+          }
+        },
+        {
+          "name": "color/neutral/900",
+          "type": "color",
+          "description": "Heading text primary",
+          "source": {
+            "id": "guid:55:1776",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#111"
+          }
+        },
+        {
+          "name": "color/neutral/border-dark",
+          "type": "color",
+          "description": "Dark border / divider",
+          "source": {
+            "id": "guid:55:1777",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#2d3238"
+          }
+        },
+        {
+          "name": "color/neutral/border-gallery",
+          "type": "color",
+          "description": "Gallery border",
+          "source": {
+            "id": "guid:55:1778",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#2f3339"
+          }
+        },
+        {
+          "name": "color/neutral/black",
+          "type": "color",
+          "description": "Pure black",
+          "source": {
+            "id": "guid:55:1779",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#000"
+          }
+        },
+        {
+          "name": "color/adobe/red",
+          "type": "color",
+          "description": "Adobe Experience Cloud red",
+          "source": {
+            "id": "guid:55:1780",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#fa0f00"
+          }
+        },
+        {
+          "name": "color/adobe/red-alt",
+          "type": "color",
+          "description": "Adobe logo background red",
+          "source": {
+            "id": "guid:55:1781",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#ff0f00"
+          }
+        },
+        {
+          "name": "color/system/success",
+          "type": "color",
+          "description": "Success / positive state",
+          "source": {
+            "id": "guid:55:1782",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#3bad4c"
+          }
+        },
+        {
+          "name": "color/system/success-dark",
+          "type": "color",
+          "description": "Success dark",
+          "source": {
+            "id": "guid:55:1783",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#4f9f45"
+          }
+        },
+        {
+          "name": "color/system/error",
+          "type": "color",
+          "description": "Error / destructive",
+          "source": {
+            "id": "guid:55:1784",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#c41239"
+          }
+        },
+        {
+          "name": "color/system/error-alt",
+          "type": "color",
+          "description": "Error alternate shade",
+          "source": {
+            "id": "guid:55:1785",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#f42434"
+          }
+        },
+        {
+          "name": "color/system/warning",
+          "type": "color",
+          "description": "Warning / caution",
+          "source": {
+            "id": "guid:55:1786",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#f4b11e"
+          }
+        },
+        {
+          "name": "color/system/info",
+          "type": "color",
+          "description": "Info state",
+          "source": {
+            "id": "guid:55:1787",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0eb1e3"
+          }
+        },
+        {
+          "name": "Color",
+          "type": "color",
+          "description": null,
+          "source": {
+            "id": "guid:134:4180",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#06f3"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧩 Semantic",
+      "modes": [
+        "Default"
+      ],
+      "source": {
+        "id": "guid:55:1788",
+        "key": null,
+        "linkedLibrary": false
+      },
+      "variables": [
+        {
+          "name": "bg/page",
+          "type": "color",
+          "description": "Page / canvas background",
+          "source": {
+            "id": "guid:56:1789",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#11110f"
+          }
+        },
+        {
+          "name": "bg/card",
+          "type": "color",
+          "description": "Card and surface background",
+          "source": {
+            "id": "guid:56:1790",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1c1e20"
+          }
+        },
+        {
+          "name": "bg/card-overlay",
+          "type": "color",
+          "description": "Card with 60% opacity overlay",
+          "source": {
+            "id": "guid:56:1791",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1c1e20"
+          }
+        },
+        {
+          "name": "bg/header",
+          "type": "color",
+          "description": "Header / Navbar background",
+          "source": {
+            "id": "guid:56:1792",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1c1e21"
+          }
+        },
+        {
+          "name": "bg/footer",
+          "type": "color",
+          "description": "Footer background",
+          "source": {
+            "id": "guid:56:1793",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#1c1e20"
+          }
+        },
+        {
+          "name": "bg/hero-dark",
+          "type": "color",
+          "description": "Hero section deep dark overlay",
+          "source": {
+            "id": "guid:56:1794",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0a1628"
+          }
+        },
+        {
+          "name": "bg/step-light",
+          "type": "color",
+          "description": "Light step/process background",
+          "source": {
+            "id": "guid:56:1795",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#f5f5f5"
+          }
+        },
+        {
+          "name": "action/primary",
+          "type": "color",
+          "description": "Default primary CTA",
+          "source": {
+            "id": "guid:56:1796",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0062f7"
+          }
+        },
+        {
+          "name": "action/primary-hover",
+          "type": "color",
+          "description": "Primary CTA hover",
+          "source": {
+            "id": "guid:56:1797",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0050ce"
+          }
+        },
+        {
+          "name": "action/primary-subtle",
+          "type": "color",
+          "description": "Tinted surface behind primary-linked content",
+          "source": {
+            "id": "guid:56:1798",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0062f724"
+          }
+        },
+        {
+          "name": "action/primary-chip",
+          "type": "color",
+          "description": "Chip / tab active fill",
+          "source": {
+            "id": "guid:56:1799",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0062f738"
+          }
+        },
+        {
+          "name": "action/ghost-border",
+          "type": "color",
+          "description": "Ghost / secondary button border on dark",
+          "source": {
+            "id": "guid:56:1800",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#3a4048"
+          }
+        },
+        {
+          "name": "action/ghost-row",
+          "type": "color",
+          "description": "Ghost button row fill at 5% white",
+          "source": {
+            "id": "guid:56:1801",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#fff"
+          }
+        },
+        {
+          "name": "accent/mint",
+          "type": "color",
+          "description": "Proof / result accent. One meaning only: measurable outcome",
+          "source": {
+            "id": "guid:56:1802",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#52edb6"
+          }
+        },
+        {
+          "name": "accent/mint-subtle",
+          "type": "color",
+          "description": "KPI badge / active tab fill",
+          "source": {
+            "id": "guid:56:1803",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#52edb62e"
+          }
+        },
+        {
+          "name": "accent/mint-faint",
+          "type": "color",
+          "description": "Section wash behind proof blocks",
+          "source": {
+            "id": "guid:56:1804",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#52edb614"
+          }
+        },
+        {
+          "name": "accent/blue-light",
+          "type": "color",
+          "description": "Light blue pill / chip accent",
+          "source": {
+            "id": "guid:56:1805",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#6eb4ff"
+          }
+        },
+        {
+          "name": "text/primary",
+          "type": "color",
+          "description": "Primary heading text (dark bg)",
+          "source": {
+            "id": "guid:56:1806",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#fff"
+          }
+        },
+        {
+          "name": "text/primary-dark",
+          "type": "color",
+          "description": "Primary heading text (light bg)",
+          "source": {
+            "id": "guid:56:1807",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#111"
+          }
+        },
+        {
+          "name": "text/secondary",
+          "type": "color",
+          "description": "Secondary / body text",
+          "source": {
+            "id": "guid:56:1808",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#9ca3a8"
+          }
+        },
+        {
+          "name": "text/tertiary",
+          "type": "color",
+          "description": "Muted / placeholder text",
+          "source": {
+            "id": "guid:56:1809",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#bfbfbf"
+          }
+        },
+        {
+          "name": "text/dimmed",
+          "type": "color",
+          "description": "White at 70% — dimmed body text",
+          "source": {
+            "id": "guid:56:1810",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#fff"
+          }
+        },
+        {
+          "name": "text/meta",
+          "type": "color",
+          "description": "Meta / review label text",
+          "source": {
+            "id": "guid:56:1811",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#929292"
+          }
+        },
+        {
+          "name": "text/dark-body",
+          "type": "color",
+          "description": "Dark mode body text",
+          "source": {
+            "id": "guid:56:1812",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#222"
+          }
+        },
+        {
+          "name": "border/default",
+          "type": "color",
+          "description": "Default divider / border",
+          "source": {
+            "id": "guid:56:1813",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#e8e8e8"
+          }
+        },
+        {
+          "name": "border/dark",
+          "type": "color",
+          "description": "Dark surface border",
+          "source": {
+            "id": "guid:56:1814",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#2d3238"
+          }
+        },
+        {
+          "name": "border/subtle",
+          "type": "color",
+          "description": "Subtle step border at 35%",
+          "source": {
+            "id": "guid:56:1815",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#2d3238"
+          }
+        },
+        {
+          "name": "border/gallery",
+          "type": "color",
+          "description": "Projects gallery border",
+          "source": {
+            "id": "guid:56:1816",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#2f3339"
+          }
+        },
+        {
+          "name": "border/stats",
+          "type": "color",
+          "description": "Stats row outline",
+          "source": {
+            "id": "guid:56:1817",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0063f8"
+          }
+        },
+        {
+          "name": "icon/adobe",
+          "type": "color",
+          "description": "Adobe Experience Cloud brand red",
+          "source": {
+            "id": "guid:56:1818",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#fa0f00"
+          }
+        },
+        {
+          "name": "status/success",
+          "type": "color",
+          "description": "Success / positive state",
+          "source": {
+            "id": "guid:56:1819",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#3bad4c"
+          }
+        },
+        {
+          "name": "status/error",
+          "type": "color",
+          "description": "Error / destructive state",
+          "source": {
+            "id": "guid:56:1820",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#c41239"
+          }
+        },
+        {
+          "name": "status/warning",
+          "type": "color",
+          "description": "Warning / caution state",
+          "source": {
+            "id": "guid:56:1821",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#f4b11e"
+          }
+        },
+        {
+          "name": "action/primary-active",
+          "type": "color",
+          "description": "Primary CTA pressed",
+          "source": {
+            "id": "guid:133:2343",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#0043ad"
+          }
+        },
+        {
+          "name": "action/disabled",
+          "type": "color",
+          "description": "Disabled control fill",
+          "source": {
+            "id": "guid:133:2344",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#2d3238"
+          }
+        },
+        {
+          "name": "action/disabled-text",
+          "type": "color",
+          "description": "Disabled control label",
+          "source": {
+            "id": "guid:133:2345",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#6b7280"
+          }
+        },
+        {
+          "name": "action/ghost-border-hover",
+          "type": "color",
+          "description": "Ghost button border on hover",
+          "source": {
+            "id": "guid:133:2346",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#6eb4ff"
+          }
+        },
+        {
+          "name": "focus/ring",
+          "type": "color",
+          "description": "Keyboard focus ring, 2px outside",
+          "source": {
+            "id": "guid:133:2347",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#6eb4ff"
+          }
+        },
+        {
+          "name": "bg/surface-2",
+          "type": "color",
+          "description": "Nested card on top of bg/card",
+          "source": {
+            "id": "guid:133:2348",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#24272a"
+          }
+        },
+        {
+          "name": "bg/hover-row",
+          "type": "color",
+          "description": "Row / card hover on dark",
+          "source": {
+            "id": "guid:133:2349",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#ffffff0f"
+          }
+        },
+        {
+          "name": "border/hover",
+          "type": "color",
+          "description": "Card border on hover",
+          "source": {
+            "id": "guid:133:2350",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#4a5058"
+          }
+        },
+        {
+          "name": "text/inverse",
+          "type": "color",
+          "description": "Text on mint / white surfaces",
+          "source": {
+            "id": "guid:133:2351",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#11110f"
+          }
+        },
+        {
+          "name": "text/placeholder",
+          "type": "color",
+          "description": "Empty input placeholder",
+          "source": {
+            "id": "guid:133:2352",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Default": "#6b7280"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📐 Scale",
+      "modes": [
+        "Mode 1"
+      ],
+      "source": {
+        "id": "guid:133:2311",
+        "key": null,
+        "linkedLibrary": false
+      },
+      "variables": [
+        {
+          "name": "spacing/0",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2312",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 0
+          }
+        },
+        {
+          "name": "spacing/2",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2313",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 2
+          }
+        },
+        {
+          "name": "spacing/4",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2314",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 4
+          }
+        },
+        {
+          "name": "spacing/8",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2315",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 8
+          }
+        },
+        {
+          "name": "spacing/12",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2316",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 12
+          }
+        },
+        {
+          "name": "spacing/16",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2317",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 16
+          }
+        },
+        {
+          "name": "spacing/20",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2318",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 20
+          }
+        },
+        {
+          "name": "spacing/24",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2319",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 24
+          }
+        },
+        {
+          "name": "spacing/32",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2320",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 32
+          }
+        },
+        {
+          "name": "spacing/40",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2321",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 40
+          }
+        },
+        {
+          "name": "spacing/48",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2322",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 48
+          }
+        },
+        {
+          "name": "spacing/64",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2323",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 64
+          }
+        },
+        {
+          "name": "spacing/80",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2324",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 80
+          }
+        },
+        {
+          "name": "spacing/96",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2325",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 96
+          }
+        },
+        {
+          "name": "spacing/120",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2326",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 120
+          }
+        },
+        {
+          "name": "spacing/160",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2327",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 160
+          }
+        },
+        {
+          "name": "radius/sm",
+          "type": "dimension",
+          "description": "Chips, tags, inputs",
+          "source": {
+            "id": "guid:133:2328",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 8
+          }
+        },
+        {
+          "name": "radius/md",
+          "type": "dimension",
+          "description": "Cards",
+          "source": {
+            "id": "guid:133:2329",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 16
+          }
+        },
+        {
+          "name": "radius/lg",
+          "type": "dimension",
+          "description": "Large panels, hero blocks",
+          "source": {
+            "id": "guid:133:2330",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 24
+          }
+        },
+        {
+          "name": "radius/pill",
+          "type": "dimension",
+          "description": "Buttons, pills",
+          "source": {
+            "id": "guid:133:2331",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 999
+          }
+        },
+        {
+          "name": "grid/columns",
+          "type": "number",
+          "description": null,
+          "source": {
+            "id": "guid:133:2332",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 12
+          }
+        },
+        {
+          "name": "grid/gutter",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2333",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 24
+          }
+        },
+        {
+          "name": "grid/margin-desktop",
+          "type": "dimension",
+          "description": "Page side padding at 1440",
+          "source": {
+            "id": "guid:133:2334",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 120
+          }
+        },
+        {
+          "name": "grid/margin-mobile",
+          "type": "dimension",
+          "description": "Page side padding at 390",
+          "source": {
+            "id": "guid:133:2335",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 20
+          }
+        },
+        {
+          "name": "grid/max-width",
+          "type": "dimension",
+          "description": "Content container at 1440",
+          "source": {
+            "id": "guid:133:2336",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 1200
+          }
+        },
+        {
+          "name": "size/control-lg",
+          "type": "dimension",
+          "description": "Primary button / input height desktop",
+          "source": {
+            "id": "guid:133:2337",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 56
+          }
+        },
+        {
+          "name": "size/control-md",
+          "type": "dimension",
+          "description": "Secondary button, mobile control — min touch target",
+          "source": {
+            "id": "guid:133:2338",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 48
+          }
+        },
+        {
+          "name": "size/control-sm",
+          "type": "dimension",
+          "description": "Chip / tab",
+          "source": {
+            "id": "guid:133:2339",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 40
+          }
+        },
+        {
+          "name": "size/icon-md",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2340",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 24
+          }
+        },
+        {
+          "name": "size/border",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2341",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 1
+          }
+        },
+        {
+          "name": "size/border-strong",
+          "type": "dimension",
+          "description": null,
+          "source": {
+            "id": "guid:133:2342",
+            "key": null,
+            "linkedLibrary": false
+          },
+          "values": {
+            "Mode 1": 2
+          }
+        }
+      ]
+    }
+  ]
+}

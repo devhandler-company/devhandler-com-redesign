@@ -1,0 +1,782 @@
+{
+  "source": {
+    "file": "Dev Handler (Amina)",
+    "exportedAt": "2026-09-01T08:48:33.801Z",
+    "figFileVersion": 106
+  },
+  "styleCount": 35,
+  "designSystemStyleCount": 24,
+  "legacyStyleCount": 11,
+  "styles": [
+    {
+      "name": "body [m]",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:25",
+        "key": "5944c2eb1775fed3fb4cd5fba20a53f37adb0b30"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Medium",
+      "fontWeight": 500,
+      "fontSize": 20,
+      "lineHeight": {
+        "value": 1.2,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "Button",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:36",
+        "key": "6c39520738f0843890e7b4f69c4fba6a8f1148aa"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 20,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "Small text",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:50",
+        "key": "29a375d90fe616bddf3967bdabfb9fae119296dc"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Medium",
+      "fontWeight": 500,
+      "fontSize": 18,
+      "lineHeight": {
+        "value": 1.1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "H 2",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:65",
+        "key": "1ef43b212f6e6f732ef554c8ad34289fa078fdae"
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 64,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": -2,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "H3",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:66",
+        "key": "1db6517a006ecdc49e4bbbacddd6295bc86c7483"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 24,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "quote text",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:68",
+        "key": "cd59cb73cf2ec9c5b1ff0164ebb3c7e15777b6ac"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 22,
+      "lineHeight": {
+        "value": 26,
+        "unit": "PIXELS"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "h3 bold",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:69",
+        "key": "d3f295714cd7304c0c72d19ce7b713cd33203836"
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 32,
+      "lineHeight": {
+        "value": 100,
+        "unit": "PERCENT"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "subtittle",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:70",
+        "key": "e13b5ae675c6296c090d9081bdeea0b25451c860"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 28,
+      "lineHeight": {
+        "value": 1.1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "H1",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:124",
+        "key": "a752d68c8df70495504b4b5fd38e752dc8d1f5f0"
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 48,
+      "lineHeight": {
+        "value": 100,
+        "unit": "PERCENT"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body text",
+      "category": "legacy",
+      "source": {
+        "id": "guid:1:125",
+        "key": "c4b424f7948aec35394ae8fed331bd82c455ad94"
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 18,
+      "lineHeight": {
+        "value": 26,
+        "unit": "PIXELS"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "display/stat",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:960",
+        "key": null
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 96,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": -2,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "display/hero",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:961",
+        "key": null
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 64,
+      "lineHeight": {
+        "value": 1.1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": -2,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "display/section",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:962",
+        "key": null
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 48,
+      "lineHeight": {
+        "value": 1.15,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": -1,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "display/subsection",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:963",
+        "key": null
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 32,
+      "lineHeight": {
+        "value": 1.2,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "display/caption",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:964",
+        "key": null
+      },
+      "fontFamily": "AmpleAlt",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 24,
+      "lineHeight": {
+        "value": 1.3,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "heading/xl",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:965",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 44,
+      "lineHeight": {
+        "value": 1.1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "heading/lg",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:966",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 24,
+      "lineHeight": {
+        "value": 1.3,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "heading/md",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:967",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 20,
+      "lineHeight": {
+        "value": 1.2,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "heading/sm",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:968",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 18,
+      "lineHeight": {
+        "value": 1.3,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "heading/xs",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:969",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Bold",
+      "fontWeight": 700,
+      "fontSize": 16,
+      "lineHeight": {
+        "value": 1.4,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body/lg",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:970",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 22,
+      "lineHeight": {
+        "value": 1.35,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body/md",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:971",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 18,
+      "lineHeight": {
+        "value": 1.45,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body/sm",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:972",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 16,
+      "lineHeight": {
+        "value": 1.5,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body/xs",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:973",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 14,
+      "lineHeight": {
+        "value": 1.5,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body-emphasis/lg",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:974",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Medium",
+      "fontWeight": 500,
+      "fontSize": 20,
+      "lineHeight": {
+        "value": 1.3,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body-emphasis/md",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:975",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Medium",
+      "fontWeight": 500,
+      "fontSize": 18,
+      "lineHeight": {
+        "value": 1.4,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "label/lg",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:976",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 20,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "label/md",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:977",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 16,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "label/sm",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:978",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 14,
+      "lineHeight": {
+        "value": 1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "label/overline",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:979",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 14,
+      "lineHeight": {
+        "value": 1.1,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 4,
+        "unit": "PERCENT"
+      },
+      "textCase": "UPPER",
+      "textDecoration": null
+    },
+    {
+      "name": "meta/md",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:980",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Medium",
+      "fontWeight": 500,
+      "fontSize": 18,
+      "lineHeight": {
+        "value": 1.2,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "meta/sm",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:981",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Medium",
+      "fontWeight": 500,
+      "fontSize": 14,
+      "lineHeight": {
+        "value": 1.2,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "meta/xs",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:982",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 12,
+      "lineHeight": {
+        "value": 1.3,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "body-emphasis/xl",
+      "category": "design-system",
+      "source": {
+        "id": "guid:128:983",
+        "key": null
+      },
+      "fontFamily": "Hind",
+      "fontStyle": "SemiBold",
+      "fontWeight": 600,
+      "fontSize": 24,
+      "lineHeight": {
+        "value": 1.35,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    },
+    {
+      "name": "Paragraph Regular/16px",
+      "category": "legacy",
+      "source": {
+        "id": "guid:134:4226",
+        "key": "9a1b7f38b1cf7c2f3edad0a1f957db1982b3be8c"
+      },
+      "fontFamily": "Roboto",
+      "fontStyle": "Regular",
+      "fontWeight": 400,
+      "fontSize": 16,
+      "lineHeight": {
+        "value": 1.5,
+        "unit": "RAW"
+      },
+      "letterSpacing": {
+        "value": 0,
+        "unit": "PERCENT"
+      },
+      "textCase": null,
+      "textDecoration": null
+    }
+  ]
+}

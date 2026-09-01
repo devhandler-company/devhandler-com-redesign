@@ -1,0 +1,127 @@
+/*
+ * Generated from Dev Handler (Amina).fig.
+ * Figma source exported at 2026-09-01T08:48:33.801Z.
+ * Values are grouped by their original Figma variable collections.
+ */
+
+:root {
+  /* Variable collection — linked library snapshot */
+  --legacy-white: #fff;
+  --legacy-grey: #929292;
+  --legacy-aquamarine: #4ce1ba;
+
+  /* 🎨 Primitives */
+  --color-bg-base: #11110f;
+  --color-bg-surface: #1c1e20;
+  --color-bg-surface-dark: #1c1e21;
+  --color-bg-overlay-dark: #0a1628;
+  --color-bg-device: #0b0e14;
+  --color-brand-primary: #0062f7;
+  --color-brand-primary-alt: #0063f8;
+  --color-brand-mint: #52edb6;
+  --color-brand-mint-light: #4ce1ba;
+  --color-brand-blue-light: #6eb4ff;
+  --color-neutral-white: #fff;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e8e8e8;
+  --color-neutral-300: #e7e7e7;
+  --color-neutral-400: #d9d9d9;
+  --color-neutral-450: #d7d7d7;
+  --color-neutral-500: #bfbfbf;
+  --color-neutral-600: #9ca3a8;
+  --color-neutral-650: #a2aec1;
+  --color-neutral-700: #929292;
+  --color-neutral-800: #222;
+  --color-neutral-850: #1a1a1a;
+  --color-neutral-900: #111;
+  --color-neutral-border-dark: #2d3238;
+  --color-neutral-border-gallery: #2f3339;
+  --color-neutral-black: #000;
+  --color-adobe-red: #fa0f00;
+  --color-adobe-red-alt: #ff0f00;
+  --color-system-success: #3bad4c;
+  --color-system-success-dark: #4f9f45;
+  --color-system-error: #c41239;
+  --color-system-error-alt: #f42434;
+  --color-system-warning: #f4b11e;
+  --color-system-info: #0eb1e3;
+  --color: #06f3;
+
+  /* 🧩 Semantic */
+  --bg-page: #11110f;
+  --bg-card: #1c1e20;
+  --bg-card-overlay: #1c1e20;
+  --bg-header: #1c1e21;
+  --bg-footer: #1c1e20;
+  --bg-hero-dark: #0a1628;
+  --bg-step-light: #f5f5f5;
+  --action-primary: #0062f7;
+  --action-primary-hover: #0050ce;
+  --action-primary-subtle: #0062f724;
+  --action-primary-chip: #0062f738;
+  --action-ghost-border: #3a4048;
+  --action-ghost-row: #fff;
+  --accent-mint: #52edb6;
+  --accent-mint-subtle: #52edb62e;
+  --accent-mint-faint: #52edb614;
+  --accent-blue-light: #6eb4ff;
+  --text-primary: #fff;
+  --text-primary-dark: #111;
+  --text-secondary: #9ca3a8;
+  --text-tertiary: #bfbfbf;
+  --text-dimmed: #fff;
+  --text-meta: #929292;
+  --text-dark-body: #222;
+  --border-default: #e8e8e8;
+  --border-dark: #2d3238;
+  --border-subtle: #2d3238;
+  --border-gallery: #2f3339;
+  --border-stats: #0063f8;
+  --icon-adobe: #fa0f00;
+  --status-success: #3bad4c;
+  --status-error: #c41239;
+  --status-warning: #f4b11e;
+  --action-primary-active: #0043ad;
+  --action-disabled: #2d3238;
+  --action-disabled-text: #6b7280;
+  --action-ghost-border-hover: #6eb4ff;
+  --focus-ring: #6eb4ff;
+  --bg-surface-2: #24272a;
+  --bg-hover-row: #ffffff0f;
+  --border-hover: #4a5058;
+  --text-inverse: #11110f;
+  --text-placeholder: #6b7280;
+
+  /* 📐 Scale */
+  --spacing-0: 0px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-120: 120px;
+  --spacing-160: 160px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --grid-columns: 12;
+  --grid-gutter: 24px;
+  --grid-margin-desktop: 120px;
+  --grid-margin-mobile: 20px;
+  --grid-max-width: 1200px;
+  --size-control-lg: 56px;
+  --size-control-md: 48px;
+  --size-control-sm: 40px;
+  --size-icon-md: 24px;
+  --size-border: 1px;
+  --size-border-strong: 2px;
+}

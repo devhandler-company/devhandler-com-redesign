@@ -1,4 +1,48 @@
 /* stylelint-disable max-line-length */
+
+/* AmpleAlt Bold is the display family defined by the Figma typography system. */
+@font-face {
+  font-family: ample-alt;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/ample-alt-bold.otf') format('opentype');
+}
+
+/* Hind is the primary text family defined by the Figma typography system. */
+@font-face {
+  font-family: hind;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/hind-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: hind;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/hind-medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: hind;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/hind-semibold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: hind;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/hind-bold.woff2') format('woff2');
+}
+
+/* Roboto remains as a fallback while the existing site transitions to Hind. */
 @font-face {
   font-family: roboto-condensed;
   font-style: normal;

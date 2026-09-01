@@ -10,31 +10,35 @@
  * governing permissions and limitations under the License.
  */
 
+@import url('./tokens.css');
+@import url('./typography.css');
+
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --background-color: var(--bg-page);
+  --light-color: var(--bg-card);
+  --dark-color: var(--bg-surface-2);
+  --text-color: var(--text-primary);
+  --link-color: var(--action-primary);
+  --link-hover-color: var(--action-primary-hover);
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: var(--font-family-body);
+  --heading-font-family: var(--font-family-heading);
+  --display-font-family: var(--font-family-display);
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: var(--type-body-md-font-size);
+  --body-font-size-s: var(--type-body-sm-font-size);
+  --body-font-size-xs: var(--type-body-xs-font-size);
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: var(--type-display-hero-font-size);
+  --heading-font-size-xl: var(--type-display-section-font-size);
+  --heading-font-size-l: var(--type-display-subsection-font-size);
+  --heading-font-size-m: var(--type-heading-lg-font-size);
+  --heading-font-size-s: var(--type-heading-md-font-size);
+  --heading-font-size-xs: var(--type-heading-sm-font-size);
 
   /* nav height */
   --nav-height: 64px;
@@ -53,23 +57,6 @@
   src: local('Arial');
 }
 
-@media (width >= 900px) {
-  :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
-  }
-}
-
 body {
   display: none;
   margin: 0;
@@ -77,7 +64,9 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  font-weight: var(--type-body-md-font-weight);
+  letter-spacing: var(--type-body-md-letter-spacing);
+  line-height: var(--type-body-md-line-height);
 }
 
 body.appear {
@@ -106,18 +95,56 @@ h5,
 h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
-  font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
+h1 {
+  font-family: var(--type-display-hero-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: var(--type-display-hero-font-weight);
+  letter-spacing: var(--type-display-hero-letter-spacing);
+  line-height: var(--type-display-hero-line-height);
+}
+
+h2 {
+  font-family: var(--type-display-section-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: var(--type-display-section-font-weight);
+  letter-spacing: var(--type-display-section-letter-spacing);
+  line-height: var(--type-display-section-line-height);
+}
+
+h3 {
+  font-family: var(--type-display-subsection-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: var(--type-display-subsection-font-weight);
+  letter-spacing: var(--type-display-subsection-letter-spacing);
+  line-height: var(--type-display-subsection-line-height);
+}
+
+h4 {
+  font-family: var(--type-heading-lg-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--type-heading-lg-font-weight);
+  letter-spacing: var(--type-heading-lg-letter-spacing);
+  line-height: var(--type-heading-lg-line-height);
+}
+
+h5 {
+  font-family: var(--type-heading-md-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: var(--type-heading-md-font-weight);
+  letter-spacing: var(--type-heading-md-letter-spacing);
+  line-height: var(--type-heading-md-line-height);
+}
+
+h6 {
+  font-family: var(--type-heading-sm-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: var(--type-heading-sm-font-weight);
+  letter-spacing: var(--type-heading-sm-letter-spacing);
+  line-height: var(--type-heading-sm-line-height);
+}
 
 p,
 dl,
@@ -182,7 +209,7 @@ button.button {
   border-radius: 2.4em;
   padding: 0.5em 1.2em;
   font: inherit;
-  font-weight: 500;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
