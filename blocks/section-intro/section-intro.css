@@ -1,0 +1,91 @@
+main .section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  box-sizing: border-box;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: clamp(var(--grid-margin-mobile), 8vw, var(--grid-margin-desktop));
+}
+
+main .section-intro-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+main .section-intro-eyebrow {
+  margin: 0;
+  color: var(--accent-blue-light);
+  font-family: var(--type-label-overline-font-family);
+  font-size: var(--type-label-overline-font-size);
+  font-weight: var(--type-label-overline-font-weight);
+  letter-spacing: var(--type-label-overline-letter-spacing);
+  line-height: var(--type-label-overline-line-height);
+  text-transform: var(--type-label-overline-text-transform);
+}
+
+main .section-intro-title {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--type-display-subsection-font-family);
+  font-size: var(--type-display-subsection-font-size);
+  font-weight: var(--type-display-subsection-font-weight);
+  letter-spacing: var(--type-display-subsection-letter-spacing);
+  line-height: var(--type-display-subsection-line-height);
+}
+
+main .section-intro-subtitle {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--type-body-lg-font-family);
+  font-size: var(--type-heading-sm-font-size);
+  font-weight: var(--type-body-lg-font-weight);
+  letter-spacing: var(--type-body-lg-letter-spacing);
+  line-height: var(--type-body-lg-line-height);
+}
+
+main .section-intro-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  color: var(--text-primary);
+  font-family: var(--type-label-md-font-family);
+  font-size: var(--type-label-md-font-size);
+  font-weight: var(--type-label-md-font-weight);
+  letter-spacing: var(--type-label-md-letter-spacing);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .section-intro-cta::after {
+  content: '→';
+  transition: transform 0.2s ease;
+}
+
+main .section-intro-cta:hover::after,
+main .section-intro-cta:focus-visible::after {
+  transform: translateX(4px);
+}
+
+@media (width >= 900px) {
+  main .section-intro {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--spacing-32);
+  }
+
+  main .section-intro-title {
+    max-width: 16ch;
+    font-size: var(--type-display-section-font-size);
+    letter-spacing: var(--type-display-section-letter-spacing);
+    line-height: var(--type-display-section-line-height);
+  }
+
+  main .section-intro-cta {
+    flex-shrink: 0;
+  }
+}
