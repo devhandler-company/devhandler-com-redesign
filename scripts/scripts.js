@@ -10,6 +10,7 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  readBlockConfig,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -165,6 +166,40 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    const hero = main.firstElementChild?.querySelector('.hero.home');
+    if (hero) {
+      // Hidden sections do not request their fonts until decoration finishes.
+      // Warm only the above-the-fold faces without delaying content on failure.
+      loadFonts().then(() => {
+        const fonts = window.matchMedia('(min-width: 900px)').matches
+          ? ['700 1em ample-alt', '600 1em hind']
+          : ['700 1em hind', '400 1em hind', '600 1em hind'];
+        return Promise.all(fonts.map((font) => document.fonts.load(font)));
+      }).catch(() => { /* Keep the normal font fallback if a request fails. */ });
+      const authoredBackground = readBlockConfig(hero).background;
+      const background = typeof authoredBackground === 'string' ? authoredBackground.trim() : '';
+      if (background && /^(https?:\/\/|\/(?!\/))\S+$/.test(background)
+        && !hero.querySelector('.hero-background')) {
+        let url;
+        try {
+          url = new URL(background, window.location.href).href;
+        } catch {
+          // A malformed authored image URL must not interrupt page loading.
+        }
+        const insertedImage = [...hero.querySelectorAll('img')].some((image) => image.src === url);
+        const existingPreload = [...document.querySelectorAll('link[rel="preload"][as="image"]')]
+          .some((link) => link.href === url);
+        if (url && !insertedImage && !existingPreload) {
+          const preload = document.createElement('link');
+          preload.rel = 'preload';
+          preload.as = 'image';
+          preload.href = url;
+          preload.media = '(min-width: 900px)';
+          preload.setAttribute('fetchpriority', 'high');
+          document.head.append(preload);
+        }
+      }
+    }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
