@@ -1,7 +1,6 @@
 /* stylelint-disable no-descending-specificity -- mobile-first state rules are refined at the desktop breakpoint. */
 
 header {
-  --nav-height: 76px;
   --nav-max-width: 1440px;
   --header-height: var(--nav-height);
 }
@@ -397,7 +396,6 @@ header .nav-action-link.nav-action-secondary {
 
 @media (width >= 900px) {
   header {
-    --nav-height: 74px;
     --header-height: var(--nav-height);
   }
 

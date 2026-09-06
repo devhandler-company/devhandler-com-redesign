@@ -41,7 +41,13 @@
   --heading-font-size-xs: var(--type-heading-sm-font-size);
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 76px;
+}
+
+@media (width >= 900px) {
+  :root {
+    --nav-height: 74px;
+  }
 }
 
 /* fallback fonts */
