@@ -206,6 +206,14 @@
   padding: var(--spacing-40);
 }
 
+.reviews.is-desktop.is-clickable .reviews-card {
+  cursor: pointer;
+}
+
+.reviews.is-desktop.is-clickable .reviews-track.is-dragging .reviews-card {
+  cursor: grabbing;
+}
+
 .reviews.is-desktop .reviews-card-quote p,
 .reviews.is-desktop .reviews-card-quote {
   margin-top: var(--spacing-32);

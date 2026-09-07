@@ -11,6 +11,7 @@ export const REVIEWS_CAROUSEL_CONFIG = {
   wideFullCards: 2,
   compactFullCards: 1,
   minimumWideEdgeRatio: 0.5,
+  clickToCenterOnDesktop: true,
   dragThreshold: 2,
 };
 
@@ -30,6 +31,7 @@ function applyCarouselConfig(block) {
   Object.entries(properties).forEach(([property, value]) => {
     block.style.setProperty(property, value);
   });
+  block.classList.toggle('is-clickable', config.clickToCenterOnDesktop);
 }
 
 function updateLayoutMode(block) {
@@ -90,6 +92,10 @@ function cloneCard(card) {
   clone.querySelectorAll('a, button, input, select, textarea, [tabindex]')
     .forEach((element) => element.setAttribute('tabindex', '-1'));
   return clone;
+}
+
+function preferredScrollBehavior() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
 }
 
 function createLoop(track, cards) {
@@ -161,6 +167,7 @@ function enableDrag(track, loop) {
   let dragging = false;
   let startX = 0;
   let startScroll = 0;
+  let didDrag = false;
 
   const markInteracted = () => block.classList.add('has-interacted');
 
@@ -175,6 +182,7 @@ function enableDrag(track, loop) {
     dragging = true;
     startX = event.clientX;
     startScroll = track.scrollLeft;
+    didDrag = false;
     track.classList.add('is-dragging');
     track.setPointerCapture(event.pointerId);
   });
@@ -187,6 +195,7 @@ function enableDrag(track, loop) {
     if (!dragging) return;
     if (Math.abs(event.clientX - startX) > REVIEWS_CAROUSEL_CONFIG.dragThreshold) {
       markInteracted();
+      didDrag = true;
     }
     track.scrollLeft = startScroll - (event.clientX - startX);
     startScroll += loop?.normalize() || 0;
@@ -194,6 +203,27 @@ function enableDrag(track, loop) {
 
   track.addEventListener('pointerup', stopDragging);
   track.addEventListener('pointercancel', stopDragging);
+
+  track.addEventListener('click', (event) => {
+    if (didDrag) {
+      didDrag = false;
+      event.preventDefault();
+      return;
+    }
+    if (!REVIEWS_CAROUSEL_CONFIG.clickToCenterOnDesktop
+      || !block.classList.contains('is-desktop')) return;
+    if (event.target.closest(
+      'a, button, input, select, textarea, label, [role="button"], [tabindex]',
+    )) return;
+
+    const card = event.target.closest('.reviews-card');
+    if (!card) return;
+    markInteracted();
+    track.scrollTo({
+      left: card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2),
+      behavior: preferredScrollBehavior(),
+    });
+  });
 
   track.addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
@@ -204,7 +234,7 @@ function enableDrag(track, loop) {
     const distance = (card?.getBoundingClientRect().width || track.clientWidth) + gap;
     track.scrollBy({
       left: event.key === 'ArrowRight' ? distance : -distance,
-      behavior: 'smooth',
+      behavior: preferredScrollBehavior(),
     });
   });
 

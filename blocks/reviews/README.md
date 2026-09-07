@@ -27,7 +27,9 @@ the viewport when the two dimmed edge cards are included. Initial order starts
 with the last card peeking before card one, so four authored cards appear as
 `4, 1, 2, 3` on a wide screen. The carousel loops continuously and supports
 mouse drag, touch, wheel/trackpad scrolling, and left/right arrow keys when
-focused.
+focused. On desktop, clicking a card smoothly centers it without intercepting
+links or controls inside the card. Set `clickToCenterOnDesktop` to `false` to
+disable that behavior.
 
 ## Layout configuration
 
