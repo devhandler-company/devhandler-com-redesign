@@ -1,0 +1,411 @@
+main > .section.aem-context-container {
+  padding-top: var(--spacing-40);
+  background: var(--bg-page);
+}
+
+main > .section.aem-context-container > .section-intro-wrapper {
+  box-sizing: border-box;
+  max-width: calc(var(--grid-max-width) + 2 * var(--grid-margin-mobile));
+  margin: 0 auto var(--spacing-40);
+  padding: 0 var(--grid-margin-mobile);
+}
+
+main > .section.aem-context-container > .section-intro-wrapper > .section-intro {
+  padding-inline: 0;
+}
+
+main > .section.aem-context-container .section-intro-title {
+  max-width: none;
+}
+
+main > .section.aem-context-container .section-intro-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+main > .section > .aem-context-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.aem-context {
+  --aem-context-overhang: clamp(0px, calc((100vw - 1240px) / 2), 64px);
+
+  box-sizing: border-box;
+  padding: 0 var(--grid-margin-mobile) var(--spacing-40);
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+main > .section.aem-context-container > .aem-context-wrapper > .aem-context {
+  background: transparent;
+}
+
+.aem-context .aem-context-panels,
+.aem-context .aem-context-quote,
+.aem-context .aem-context-extra {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+}
+
+.aem-context p,
+.aem-context h3,
+.aem-context blockquote {
+  margin: 0;
+}
+
+.aem-context .aem-context-panels,
+.aem-context .aem-context-details {
+  display: grid;
+  gap: var(--spacing-24);
+}
+
+.aem-context .aem-context-problem,
+.aem-context .aem-context-solution {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 178px;
+  padding: var(--spacing-20);
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  overflow-wrap: anywhere;
+}
+
+.aem-context .aem-context-solution {
+  border-color: transparent;
+  background: var(--bg-step-light);
+  color: var(--text-primary-dark);
+}
+
+.aem-context h3 {
+  font-family: var(--type-heading-md-font-family);
+  font-size: var(--type-heading-md-font-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--type-heading-md-line-height);
+}
+
+.aem-context p {
+  font-family: var(--type-body-sm-font-family);
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+}
+
+.aem-context .aem-context-eyebrow {
+  margin-bottom: var(--spacing-12);
+  color: var(--accent-blue-light);
+  font-size: var(--type-label-overline-font-size);
+  font-weight: var(--type-label-overline-font-weight);
+  letter-spacing: var(--type-label-overline-letter-spacing);
+  line-height: var(--type-label-overline-line-height);
+  text-transform: uppercase;
+}
+
+.aem-context .aem-context-solution .aem-context-eyebrow {
+  color: var(--text-primary-dark);
+}
+
+.aem-context :where(h3) + p {
+  margin-top: var(--spacing-12);
+}
+
+.aem-context :where(.aem-context-problem) p:where(:not(.aem-context-eyebrow)) {
+  color: var(--text-secondary);
+}
+
+.aem-context :where(.aem-context-solution) p:where(:not(.aem-context-eyebrow)) {
+  color: var(--text-dark-body);
+}
+
+.aem-context .aem-context-steps {
+  display: grid;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aem-context .aem-context-step {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 240px;
+  padding: var(--spacing-24) var(--spacing-32);
+  border: var(--size-border) solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  overflow-wrap: anywhere;
+}
+
+.aem-context .aem-context-number {
+  display: block;
+  color: var(--text-tertiary);
+  font-family: var(--type-display-hero-font-family);
+  font-size: var(--type-display-hero-font-size);
+  font-weight: var(--type-display-hero-font-weight);
+  line-height: 1;
+  letter-spacing: var(--type-display-hero-letter-spacing);
+}
+
+.aem-context .aem-context-step h3 {
+  font-size: var(--type-heading-lg-font-size);
+  font-weight: var(--type-heading-lg-font-weight);
+  line-height: var(--type-heading-lg-line-height);
+}
+
+.aem-context :where(.aem-context-step) p {
+  margin-top: var(--spacing-16);
+  font-size: var(--type-body-emphasis-lg-font-size);
+  line-height: var(--type-body-emphasis-lg-line-height);
+}
+
+.aem-context .aem-context-quote {
+  position: relative;
+  margin-top: 88px;
+  margin-bottom: 0;
+}
+
+.aem-context .aem-context-statement {
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--spacing-20) var(--spacing-24);
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg-card) 50%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.aem-context :where(blockquote) p {
+  font-size: var(--type-body-md-font-size);
+  line-height: var(--type-body-md-line-height);
+}
+
+.aem-context figcaption {
+  margin-top: var(--spacing-16);
+  color: var(--accent-mint);
+}
+
+.aem-context :where(figcaption) p {
+  font-size: var(--type-meta-sm-font-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--type-meta-sm-line-height);
+}
+
+.aem-context .aem-context-portrait,
+.aem-context .aem-context-link {
+  display: none;
+}
+
+.aem-context a:any-link {
+  color: var(--accent-blue-light);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.aem-context a:focus-visible {
+  outline: var(--size-border-strong) solid var(--focus-ring);
+  outline-offset: var(--spacing-4);
+}
+
+.aem-context .aem-context-solution a:focus-visible {
+  outline-color: var(--text-primary-dark);
+}
+
+.aem-context .aem-context-solution a:any-link,
+.aem-context .aem-context-step:first-child a:any-link {
+  color: inherit;
+}
+
+@media (width >= 900px) {
+  main > .section.aem-context-container {
+    padding-top: var(--spacing-64);
+    background: radial-gradient(ellipse 1000px 850px at 55% 35%, var(--action-primary-chip), transparent),
+      linear-gradient(110deg, var(--bg-hero-dark), color-mix(in srgb, var(--action-primary) 35%, var(--bg-hero-dark)) 50%, var(--bg-hero-dark));
+  }
+
+  main > .section.aem-context-container > .section-intro-wrapper {
+    margin-bottom: var(--spacing-64);
+  }
+
+  .aem-context {
+    padding-bottom: var(--spacing-48);
+  }
+
+  .aem-context .aem-context-panels {
+    grid-template-columns: 4fr 3fr;
+    gap: 0;
+  }
+
+  .aem-context .aem-context-panels > :only-child {
+    grid-column: 1 / -1;
+  }
+
+  .aem-context .aem-context-details {
+    gap: var(--spacing-16);
+    grid-auto-rows: 1fr;
+  }
+
+  .aem-context .aem-context-problem,
+  .aem-context .aem-context-solution {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 260px;
+    padding: var(--spacing-32);
+    border-radius: var(--radius-lg);
+  }
+
+  .aem-context .aem-context-problem,
+  .aem-context .aem-context-step,
+  .aem-context .aem-context-statement {
+    background: linear-gradient(135deg, var(--bg-hero-dark), color-mix(in srgb, var(--bg-hero-dark) 30%, transparent));
+  }
+
+  .aem-context h3 {
+    font-size: var(--type-heading-lg-font-size);
+    font-weight: var(--type-heading-lg-font-weight);
+    line-height: var(--type-heading-lg-line-height);
+  }
+
+  .aem-context p {
+    font-size: var(--type-body-emphasis-lg-font-size);
+    line-height: var(--type-body-emphasis-lg-line-height);
+  }
+
+  .aem-context .aem-context-eyebrow {
+    font-size: var(--type-label-overline-font-size);
+  }
+
+  .aem-context :where(.aem-context-problem) p:where(:not(.aem-context-eyebrow)) {
+    color: var(--text-primary);
+  }
+
+  .aem-context .aem-context-steps {
+    gap: 0;
+    grid-auto-rows: 1fr;
+  }
+
+  .aem-context .aem-context-step {
+    min-height: 268px;
+    padding: var(--spacing-40);
+    border-color: var(--border-dark);
+    border-radius: var(--radius-lg);
+  }
+
+  .aem-context .aem-context-step:first-child {
+    background: var(--accent-mint);
+    color: var(--text-primary-dark);
+  }
+
+  .aem-context .aem-context-step:first-child a:focus-visible {
+    outline-color: var(--text-primary-dark);
+  }
+
+  .aem-context .aem-context-number {
+    margin-bottom: var(--spacing-24);
+    color: var(--accent-mint);
+  }
+
+  .aem-context .aem-context-step:first-child .aem-context-number {
+    color: var(--action-primary);
+  }
+
+  .aem-context :where(.aem-context-step) p {
+    font-size: var(--type-body-emphasis-lg-font-size);
+    line-height: var(--type-body-emphasis-lg-line-height);
+  }
+
+  .aem-context .aem-context-quote {
+    margin-top: var(--spacing-64);
+  }
+
+  .aem-context .aem-context-with-portrait {
+    min-height: 410px;
+  }
+
+  .aem-context .aem-context-statement {
+    min-height: 300px;
+    padding: var(--spacing-48);
+    border-radius: var(--radius-lg);
+  }
+
+  .aem-context .aem-context-with-portrait .aem-context-statement {
+    padding-right: clamp(330px, 32vw, 410px);
+  }
+
+  .aem-context :where(blockquote) p {
+    font-size: var(--type-body-lg-font-size);
+    line-height: var(--type-body-lg-line-height);
+  }
+
+  .aem-context figcaption {
+    margin-top: var(--spacing-24);
+    color: var(--text-primary);
+  }
+
+  .aem-context :where(figcaption) p {
+    font-family: var(--type-display-subsection-font-family);
+    font-size: var(--type-display-subsection-font-size);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--type-display-subsection-line-height);
+  }
+
+  .aem-context .aem-context-portrait {
+    position: absolute;
+    right: calc(-1 * min(var(--aem-context-overhang), 32px));
+    bottom: 0;
+    display: block;
+    width: min(390px, 38%);
+    pointer-events: none;
+  }
+
+  .aem-context .aem-context-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .aem-context a.aem-context-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: var(--size-control-lg);
+    width: fit-content;
+    max-width: 100%;
+    margin-top: var(--spacing-24);
+    padding: var(--spacing-16) var(--spacing-32);
+    border-radius: var(--radius-pill);
+    background: var(--accent-mint);
+    color: var(--text-primary-dark);
+    font-size: var(--type-label-lg-font-size);
+    font-weight: var(--type-label-lg-font-weight);
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .aem-context .aem-context-with-portrait .aem-context-link {
+    position: relative;
+    right: calc(-1 * var(--aem-context-overhang));
+    width: min(474px, 44%);
+    max-width: none;
+    margin-top: 54px;
+    margin-left: auto;
+  }
+
+  .aem-context .aem-context-link:hover {
+    background: color-mix(in srgb, var(--accent-mint) 85%, var(--text-primary));
+  }
+
+  .aem-context .aem-context-link:active {
+    background: color-mix(in srgb, var(--accent-mint) 85%, var(--text-primary-dark));
+  }
+}
+
+@media (forced-colors: active) {
+  .aem-context .aem-context-link {
+    border: var(--size-border) solid ButtonText;
+  }
+}
