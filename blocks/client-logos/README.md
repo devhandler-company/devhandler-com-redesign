@@ -66,6 +66,9 @@ as fake vector assets. Original artwork is not recolored or recreated.
   seven columns from 1200 px. The static roster always includes every client.
 - Content width is capped at 1440 px specifically for this block. The desktop
   background fills the section, including ultrawide screens.
+- At 900–1440 px the rows reach both viewport edges without wrapper padding.
+  Wider screens center the 1440 px rows. Mobile keeps its 20 px side gutters;
+  the desktop heading also retains a text inset independently of the rows.
 - Desktop rows clip at the bounded content area's edges, not the full 4K screen.
   Each visual group repeats once to create a seamless loop. There are no duplicate
   IDs or repeated accessible list entries. Authored order determines row order.
