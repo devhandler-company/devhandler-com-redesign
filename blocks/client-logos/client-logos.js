@@ -107,15 +107,7 @@ export default function decorate(block) {
       row.append(track);
       rows.append(row);
     });
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'client-logos-toggle';
-    toggle.textContent = 'Pause animation';
-    toggle.addEventListener('click', () => {
-      const paused = block.classList.toggle('client-logos-paused');
-      toggle.textContent = paused ? 'Resume animation' : 'Pause animation';
-    });
     block.classList.add('client-logos-animated');
-    block.append(rows, toggle);
+    block.append(rows);
   }
 }
