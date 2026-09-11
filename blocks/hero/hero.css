@@ -5,8 +5,8 @@
   padding: var(--spacing-20) clamp(var(--grid-margin-mobile), 8vw, var(--grid-margin-desktop));
 }
 
-/* Preserve the original EDS hero on every page that has not opted into home. */
-.hero:where(:not(.home)) {
+/* Preserve the original EDS hero outside the authored home/services variants. */
+.hero:where(:not(.home, .services)) {
   position: relative;
   isolation: isolate;
   display: grid;
@@ -21,7 +21,7 @@
   color: var(--text-primary);
 }
 
-.hero:where(:not(.home))::after {
+.hero:where(:not(.home, .services))::after {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -29,16 +29,16 @@
   content: '';
 }
 
-.hero:where(:not(.home)) > div,
-.hero:where(:not(.home)) > div > div {
+.hero:where(:not(.home, .services)) > div,
+.hero:where(:not(.home, .services)) > div > div {
   display: contents;
 }
 
-.hero:where(:not(.home)) p {
+.hero:where(:not(.home, .services)) p {
   margin: 0;
 }
 
-.hero:where(:not(.home)) h1 {
+.hero:where(:not(.home, .services)) h1 {
   max-width: 18ch;
   margin: 0;
   color: var(--text-primary);
@@ -50,14 +50,14 @@
   text-wrap: balance;
 }
 
-.hero:where(:not(.home)) picture {
+.hero:where(:not(.home, .services)) picture {
   position: absolute;
   z-index: -2;
   inset: 0;
   box-sizing: border-box;
 }
 
-.hero:where(:not(.home)) img {
+.hero:where(:not(.home, .services)) img {
   display: block;
   width: 100%;
   height: 100%;
@@ -65,7 +65,7 @@
   object-position: center;
 }
 
-main > .section > .hero-wrapper:has(> .hero.home) {
+main > .section > .hero-wrapper:has(> .hero:is(.home, .services)) {
   max-width: none;
   padding: 0;
 }
@@ -81,6 +81,12 @@ main > .section > .hero-wrapper:has(> .hero.home) {
   background: var(--bg-page);
   color: var(--text-primary);
   text-align: center;
+}
+
+.hero.services p,
+.hero.services h1 {
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .hero.home p,
@@ -134,7 +140,7 @@ main > .section > .hero-wrapper:has(> .hero.home) {
   margin-top: var(--spacing-24);
 }
 
-.hero.home .hero-actions a.button {
+.hero:is(.home, .services) .hero-actions a.button {
   min-height: var(--size-control-lg);
   padding: var(--spacing-16) var(--spacing-24);
   border: var(--size-border) solid var(--action-ghost-border);
@@ -151,30 +157,30 @@ main > .section > .hero-wrapper:has(> .hero.home) {
   text-decoration: none;
 }
 
-.hero.home .hero-actions a.primary {
+.hero:is(.home, .services) .hero-actions a.primary {
   border-color: var(--action-primary);
   background: var(--action-primary);
 }
 
-.hero.home .hero-actions a.primary:hover {
+.hero:is(.home, .services) .hero-actions a.primary:hover {
   border-color: var(--action-primary-hover);
   background: var(--action-primary-hover);
 }
 
-.hero.home .hero-actions a.primary:active {
+.hero:is(.home, .services) .hero-actions a.primary:active {
   background: var(--action-primary-active);
 }
 
-.hero.home .hero-actions a.secondary:hover {
+.hero:is(.home, .services) .hero-actions a.secondary:hover {
   border-color: var(--action-ghost-border-hover);
   background: var(--bg-hover-row);
 }
 
-.hero.home .hero-actions a.secondary:active {
+.hero:is(.home, .services) .hero-actions a.secondary:active {
   background: var(--bg-surface-2);
 }
 
-.hero.home a:focus-visible {
+.hero:is(.home, .services) a:focus-visible {
   outline: var(--size-border-strong) solid var(--focus-ring);
   outline-offset: var(--spacing-4);
 }
@@ -274,11 +280,11 @@ main > .section > .hero-wrapper:has(> .hero.home) {
 }
 
 @media (width >= 900px) {
-  .hero:where(:not(.home)) {
+  .hero:where(:not(.home, .services)) {
     min-height: 640px;
   }
 
-  .hero:where(:not(.home))::after {
+  .hero:where(:not(.home, .services))::after {
     background: linear-gradient(90deg, var(--bg-hero-dark) 0%, transparent 78%);
   }
 
@@ -343,7 +349,7 @@ main > .section > .hero-wrapper:has(> .hero.home) {
     margin-top: var(--spacing-32);
   }
 
-  .hero.home .hero-actions a.button {
+  .hero:is(.home, .services) .hero-actions a.button {
     padding-inline: var(--spacing-32);
   }
 
@@ -361,6 +367,86 @@ main > .section > .hero-wrapper:has(> .hero.home) {
 
   .hero.home .hero-trust .hero-trust-desktop {
     display: list-item;
+  }
+}
+
+.hero.services {
+  box-sizing: border-box;
+  padding: var(--spacing-40) var(--grid-margin-mobile) var(--spacing-48);
+  background: var(--bg-hero-dark);
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.hero.services .hero-content {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+}
+
+.hero.services .hero-eyebrow {
+  margin-bottom: var(--spacing-24);
+  color: var(--accent-blue-light);
+  font-family: var(--type-label-overline-font-family);
+  font-size: var(--type-label-overline-font-size);
+  font-weight: var(--type-label-overline-font-weight);
+  line-height: var(--type-label-overline-line-height);
+  letter-spacing: var(--type-label-overline-letter-spacing);
+  text-transform: var(--type-label-overline-text-transform);
+}
+
+.hero.services h1 {
+  max-width: 760px;
+  font-family: var(--type-display-subsection-font-family);
+  font-size: var(--type-display-subsection-font-size);
+  font-weight: var(--type-display-subsection-font-weight);
+  line-height: var(--type-display-subsection-line-height);
+  letter-spacing: var(--type-display-subsection-letter-spacing);
+}
+
+.hero.services .hero-content > p:not(.hero-eyebrow) {
+  max-width: 720px;
+  margin-top: var(--spacing-24);
+  color: var(--text-secondary);
+  font-family: var(--type-body-sm-font-family);
+  font-size: var(--type-body-sm-font-size);
+  font-weight: var(--type-body-sm-font-weight);
+  line-height: var(--type-body-sm-line-height);
+}
+
+.hero.services .hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-24);
+}
+
+@media (width >= 600px) {
+  .hero.services h1 {
+    font-size: var(--type-display-section-font-size);
+    line-height: var(--type-display-section-line-height);
+    letter-spacing: var(--type-display-section-letter-spacing);
+  }
+
+  .hero.services .hero-actions {
+    flex-flow: row wrap;
+    gap: var(--spacing-16);
+  }
+}
+
+@media (width >= 900px) {
+  .hero.services {
+    padding: var(--spacing-20) var(--grid-margin-mobile) var(--spacing-80);
+  }
+
+  .hero.services h1 {
+    font-size: var(--type-display-hero-font-size);
+    line-height: var(--type-display-hero-line-height);
+    letter-spacing: var(--type-display-hero-letter-spacing);
+  }
+
+  .hero.services .hero-content > p:not(.hero-eyebrow) {
+    font-size: var(--type-body-lg-font-size);
+    line-height: var(--type-body-lg-line-height);
   }
 }
 

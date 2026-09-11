@@ -1,10 +1,13 @@
 /** One authored hero, with layout differences handled by CSS. */
 export default function decorate(block) {
-  if (!block.classList.contains('home')) return;
+  const services = block.classList.contains('services');
+  if (!block.classList.contains('home') && !services) return;
   if (block.querySelector(':scope > .hero-content')) return;
 
   const content = document.createElement('div');
   content.className = 'hero-content';
+  const eyebrow = document.createElement('p');
+  eyebrow.className = 'hero-eyebrow';
   const background = document.createElement('div');
   background.className = 'hero-background';
   const badges = document.createElement('div');
@@ -19,7 +22,10 @@ export default function decorate(block) {
     const cells = [...row.children];
     const label = cells.length > 1 ? cells[0].textContent.trim().replace(/\s+/g, ' ').toLowerCase() : '';
     const targets = { background, content, badges };
-    if (Object.hasOwn(targets, label)) {
+    if (services && label === 'eyebrow') {
+      legacy = false;
+      eyebrow.textContent = cells.slice(1).map((cell) => cell.textContent.trim()).join(' ');
+    } else if (Object.hasOwn(targets, label)) {
       legacy = false;
       cells.slice(1).forEach((cell) => targets[label].append(...cell.childNodes));
     } else if (label === 'trust' || label === 'trust (desktop)') {
@@ -90,6 +96,7 @@ export default function decorate(block) {
     if (!p.textContent.trim() && !p.querySelector('img')) p.remove();
   });
   if (actions.hasChildNodes()) content.append(actions);
+  if (eyebrow.textContent.trim()) content.prepend(eyebrow);
 
   badges.querySelectorAll('img').forEach((image) => { image.loading = 'eager'; });
   block.replaceChildren();
