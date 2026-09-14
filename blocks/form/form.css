@@ -37,6 +37,15 @@ main .form-title {
   line-height: var(--type-heading-xl-line-height);
 }
 
+main .form-title strong {
+  color: var(--action-primary);
+  font-weight: inherit;
+}
+
+main .form-title em {
+  font-style: normal;
+}
+
 main .form-labels {
   display: flex;
   flex-wrap: wrap;

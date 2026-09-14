@@ -38,10 +38,20 @@ function buildEyebrow(config) {
   return eyebrow;
 }
 
+/** Unwrap a cell's single authored paragraph so inline markup (e.g. <strong>) can be reused as-is. */
+function inlineNodesOf(cell) {
+  if (!cell) return [];
+  const paragraphs = [...cell.querySelectorAll(':scope > p')];
+  if (paragraphs.length === 1) return [...paragraphs[0].childNodes];
+  return [...cell.childNodes];
+}
+
 function buildTitle(config) {
   const title = document.createElement('h2');
   title.className = 'form-title';
-  title.textContent = textOf(config.title) || "Here's what happens after you...";
+  const nodes = inlineNodesOf(config.title);
+  if (nodes.length) title.append(...nodes);
+  else title.textContent = "Here's what happens after you...";
   return title;
 }
 
