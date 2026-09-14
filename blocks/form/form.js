@@ -45,10 +45,30 @@ function buildTitle(config) {
   return title;
 }
 
-function buildLabels(config) {
-  const items = [...(config.labels?.querySelectorAll('li') || [])]
-    .map((item) => item.textContent.trim())
+/**
+ * Read badge items from the Labels cell. Authors sometimes format this as a real
+ * bullet list, but often just as separate lines/paragraphs — support both.
+ */
+function readLabelItems(cell) {
+  if (!cell) return [];
+  const listItems = [...cell.querySelectorAll('li')];
+  const paragraphs = [...cell.querySelectorAll('p')];
+  let source = [cell];
+  if (listItems.length) source = listItems;
+  else if (paragraphs.length) source = paragraphs;
+
+  return source
+    .flatMap((element) => {
+      const copy = element.cloneNode(true);
+      copy.querySelectorAll('br').forEach((br) => br.replaceWith('\n'));
+      return copy.textContent.split(/\r?\n/);
+    })
+    .map((text) => text.trim())
     .filter(Boolean);
+}
+
+function buildLabels(config) {
+  const items = readLabelItems(config.labels);
   if (!items.length) return null;
 
   const list = document.createElement('ul');
