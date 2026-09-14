@@ -145,28 +145,26 @@ function decorateButtons(main) {
 }
 
 /**
- * Applies an authored "Section Metadata" block to its parent section as classes
- * and CSS custom properties, then removes the metadata block from the DOM.
+ * Applies a section's authored metadata — delivered as data-* attributes directly on the
+ * section by the rendering pipeline, not as a nested block — to classes and CSS custom
+ * properties on the section.
  * @param {Element} main The container element
  */
 function decorateSectionMetadata(main) {
   main.querySelectorAll(':scope > .section').forEach((section) => {
-    const metaBlock = section.querySelector(':scope > div > .section-metadata');
-    if (!metaBlock) return;
-    const meta = readBlockConfig(metaBlock);
-    Object.keys(meta).forEach((key) => {
-      const value = meta[key];
-      if (!value) return;
-      if (key === 'style') {
-        value.split(',').forEach((style) => section.classList.add(toClassName(style.trim())));
-      } else if (key === 'grid') {
-        section.classList.add('grid');
-        section.style.setProperty('--section-grid-columns', value.trim());
-      } else {
-        section.classList.add(`${toClassName(key)}-${toClassName(value)}`);
-      }
+    const { dataset } = section;
+    if (dataset.style) {
+      dataset.style.split(',').forEach((value) => section.classList.add(toClassName(value.trim())));
+    }
+    if (dataset.grid) {
+      section.classList.add('grid');
+      section.style.setProperty('--section-grid-columns', dataset.grid.trim());
+    }
+    Object.keys(dataset).forEach((key) => {
+      if (['sectionStatus', 'style', 'grid'].includes(key)) return;
+      const value = dataset[key];
+      if (value) section.classList.add(`${toClassName(key)}-${toClassName(value)}`);
     });
-    metaBlock.parentElement.remove();
   });
 }
 
