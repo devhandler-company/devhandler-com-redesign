@@ -1,0 +1,96 @@
+main .list-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  margin: 0;
+  padding: var(--spacing-20);
+  border-radius: var(--radius-md);
+  list-style: none;
+}
+
+main .list-items > li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+}
+
+main .list-marker {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--action-primary);
+}
+
+main .list-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+main .list-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--type-heading-sm-font-family);
+  font-size: var(--type-heading-sm-font-size);
+  font-weight: var(--type-heading-sm-font-weight);
+  letter-spacing: var(--type-heading-sm-letter-spacing);
+  line-height: var(--type-heading-sm-line-height);
+}
+
+main .list-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--type-body-sm-font-family);
+  font-size: var(--type-body-sm-font-size);
+  font-weight: var(--type-body-sm-font-weight);
+  letter-spacing: var(--type-body-sm-letter-spacing);
+  line-height: var(--type-body-sm-line-height);
+}
+
+main .list-description p {
+  margin: 0;
+}
+
+main .list-description a {
+  color: inherit;
+}
+
+@media (width >= 900px) {
+  main .list-items {
+    gap: var(--spacing-32);
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  main .list-items > li {
+    align-items: center;
+    gap: var(--spacing-40);
+  }
+
+  main .list-marker {
+    width: 60px;
+    height: 40px;
+    border: 1px solid var(--color-neutral-black);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, #0358d8, #4de4b9);
+  }
+
+  main .list-content {
+    gap: var(--spacing-8);
+  }
+
+  main .list-title {
+    font-family: var(--type-display-subsection-font-family);
+    font-size: var(--type-display-subsection-font-size);
+    font-weight: var(--type-display-subsection-font-weight);
+    letter-spacing: var(--type-display-subsection-letter-spacing);
+    line-height: var(--type-display-subsection-line-height);
+  }
+
+  main .list-description {
+    color: var(--text-primary);
+  }
+}

@@ -356,3 +356,44 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+main > .section.spacing-s {
+  margin-block: var(--spacing-24);
+}
+
+main > .section.spacing-m {
+  margin-block: var(--spacing-64);
+}
+
+main > .section.spacing-l {
+  margin-block: var(--spacing-120);
+}
+
+@media (width >= 900px) {
+  main > .section.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--section-grid-columns, 2), minmax(0, 1fr));
+    gap: var(--spacing-24);
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 32px;
+  }
+
+  main > .section.grid > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  main > .section.grid.gap-s {
+    gap: var(--spacing-16);
+  }
+
+  main > .section.grid.gap-m {
+    gap: var(--spacing-32);
+  }
+
+  main > .section.grid.gap-l {
+    gap: var(--spacing-64);
+  }
+}
