@@ -1,0 +1,272 @@
+main .form-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  background: var(--color-neutral-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-24);
+}
+
+/* intro column */
+main .form-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+main .form-eyebrow {
+  margin: 0;
+  color: var(--text-meta);
+  font-family: var(--type-label-overline-font-family);
+  font-size: var(--type-label-overline-font-size);
+  font-weight: var(--type-label-overline-font-weight);
+  letter-spacing: var(--type-label-overline-letter-spacing);
+  line-height: var(--type-label-overline-line-height);
+  text-transform: var(--type-label-overline-text-transform);
+}
+
+main .form-title {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--text-primary-dark);
+  font-family: var(--type-heading-xl-font-family);
+  font-size: 28px;
+  font-weight: var(--type-heading-xl-font-weight);
+  letter-spacing: var(--type-heading-xl-letter-spacing);
+  line-height: var(--type-heading-xl-line-height);
+}
+
+main .form-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main .form-labels li {
+  padding: 8px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-dark-body);
+  font-family: var(--type-label-sm-font-family);
+  font-size: calc(var(--type-label-sm-font-size) - 2px);
+  font-weight: var(--type-label-sm-font-weight);
+  white-space: nowrap;
+}
+
+main .form-after-text {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--text-dark-body);
+  font-family: var(--type-body-sm-font-family);
+  font-size: calc(var(--type-body-sm-font-size) - 2px);
+  font-weight: var(--type-body-sm-font-weight);
+  line-height: var(--type-body-sm-line-height);
+}
+
+/* form panel */
+main .form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+main .form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+main .form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+main .form-field-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+main .form-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--size-control-md);
+  padding-inline: var(--spacing-16);
+  background: var(--bg-step-light);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-dark-body);
+  font: inherit;
+  font-size: 15px;
+}
+
+main .form-input::placeholder {
+  color: var(--text-placeholder);
+}
+
+textarea.form-input {
+  height: 88px;
+  padding-block: 14px;
+  resize: vertical;
+}
+
+main .form-consent-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+main .form-consent-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--action-primary);
+}
+
+main .form-consent-label span {
+  color: var(--text-dark-body);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+}
+
+main .form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+main .form-submit,
+main .form-schedule {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-control-md);
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+main .form-submit {
+  border: none;
+  background: var(--action-primary);
+  color: var(--color-neutral-white);
+}
+
+main .form-submit:hover,
+main .form-submit:focus-visible {
+  background: var(--action-primary-hover);
+}
+
+main .form-submit:disabled {
+  background: var(--action-disabled);
+  color: var(--action-disabled-text);
+  cursor: not-allowed;
+}
+
+main .form-schedule {
+  border: 1.5px solid var(--border-default);
+  background: transparent;
+  color: var(--text-primary-dark);
+}
+
+main .form-schedule:hover,
+main .form-schedule:focus-visible {
+  border-color: var(--action-ghost-border-hover);
+}
+
+main .form-schedule[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+main .form-error {
+  margin: 0;
+  color: var(--status-error);
+  font-size: 14px;
+}
+
+main .form-thank-you {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+main .form-thank-you h3 {
+  margin: 0;
+  color: var(--text-primary-dark);
+  font-family: var(--type-heading-lg-font-family);
+  font-size: var(--type-heading-lg-font-size);
+  font-weight: var(--type-heading-lg-font-weight);
+}
+
+main .form-thank-you p {
+  margin: 0;
+  color: var(--text-dark-body);
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+}
+
+@media (width >= 1024px) {
+  main .form-card {
+    flex-direction: row;
+    gap: var(--spacing-64);
+    padding: var(--spacing-64);
+  }
+
+  main .form-title {
+    font-size: var(--type-heading-xl-font-size);
+  }
+
+  main .form-labels li {
+    font-size: var(--type-label-sm-font-size);
+  }
+
+  main .form-after-text {
+    font-size: var(--type-body-sm-font-size);
+  }
+
+  main .form-intro {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  main .form-panel {
+    flex: 0 0 400px;
+    width: 400px;
+  }
+
+  main .form-input {
+    height: var(--size-control-lg);
+    padding-inline: var(--spacing-20);
+    font-size: 16px;
+  }
+
+  textarea.form-input {
+    height: 96px;
+    padding-block: 16px;
+  }
+
+  main .form-actions {
+    flex-direction: row;
+  }
+
+  main .form-submit {
+    padding-inline: 40px;
+  }
+
+  main .form-schedule {
+    padding-inline: 32px;
+  }
+}
