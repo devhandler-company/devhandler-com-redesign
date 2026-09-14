@@ -11,6 +11,7 @@ import {
   loadCSS,
   buildBlock,
   readBlockConfig,
+  toClassName,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -144,6 +145,32 @@ function decorateButtons(main) {
 }
 
 /**
+ * Applies an authored "Section Metadata" block to its parent section as classes
+ * and CSS custom properties, then removes the metadata block from the DOM.
+ * @param {Element} main The container element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > .section').forEach((section) => {
+    const metaBlock = section.querySelector(':scope > div > .section-metadata');
+    if (!metaBlock) return;
+    const meta = readBlockConfig(metaBlock);
+    Object.keys(meta).forEach((key) => {
+      const value = meta[key];
+      if (!value) return;
+      if (key === 'style') {
+        value.split(',').forEach((style) => section.classList.add(toClassName(style.trim())));
+      } else if (key === 'grid') {
+        section.classList.add('grid');
+        section.style.setProperty('--section-grid-columns', value.trim());
+      } else {
+        section.classList.add(`${toClassName(key)}-${toClassName(value)}`);
+      }
+    });
+    metaBlock.parentElement.remove();
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -152,6 +179,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
