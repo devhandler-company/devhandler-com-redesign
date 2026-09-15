@@ -5,7 +5,7 @@ main .section-intro {
   box-sizing: border-box;
   max-width: var(--grid-max-width);
   margin-inline: auto;
-  padding-inline: clamp(var(--grid-margin-mobile), 8vw, var(--grid-margin-desktop));
+  padding: 0 var(--grid-margin-mobile);
 }
 
 main .section-intro-content {
@@ -88,4 +88,47 @@ main .section-intro-cta:focus-visible::after {
   main .section-intro-cta {
     flex-shrink: 0;
   }
+
+  main .section-intro.button {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+/* button variant: CTA drops to its own line as a filled pill button */
+main .section-intro.button .section-intro-title {
+  max-width: none;
+}
+
+main .section-intro.button .section-intro-cta {
+  box-sizing: border-box;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--size-control-lg);
+  padding: var(--spacing-16) var(--spacing-32);
+  border-radius: var(--radius-pill);
+  background: var(--accent-mint);
+  color: var(--text-primary-dark);
+  font-family: var(--type-label-lg-font-family);
+  font-size: var(--type-label-lg-font-size);
+  font-weight: var(--type-label-lg-font-weight);
+  line-height: 1.2;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+main .section-intro.button .section-intro-cta::after {
+  content: none;
+}
+
+main .section-intro.button .section-intro-cta:hover,
+main .section-intro.button .section-intro-cta:focus-visible {
+  background: color-mix(in srgb, var(--accent-mint) 85%, var(--text-primary));
+}
+
+main .section-intro.button .section-intro-cta:active {
+  background: color-mix(in srgb, var(--accent-mint) 85%, var(--text-primary-dark));
 }
