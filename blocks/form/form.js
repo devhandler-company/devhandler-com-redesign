@@ -38,7 +38,9 @@ function buildEyebrow(config) {
   return eyebrow;
 }
 
-/** Unwrap a cell's single authored paragraph so inline markup (e.g. <strong>) can be reused as-is. */
+/**
+ * Unwrap a cell's single authored paragraph so inline markup can be reused as-is.
+ */
 function inlineNodesOf(cell) {
   if (!cell) return [];
   const paragraphs = [...cell.querySelectorAll(':scope > p')];
