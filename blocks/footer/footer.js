@@ -94,6 +94,19 @@ export default async function decorate(block) {
     }
   });
 
+  // Google Docs can split a linked address at each soft break.
+  footer.querySelectorAll('.footer-contacts li > a').forEach((link) => {
+    let separator = link.nextElementSibling;
+    while (separator?.tagName === 'BR'
+      && separator.nextElementSibling?.matches('a')
+      && separator.nextElementSibling.href === link.href) {
+      const continuation = separator.nextElementSibling;
+      link.append(separator, ...continuation.childNodes);
+      continuation.remove();
+      separator = link.nextElementSibling;
+    }
+  });
+
   footer.querySelectorAll('.footer-contacts a').forEach((link) => {
     const icon = link.querySelector(':scope > .icon');
     if (icon) {
