@@ -47,6 +47,9 @@ same semantic list at every width.
 | Canadian Tire | canadian-tire.svg | |
 | LanguageWire | languagewire.webp | Light |
 | Sonova | sonova.webp | |
+| BMW AG | bmw.webp | |
+| Prinova | prinova.webp | |
+| Six Flags | six-flags.webp | |
 
 Prefix these filenames with `/blocks/client-logos/`. Vectors come from supplied
 exports, with empty canvas margins trimmed. Complete existing artwork replaces
@@ -54,6 +57,20 @@ clipped strip exports. Raster sources use transparent 192x64, 384x128 and 576x19
 WebP canvases without upscaling the source artwork. The base path selects 1x/2x/3x
 automatically through srcset. SVGs containing raster payloads are not shipped
 as fake vector assets. Original artwork is not recolored or recreated.
+
+BMW, Prinova and Six Flags reuse the existing public site's artwork, served by
+the reference site as `media_113b8ce2d692d30d325b3bd25f0aec215ce63c334.png`,
+`media_1c997017781b8971090954504a2125a2ad23842e5.png` and
+`media_140724897e852d2719f0c5175c4d262c060e93445.png`, respectively. The bundled
+WebP versions use the same 1x/2x/3x canvas convention as the existing raster roster.
+
+## Compact variant
+
+Use **Client Logos (compact)** for Services Root. It always uses a static grid,
+including rosters with 12 or more clients: two columns on mobile, three from
+600px, five from 900px. It has no marquee duplicates or blue section background.
+The default homepage variant is unchanged. The same three-cell authoring contract
+and optional Light surface remain available.
 
 ## Layout, motion and accessibility
 

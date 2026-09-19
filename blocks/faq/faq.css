@@ -1,0 +1,91 @@
+.faq {
+  display: grid;
+  gap: var(--spacing-16);
+  color: var(--text-primary);
+}
+
+.faq .faq-item {
+  min-width: 0;
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  overflow-wrap: anywhere;
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  min-height: var(--spacing-80);
+  padding: var(--spacing-24);
+  box-sizing: border-box;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq h3 {
+  margin: 0;
+  font-family: var(--type-heading-md-font-family);
+  font-size: var(--type-heading-md-font-size);
+  font-weight: var(--type-heading-md-font-weight);
+  line-height: var(--type-heading-md-line-height);
+}
+
+.faq summary::after {
+  content: '';
+  flex: 0 0 var(--spacing-16);
+  height: var(--spacing-16);
+  background:
+    linear-gradient(currentcolor, currentcolor) center / 100% 3px no-repeat,
+    linear-gradient(currentcolor, currentcolor) center / 3px 100% no-repeat;
+  color: var(--text-secondary);
+}
+
+.faq [open] > summary::after {
+  background-size: 100% 3px, 0 0;
+  color: var(--accent-blue-light);
+}
+
+.faq .faq-answer {
+  padding: 0 var(--spacing-24) var(--spacing-24);
+  color: var(--text-secondary);
+  font-size: var(--type-body-md-font-size);
+  line-height: var(--type-body-md-line-height);
+}
+
+.faq .faq-answer > :first-child { margin-top: 0; }
+.faq .faq-answer > :last-child { margin-bottom: 0; }
+.faq .faq-unanswered { padding: var(--spacing-24); }
+.faq a { color: var(--accent-blue-light); }
+
+.faq :is(summary, a):focus-visible {
+  outline: var(--size-border-strong) solid var(--focus-ring);
+  outline-offset: var(--spacing-4);
+  border-radius: var(--radius-sm);
+}
+
+@media (width >= 900px) {
+  .faq summary {
+    min-height: calc(var(--spacing-96) - 2 * var(--size-border));
+    padding: var(--spacing-32);
+  }
+
+  .faq [open] > summary {
+    min-height: 0;
+    padding-bottom: var(--spacing-24);
+  }
+
+  .faq .faq-answer { padding: 0 var(--spacing-32) var(--spacing-32); }
+}
+
+@media (forced-colors: active) {
+  .faq summary::after {
+    background: none;
+    content: '+';
+  }
+
+  .faq [open] > summary::after { content: '−'; }
+}

@@ -12,6 +12,10 @@ Name the block `Cards (case)`. Every content row represents one case card.
 
 The Figma card includes the image. The decorator tolerates an empty image cell so incomplete authoring does not break the page, but the image is required for a design-complete card. Each statistic cell contains two text elements: the value first, then its label. The rendered card uses a semantic `article`, a list for tags, and a definition list for statistics.
 
+For the working Services Root mockup, `Cards (case, placeholder-media)` reserves
+an empty image area when the first cell is blank. No placeholder file is loaded.
+An unlinked title in Cell 3 remains a heading until the real case URL is supplied.
+
 ## Service variant
 
 Name the block `Cards (service)`. Every content row represents one service card.
@@ -53,6 +57,9 @@ Name the block `Cards (model)`. Every content row represents one engagement mode
 | Model label or number | Model title | Description | Benefits as a list or separate paragraphs | Required CTA link |
 
 Benefits render as a semantic list with the Figma mint bullet treatment.
+
+A CTA cell without a usable destination retains its label as static text. Invalid
+link schemes are not made clickable; valid new-tab links receive safe rel values.
 
 ## Responsive behavior
 

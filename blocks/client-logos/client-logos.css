@@ -192,3 +192,36 @@ main > .section.client-logos-container {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+main > .section.client-logos-container:has(.client-logos.compact) { background: transparent; }
+
+main > .section > .client-logos-wrapper:has(.client-logos.compact) {
+  max-width: calc(var(--grid-max-width) + 2 * var(--grid-margin-mobile));
+  padding-inline: var(--grid-margin-mobile);
+}
+
+.client-logos.compact { padding-block: 0; }
+
+.client-logos.compact .client-logos-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-24);
+}
+
+.client-logos.compact .client-logos-item {
+  border-color: transparent;
+  background: transparent;
+}
+
+.client-logos.compact .client-logos-light { background: var(--bg-step-light); }
+
+@media (width >= 600px) {
+  .client-logos.compact .client-logos-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (width >= 900px) {
+  .client-logos.compact .client-logos-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--spacing-24);
+  }
+}

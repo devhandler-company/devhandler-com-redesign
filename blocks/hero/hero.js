@@ -13,6 +13,9 @@ export default function decorate(block) {
   const badges = document.createElement('div');
   badges.className = 'hero-badges';
   const trust = document.createElement('ul');
+  const breadcrumbs = document.createElement('nav');
+  breadcrumbs.className = 'hero-breadcrumbs';
+  breadcrumbs.setAttribute('aria-label', 'Breadcrumb');
   trust.className = 'hero-trust';
   // Preserve list semantics in Safari when CSS removes the list markers.
   trust.setAttribute('role', 'list');
@@ -22,7 +25,32 @@ export default function decorate(block) {
     const cells = [...row.children];
     const label = cells.length > 1 ? cells[0].textContent.trim().replace(/\s+/g, ' ').toLowerCase() : '';
     const targets = { background, content, badges };
-    if (services && label === 'eyebrow') {
+    if (services && label === 'breadcrumbs') {
+      legacy = false;
+      const list = document.createElement('ol');
+      list.setAttribute('role', 'list');
+      cells.slice(1).forEach((cell) => {
+        let entries = cell.children.length ? [...cell.children] : [cell];
+        if (cell.querySelector('li')) entries = [...cell.querySelectorAll('li')];
+        entries.forEach((entry) => {
+          if (!entry.textContent.trim()) return;
+          const item = document.createElement('li');
+          item.append(...entry.childNodes);
+          list.append(item);
+        });
+      });
+      list.lastElementChild?.setAttribute('aria-current', 'page');
+      list.querySelectorAll('a').forEach((link) => {
+        const href = link.getAttribute('href')?.trim();
+        let safe = false;
+        try {
+          safe = Boolean(href) && !(/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))
+            && ['http:', 'https:'].includes(new URL(href, window.location).protocol);
+        } catch { /* Incomplete crumbs remain readable without a link. */ }
+        if (!safe) link.replaceWith(...link.childNodes);
+      });
+      breadcrumbs.append(list);
+    } else if (services && label === 'eyebrow') {
       legacy = false;
       eyebrow.textContent = cells.slice(1).map((cell) => cell.textContent.trim()).join(' ');
     } else if (Object.hasOwn(targets, label)) {
@@ -86,6 +114,9 @@ export default function decorate(block) {
         if (!link.textContent.trim()) return;
         const primary = link.classList.contains('primary')
           || link.classList.contains('accent') || Boolean(link.closest('strong') || link.querySelector('strong'));
+        if (services) {
+          link.querySelectorAll('strong, em').forEach((format) => format.replaceWith(...format.childNodes));
+        }
         link.classList.add('button', primary ? 'primary' : 'secondary');
         actions.append(link);
       });
@@ -97,6 +128,7 @@ export default function decorate(block) {
   });
   if (actions.hasChildNodes()) content.append(actions);
   if (eyebrow.textContent.trim()) content.prepend(eyebrow);
+  if (breadcrumbs.textContent.trim()) content.prepend(breadcrumbs);
 
   badges.querySelectorAll('img').forEach((image) => { image.loading = 'eager'; });
   block.replaceChildren();

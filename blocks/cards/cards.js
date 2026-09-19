@@ -24,7 +24,14 @@ function textParts(cell) {
 function findTextLink(cell) {
   if (!cell) return null;
   return [...cell.querySelectorAll('a[href]')]
-    .find((link) => !link.querySelector('picture, img')) || null;
+    .find((link) => {
+      if (link.querySelector('picture, img')) return false;
+      const href = link.getAttribute('href')?.trim();
+      if (!href || (/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))) return false;
+      try {
+        return ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, window.location).protocol);
+      } catch { return false; }
+    }) || null;
 }
 
 function createCard() {
@@ -59,11 +66,12 @@ function appendText(parent, className, text, tagName = 'p') {
 
 function appendLink(parent, cell, className) {
   const source = findTextLink(cell);
-  if (!source) return null;
+  if (!source) return appendText(parent, className, textParts(cell).join(' '), 'span');
 
   const link = source.cloneNode(false);
   link.className = className;
   link.textContent = textParts(cell).join(' ') || source.textContent;
+  if (link.target === '_blank') link.relList.add('noopener', 'noreferrer');
   parent.append(link);
   return link;
 }
@@ -116,7 +124,9 @@ function createCaseCard(row) {
   const fallbackTitleIndex = cells.findIndex((cell, index) => (
     index !== imageCellIndex && textParts(cell).length
   ));
-  const resolvedTitleIndex = titleCellIndex >= 0 ? titleCellIndex : fallbackTitleIndex;
+  // The two statistic cells are optional; the title remains in the third cell.
+  const unlinkedTitleIndex = cells.length >= 3 ? 2 : fallbackTitleIndex;
+  const resolvedTitleIndex = titleCellIndex >= 0 ? titleCellIndex : unlinkedTitleIndex;
   if (resolvedTitleIndex < 0) return null;
 
   const titleCell = cells[resolvedTitleIndex];
@@ -144,6 +154,7 @@ function createCaseCard(row) {
     const link = titleLink.cloneNode(false);
     link.className = 'cards-title-link';
     link.textContent = titleText;
+    if (link.target === '_blank') link.relList.add('noopener', 'noreferrer');
     heading.append(link);
   } else {
     heading.textContent = titleText;
@@ -214,6 +225,7 @@ function createEditorialHeading(cell) {
     const fullTitleLink = titleLink.cloneNode(false);
     fullTitleLink.classList.add('cards-title-link');
     fullTitleLink.textContent = title;
+    if (fullTitleLink.target === '_blank') fullTitleLink.relList.add('noopener', 'noreferrer');
     heading.append(fullTitleLink);
   } else {
     heading.textContent = title;
@@ -297,6 +309,7 @@ function createModelCard(row) {
   if (benefits.length) {
     const list = document.createElement('ul');
     list.className = 'cards-model-benefits';
+    list.setAttribute('role', 'list');
     benefits.forEach((benefit) => appendText(list, '', benefit, 'li'));
     article.append(list);
   }
@@ -309,6 +322,7 @@ function createModelCard(row) {
 function decorateVariant(block, buildCard) {
   const list = document.createElement('ul');
   list.className = 'cards-list';
+  list.setAttribute('role', 'list');
   [...block.children].forEach((row) => {
     const card = buildCard(row);
     if (card) list.append(card);
@@ -334,6 +348,7 @@ function decorateDefault(block) {
 }
 
 export default function decorate(block) {
+  if (block.querySelector(':scope > .cards-list')) return;
   const variant = CARD_VARIANTS.find((name) => block.classList.contains(name));
 
   switch (variant) {

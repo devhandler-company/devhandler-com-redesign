@@ -189,6 +189,11 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (doc.body.classList.contains('services-page')) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/services.css`).catch(() => {
+      /* Preserve readable content if the page stylesheet is unavailable. */
+    });
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

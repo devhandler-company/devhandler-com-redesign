@@ -52,7 +52,7 @@ export default function decorate(block) {
       if (!img.hasAttribute('height')) img.height = 64;
       const bundled = new URL('/blocks/client-logos/', window.location.href).href;
       if (!picture && url.startsWith(bundled)
-        && /\/(rx|maytag|helios|smartcat|dhl|languagewire|sonova)\.webp$/.test(url)) {
+        && /\/(rx|maytag|helios|smartcat|dhl|languagewire|sonova|bmw|prinova|six-flags)\.webp$/.test(url)) {
         img.srcset = `${url} 1x, ${url.replace('.webp', '-2x.webp')} 2x, ${url.replace('.webp', '-3x.webp')} 3x`;
       }
       img.addEventListener('error', () => {
@@ -75,7 +75,7 @@ export default function decorate(block) {
   block.append(list);
 
   // Short lists remain static: each moving group must cover the capped viewport.
-  if (list.children.length >= 12) {
+  if (list.children.length >= 12 && !block.classList.contains('compact')) {
     const rows = document.createElement('div');
     rows.className = 'client-logos-rows';
     rows.setAttribute('aria-hidden', 'true');
