@@ -84,6 +84,14 @@
   min-height: calc(var(--spacing-160) * 2 + var(--spacing-120));
 }
 
+.cards.case.placeholder-media .cards-card:not(:has(.cards-media))::before {
+  content: '';
+  display: block;
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-surface-2);
+}
+
 .cards.case .cards-media {
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -476,7 +484,7 @@
   content: "";
 }
 
-.cards.model .cards-model-link:any-link {
+.cards.model .cards-model-link {
   align-self: flex-start;
   margin-top: auto;
   padding-top: var(--spacing-24);
@@ -492,6 +500,8 @@
 .cards.model .cards-model-link::after {
   content: " →";
 }
+
+.cards.model span.cards-model-link::after { content: none; }
 
 .cards.model .cards-model-link:hover,
 .cards.model .cards-model-link:focus-visible,

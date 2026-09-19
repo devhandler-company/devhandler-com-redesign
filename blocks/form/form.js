@@ -194,6 +194,7 @@ function buildActions(config) {
 function buildError() {
   const error = document.createElement('p');
   error.className = 'form-error';
+  error.setAttribute('role', 'alert');
   error.textContent = ERROR_MESSAGE;
   error.hidden = true;
   return error;

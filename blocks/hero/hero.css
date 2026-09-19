@@ -383,6 +383,31 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services)) {
   margin-inline: auto;
 }
 
+.hero.services .hero-breadcrumbs { margin-bottom: var(--spacing-40); }
+
+.hero.services .hero-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-secondary);
+  font-size: var(--type-body-xs-font-size);
+}
+
+.hero.services .hero-breadcrumbs li + li::before {
+  content: '/';
+  margin-right: var(--spacing-12);
+}
+
+.hero.services .hero-breadcrumbs a { color: var(--text-secondary); }
+
+.hero.services .hero-breadcrumbs a:focus-visible {
+  outline: var(--size-border-strong) solid var(--focus-ring);
+  outline-offset: var(--spacing-4);
+}
+
 .hero.services .hero-eyebrow {
   margin-bottom: var(--spacing-24);
   color: var(--accent-blue-light);

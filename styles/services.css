@@ -1,0 +1,186 @@
+/* Page composition only; enabled by authored Template: services-page metadata. */
+.services-page main > .section {
+  margin-block: var(--spacing-80);
+}
+
+/* Section surfaces reveal the continuous page background; cards keep their fills. */
+body.services-page main > .section { background: transparent; }
+.services-page main .hero.services { background: transparent; }
+
+.services-page main > .section:empty { display: none; }
+
+.services-page main > .section.hero-container,
+.services-page main > .section.stats-container { margin-block: 0; }
+
+.services-page main > .section > div {
+  box-sizing: border-box;
+  max-width: calc(var(--grid-max-width) + 2 * var(--grid-margin-mobile));
+  padding-inline: var(--grid-margin-mobile);
+}
+
+.services-page main > .section.hero-container > .hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.services-page main .section-intro {
+  padding: 0;
+  margin-bottom: var(--spacing-32);
+}
+
+.services-page main .section-intro-title { max-width: none; }
+.services-page main .section-intro-subtitle { max-width: none; }
+.services-page main .section-intro-content { gap: var(--spacing-16); }
+.services-page main .cards.service .cards-service-link:any-link { color: var(--text-primary); }
+
+.services-page .cards.model :is(.cards-model-description, .cards-model-benefits, .cards-model-link) {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.services-page .form-labels li {
+  box-sizing: border-box;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.services-page main > .section.services-cases { margin-bottom: 0; }
+
+.services-page .cards.case .cards-case-metadata {
+  margin-top: 0;
+  padding-top: var(--spacing-16);
+}
+
+.services-page .cards.case .cards-case-tags li { border-radius: var(--radius-sm); }
+
+.services-page main > .section.services-process { padding-block: 0; }
+
+.services-page main > .section.services-clients {
+  margin-top: var(--spacing-48);
+}
+
+.services-page .form-eyebrow { color: var(--text-placeholder); }
+
+@media (prefers-reduced-motion: reduce) {
+  .services-page .section-intro-cta::after {
+    transition: none;
+    transform: none;
+  }
+}
+
+@media (width >= 900px) {
+  .services-page main {
+    background:
+      radial-gradient(ellipse 600px 450px at 0 61%,
+        color-mix(in srgb, var(--text-primary) 8%, transparent), transparent),
+      radial-gradient(ellipse 650px 500px at 100% 27%,
+        color-mix(in srgb, var(--text-primary) 4%, transparent), transparent),
+      var(--bg-page);
+  }
+
+  .services-page main > .section { margin-block: var(--spacing-160); }
+
+  .services-page main > .section.hero-container,
+  .services-page main > .section.stats-container { margin-block: 0; }
+
+  .services-page .hero.services {
+    padding-top: var(--spacing-96);
+    padding-bottom: var(--spacing-80);
+  }
+
+  .services-page main > .section.services-catalog { margin-top: 0; }
+  .services-page main .section-intro { margin-bottom: var(--spacing-48); }
+
+  .services-page main > .section > .stats-wrapper {
+    padding-bottom: calc(var(--spacing-40) + var(--spacing-16));
+  }
+
+  .services-page main > .section.services-router {
+    margin-top: calc(var(--spacing-160) + var(--spacing-48));
+    padding-block: 0;
+  }
+
+  .services-page main > .section.services-cases { margin-bottom: 0; }
+
+  .services-page main > .section.services-catalog > .cards-wrapper {
+    max-width: calc(var(--grid-max-width) - var(--spacing-96) + 2 * var(--grid-margin-mobile));
+  }
+
+  .services-page main > .section.services-clients {
+    margin-top: var(--spacing-48);
+    margin-bottom: calc(var(--spacing-160) + var(--spacing-64));
+  }
+
+  .services-page main > .section.services-faq { margin-bottom: var(--spacing-80); }
+  .services-page main > .section.services-form { margin-top: var(--spacing-80); }
+
+  .services-page main > .section.services-cta {
+    margin-top: calc(var(--spacing-160) + var(--spacing-40));
+    margin-bottom: var(--spacing-120);
+  }
+
+  .services-page main > .section.services-form > .form-wrapper {
+    max-width: calc(var(--grid-max-width) + var(--spacing-96) + 2 * var(--grid-margin-mobile));
+  }
+
+  .services-page .services-form .form-card {
+    display: grid;
+    grid-template-columns: minmax(0, 428fr) minmax(0, 578fr);
+    gap: var(--spacing-96);
+    border-radius: var(--spacing-48);
+    padding: var(--spacing-80) var(--spacing-96);
+    min-height: 760px;
+  }
+
+  .services-page .services-form .form-panel {
+    width: auto;
+    min-width: 0;
+    padding-top: var(--spacing-64);
+  }
+
+  .services-page .services-form .form-fields { gap: var(--spacing-8); }
+
+  .services-page .services-form .form-labels { gap: var(--spacing-8); }
+
+  .services-page .services-form .form-labels li {
+    padding: var(--spacing-8) var(--spacing-16);
+    font-size: var(--type-body-md-font-size);
+    line-height: 1.2;
+    font-weight: var(--font-weight-regular);
+    background: var(--bg-step-light);
+  }
+
+  .services-page .services-form .form-after-text {
+    margin-top: var(--spacing-24);
+    font-size: var(--type-body-md-font-size);
+    line-height: var(--type-body-md-line-height);
+  }
+
+  .services-page .services-form .form-input {
+    border-color: var(--action-ghost-border);
+    font-size: var(--type-body-md-font-size);
+  }
+
+  .services-page .services-form .form-consent-label input[type='checkbox'] {
+    width: var(--spacing-32);
+    height: var(--spacing-32);
+  }
+
+  .services-page .services-form .form-consent-label span { font-size: var(--type-body-md-font-size); }
+
+  .services-page .services-form :is(.form-submit, .form-schedule) {
+    height: var(--size-control-lg);
+    font-size: var(--type-label-lg-font-size);
+  }
+
+  .services-page .services-form .form-schedule { border-color: var(--action-ghost-border); }
+
+  .services-page .services-form .form-title {
+    font-family: var(--type-display-hero-font-family);
+    font-size: var(--type-display-hero-font-size);
+    line-height: var(--type-display-hero-line-height);
+  }
+
+  .services-page .services-form .form-eyebrow { margin-bottom: var(--spacing-32); }
+}

@@ -1,0 +1,98 @@
+.cta {
+  box-sizing: border-box;
+  padding: var(--spacing-40) var(--spacing-24);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(105deg, var(--action-primary), var(--bg-hero-dark));
+  color: var(--text-primary);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.cta:empty { display: none; }
+
+.cta :is(h2, h3) {
+  margin: 0;
+  font-family: var(--type-display-subsection-font-family);
+  font-size: var(--type-display-subsection-font-size);
+  font-weight: var(--type-display-subsection-font-weight);
+  line-height: var(--type-display-subsection-line-height);
+  letter-spacing: var(--type-display-subsection-letter-spacing);
+}
+
+.cta p {
+  margin: var(--spacing-24) 0 0;
+  font-size: var(--type-body-md-font-size);
+  line-height: var(--type-body-md-line-height);
+}
+
+.cta .cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-16);
+  margin-top: var(--spacing-32);
+}
+
+.cta a.button:any-link {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: var(--size-control-lg);
+  margin: 0;
+  padding: calc(var(--spacing-16) - var(--size-border-strong)) var(--spacing-32);
+  font-family: var(--type-label-lg-font-family);
+  font-size: var(--type-label-lg-font-size);
+  font-weight: var(--type-label-lg-font-weight);
+  line-height: 1.2;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.cta a.button.primary:any-link {
+  border-color: var(--focus-ring);
+  background: var(--action-primary);
+  color: var(--text-primary);
+}
+
+.cta a.button.primary:any-link:hover {
+  background: var(--action-primary-hover);
+}
+
+.cta a.button.secondary:any-link {
+  color: var(--text-primary);
+  border-color: var(--focus-ring);
+  background: transparent;
+}
+
+.cta a.button.secondary:any-link:hover {
+  background: var(--bg-hover-row);
+  border-color: var(--text-primary);
+}
+
+.cta a:focus-visible {
+  outline: var(--size-border-strong) solid var(--text-primary);
+  outline-offset: var(--spacing-4);
+}
+
+@media (width >= 600px) {
+  .cta .cta-actions {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
+
+@media (width >= 900px) {
+  .cta { padding: var(--spacing-64) var(--spacing-48); }
+
+  .cta :is(h2, h3) {
+    font-size: var(--type-display-section-font-size);
+    line-height: var(--type-display-section-line-height);
+    letter-spacing: var(--type-display-section-letter-spacing);
+  }
+
+  .cta p {
+    font-size: var(--type-body-lg-font-size);
+    line-height: var(--type-body-lg-line-height);
+  }
+}
