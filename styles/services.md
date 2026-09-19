@@ -12,6 +12,10 @@ The shared loader fetches `styles/services.css` only when the body has the autho
 `services-page` template class. The stylesheet scopes every rule to that class.
 Homepage and Service Detail layouts are not changed.
 
+Section surfaces, including the Services Hero, stay transparent over the shared
+page background. Do not add per-section fills or gradients. Cards, the Form card
+and the inset CTA retain their own component surfaces.
+
 ## Section order
 
 Separate sections with standalone `---` paragraphs. Section Metadata tables use

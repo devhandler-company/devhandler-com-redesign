@@ -3,6 +3,10 @@
   margin-block: var(--spacing-80);
 }
 
+/* Section surfaces reveal the continuous page background; cards keep their fills. */
+body.services-page main > .section { background: transparent; }
+.services-page main .hero.services { background: transparent; }
+
 .services-page main > .section:empty { display: none; }
 
 .services-page main > .section.hero-container,
@@ -54,7 +58,6 @@
 
 .services-page main > .section.services-clients {
   margin-top: var(--spacing-48);
-  background: transparent;
 }
 
 .services-page .form-eyebrow { color: var(--text-placeholder); }
