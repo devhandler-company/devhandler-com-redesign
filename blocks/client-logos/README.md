@@ -1,6 +1,6 @@
 # Client Logos
 
-A client-logo list with two bounded desktop marquee rows and a static mobile
+A client-logo list with two full-width desktop marquee rows and a static mobile
 grid. One authored roster supplies every viewport. Logos are informational, not
 buttons. Client names provide accessible text and image-failure fallbacks.
 Decorative motion copies are hidden from assistive technology; the semantic list
@@ -81,13 +81,13 @@ and optional Light surface remain available.
   logos readable instead of squeezing every brand into one viewport.
 - Shorter lists and reduced-motion mode stay static: four columns at 600–1199 px,
   seven columns from 1200 px. The static roster always includes every client.
-- Content width is capped at 1440 px specifically for this block. The desktop
-  background fills the section, including ultrawide screens.
-- At 900–1440 px the rows reach both viewport edges without wrapper padding.
-  Wider screens center the 1440 px rows. Mobile keeps its 20 px side gutters;
+- From 900 px the rows reach both viewport edges without a width cap or wrapper
+  padding, including ultrawide screens. Mobile keeps its 20 px side gutters;
   the desktop heading also retains a text inset independently of the rows.
-- Desktop rows clip at the bounded content area's edges, not the full 4K screen.
-  Each visual group repeats once to create a seamless loop. There are no duplicate
+- Desktop rows clip at the viewport edges. Each visual group repeats its roster
+  enough times to cover the container, then repeats once for a seamless loop.
+  A ResizeObserver updates copies only when the required repetition count changes.
+  There are no duplicate
   IDs or repeated accessible list entries. Authored order determines row order.
 - The design has no animation controls. Hover/focus temporarily pauses the rows;
   movement resumes when the pointer/focus leaves the block.
@@ -102,7 +102,7 @@ and optional Light surface remain available.
 
 All styles are scoped to this block and its EDS container/wrapper. The decorator
 imports no other block, adds no dependency and modifies only its input. Animation
-uses CSS transforms, without timers, animation-frame callbacks or resize handlers.
+uses CSS transforms, without timers or animation-frame callbacks.
 Each image has lazy loading, async decoding and a reserved slot. Existing EDS
 picture sources are preserved. No client URL click behavior is inferred.
 
