@@ -74,40 +74,52 @@ export default function decorate(block) {
   if (heading) block.append(heading);
   block.append(list);
 
-  // Short lists remain static: each moving group must cover the capped viewport.
+  // Short lists remain static; decorative groups repeat to cover wide viewports.
   if (list.children.length >= 12 && !block.classList.contains('compact')) {
     const rows = document.createElement('div');
     rows.className = 'client-logos-rows';
     rows.setAttribute('aria-hidden', 'true');
     const items = [...list.children];
     const midpoint = Math.ceil(items.length / 2);
-    [items.slice(0, midpoint), items.slice(midpoint)].forEach((clients) => {
+    const renderRows = [items.slice(0, midpoint), items.slice(midpoint)].map((clients) => {
       const row = document.createElement('div');
       row.className = 'client-logos-row';
       const track = document.createElement('div');
       track.className = 'client-logos-track';
-      // 224 px logo slots + 40 px spacing, moving at 40 CSS px per second.
-      track.style.setProperty('--client-logos-duration', `${(clients.length * 264) / 40}s`);
-      for (let repeat = 0; repeat < 2; repeat += 1) {
-        const group = document.createElement('div');
-        group.className = 'client-logos-group';
-        clients.forEach((client) => {
-          const copy = document.createElement('div');
-          copy.className = client.className;
-          [...client.childNodes].forEach((node) => copy.append(node.cloneNode(true)));
-          copy.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
-          copy.querySelector('img')?.addEventListener('error', () => {
-            copy.classList.remove('client-logos-has-image');
-            copy.querySelector('picture, img')?.remove();
-          }, { once: true });
-          group.append(copy);
-        });
-        track.append(group);
-      }
+      let previousCopies = 0;
+      const fill = (width) => {
+        // 224 px logo slots + 40 px spacing, moving at 40 CSS px per second.
+        const copies = Math.max(1, Math.ceil(width / (clients.length * 264)));
+        if (copies === previousCopies) return;
+        previousCopies = copies;
+        track.replaceChildren();
+        track.style.setProperty('--client-logos-duration', `${(clients.length * copies * 264) / 40}s`);
+        for (let repeat = 0; repeat < 2; repeat += 1) {
+          const group = document.createElement('div');
+          group.className = 'client-logos-group';
+          Array.from({ length: copies }, () => clients).flat().forEach((client) => {
+            const copy = document.createElement('div');
+            copy.className = client.className;
+            [...client.childNodes].forEach((node) => copy.append(node.cloneNode(true)));
+            copy.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+            copy.querySelector('img')?.addEventListener('error', () => {
+              copy.classList.remove('client-logos-has-image');
+              copy.querySelector('picture, img')?.remove();
+            }, { once: true });
+            group.append(copy);
+          });
+          track.append(group);
+        }
+      };
       row.append(track);
       rows.append(row);
+      return fill;
     });
     block.classList.add('client-logos-animated');
     block.append(rows);
+    const resize = () => renderRows.forEach((fill) => fill(block.clientWidth));
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(block);
   }
 }
