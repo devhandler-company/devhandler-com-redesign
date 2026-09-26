@@ -194,6 +194,11 @@ async function loadEager(doc) {
       /* Preserve readable content if the page stylesheet is unavailable. */
     });
   }
+  if (doc.body.classList.contains('our-work-page')) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/our-work.css`).catch(() => {
+      /* Preserve readable content if the page stylesheet is unavailable. */
+    });
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
