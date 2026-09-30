@@ -1,6 +1,5 @@
 main > .section.aem-context-container {
   padding-top: var(--spacing-40);
-  background: var(--bg-page);
 }
 
 main > .section.aem-context-container > .section-intro-wrapper {
@@ -33,12 +32,7 @@ main > .section > .aem-context-wrapper {
 
   box-sizing: border-box;
   padding: 0 var(--grid-margin-mobile) var(--spacing-40);
-  background: var(--bg-page);
   color: var(--text-primary);
-}
-
-main > .section.aem-context-container > .aem-context-wrapper > .aem-context {
-  background: transparent;
 }
 
 .aem-context .aem-context-panels,

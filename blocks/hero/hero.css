@@ -78,7 +78,6 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services)) {
   align-items: center;
   box-sizing: border-box;
   padding: 30px var(--grid-margin-mobile) var(--spacing-40);
-  background: var(--bg-page);
   color: var(--text-primary);
   text-align: center;
 }
@@ -290,9 +289,6 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services)) {
 
   .hero.home {
     padding: 142px max(var(--grid-margin-mobile), calc((100% - var(--grid-max-width)) / 2)) var(--spacing-64);
-    background: radial-gradient(ellipse 1100px 650px at -10% 75%, color-mix(in srgb, var(--action-primary) 28%, transparent), transparent),
-      radial-gradient(ellipse 1100px 500px at 100% 110%, var(--action-primary-subtle), transparent),
-      linear-gradient(var(--bg-page), var(--bg-hero-dark));
   }
 
   .hero.home .hero-background {

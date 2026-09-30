@@ -4,10 +4,6 @@ main > .section > .client-logos-wrapper {
   padding: 0 var(--grid-margin-mobile);
 }
 
-main > .section.client-logos-container {
-  background: var(--bg-page);
-}
-
 .client-logos {
   position: relative;
   padding-block: var(--spacing-64);

@@ -197,6 +197,11 @@ async function loadEager(doc) {
       /* Preserve readable content if the page stylesheet is unavailable. */
     });
   }
+  if (doc.body.classList.contains("default-background")) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/default.css`).catch(() => {
+      /* Preserve readable content if the page stylesheet is unavailable. */
+    });
+  }
   if (doc.body.classList.contains('our-work-page')) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/our-work.css`).catch(() => {
       /* Preserve readable content if the page stylesheet is unavailable. */

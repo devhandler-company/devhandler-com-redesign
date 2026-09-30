@@ -1,7 +1,6 @@
 main > .section.process-container {
   margin-block: 0;
   padding-block: var(--spacing-40);
-  background: var(--bg-page);
 }
 
 main > .process-container > .process-wrapper,
