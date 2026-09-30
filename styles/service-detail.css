@@ -319,6 +319,18 @@ body.service-detail-page main > .section {
 
 @media (width >= 900px) {
   body.service-detail-page main {
+    position: relative;
+    isolation: isolate;
+    background: var(--bg-page);
+  }
+
+  body.service-detail-page main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
     background:
       radial-gradient(
         ellipse 1400px 2400px at -12% 55%,
