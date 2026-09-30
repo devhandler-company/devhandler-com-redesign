@@ -160,6 +160,9 @@ function decorateSectionMetadata(main) {
       section.classList.add('grid');
       section.style.setProperty('--section-grid-columns', dataset.grid.trim());
     }
+    if (document.body.classList.contains('service-detail-page') && dataset.id) {
+      section.id = dataset.id.trim();
+    }
     Object.keys(dataset).forEach((key) => {
       if (['sectionStatus', 'style', 'grid'].includes(key)) return;
       const value = dataset[key];
@@ -198,6 +201,27 @@ async function loadEager(doc) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/our-work.css`).catch(() => {
       /* Preserve readable content if the page stylesheet is unavailable. */
     });
+  }
+  if (doc.body.classList.contains('service-detail-page')) {
+    const firstSection = doc.querySelector('main > div');
+    const firstBlocks = ['hero', 'stats'].filter((name) => firstSection?.querySelector(`.${name}`));
+    firstBlocks.forEach((name) => {
+      const preload = doc.createElement('link');
+      preload.rel = 'modulepreload';
+      preload.href = `${window.hlx.codeBasePath}/blocks/${name}/${name}.js`;
+      doc.head.append(preload);
+    });
+    const fonts = loadFonts().then(() => Promise.all(
+      ['700 1em ample-alt', '400 1em hind', '600 1em hind'].map((font) => document.fonts.load(font)),
+    )).catch(() => { /* Preserve the normal fallback if a font request fails. */ });
+    await Promise.all([
+      fonts,
+      loadCSS(`${window.hlx.codeBasePath}/styles/service-detail.css`).catch(() => {
+        /* Preserve readable content if the page stylesheet is unavailable. */
+      }),
+      ...firstBlocks.map((name) => loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`)
+        .catch(() => { /* Keep content readable when block styling is unavailable. */ })),
+    ]);
   }
   const main = doc.querySelector('main');
   if (main) {

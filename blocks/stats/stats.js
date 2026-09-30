@@ -12,10 +12,19 @@ export default function decorate(block) {
   if (block.querySelector(':scope > .stats-list')) return;
   const list = document.createElement('dl');
   list.className = 'stats-list';
+  let heading;
   [...block.children].forEach((row) => {
     const [valueCell, labelCell] = row.children;
     const value = cellText(valueCell);
     const label = cellText(labelCell);
+    if (block.classList.contains('snapshot') && value.toLowerCase() === 'heading') {
+      if (label && !heading) {
+        heading = document.createElement('p');
+        heading.className = 'stats-heading';
+        heading.textContent = label;
+      }
+      return;
+    }
     if (!value || !label) return;
     const item = document.createElement('div');
     item.className = 'stats-item';
@@ -28,4 +37,5 @@ export default function decorate(block) {
   });
   list.style.setProperty('--stats-columns', Math.min(4, list.children.length) || 1);
   block.replaceChildren(list);
+  if (heading && list.children.length) block.prepend(heading);
 }

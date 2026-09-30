@@ -69,4 +69,17 @@ link schemes are not made clickable; valid new-tab links receive safe rel values
 - Featured cards are stacked on mobile and switch to a 50/50 layout from 900px upward.
 - All variants share the card surface, border, radius, interaction, and focus styles.
 
-`Card / Review`, `Card / Result`, and `Card / Change` are present on the UI Kit page but are not used on Redesign v2.2, so they are intentionally not production variants.
+## Service Detail variants
+
+`Cards (challenge)`, `Cards (outcome)`, and `Cards (reason)` accept label/value,
+required title, optional description, and optional impact text per row. They reuse
+the Cards grid and semantic articles without changing existing variants.
+
+`Cards (case, featured-case, placeholder-media)` renders one large case proof
+from labelled two-column rows: Image, Topics, Title, Summary, repeated Metric
+rows (value and label in separate paragraphs), and Link. All except Title are
+optional; unlinked titles and CTA labels remain static. The placeholder reserves
+space without requesting an image. This modifier does not change regular cases.
+
+See [Service Detail authoring](../../styles/service-detail.md) for the full page
+contract. `Card / Review` and `Card / Change` remain outside these variants.

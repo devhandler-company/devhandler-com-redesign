@@ -104,6 +104,17 @@ export default function decorate(block) {
     background.replaceChildren(picture);
   }
 
+  [content, badges, trust].flatMap((container) => [...container.querySelectorAll('a[href]')])
+    .forEach((link) => {
+      const href = link.getAttribute('href')?.trim();
+      let safe = false;
+      try {
+        safe = Boolean(href) && !(/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))
+          && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, window.location).protocol);
+      } catch { /* Invalid authored destinations remain readable without a link. */ }
+      if (!safe) link.replaceWith(...link.childNodes);
+    });
+
   const actions = document.createElement('div');
   actions.className = 'hero-actions';
   content.querySelectorAll('p').forEach((paragraph) => {

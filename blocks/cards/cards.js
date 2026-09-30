@@ -1,7 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 const TEXT_ELEMENTS = 'p, li, h1, h2, h3, h4, h5, h6';
-const CARD_VARIANTS = ['case', 'service', 'insight', 'featured', 'model'];
+const CARD_VARIANTS = ['case', 'service', 'insight', 'featured', 'model', 'challenge', 'outcome', 'reason'];
 const CARD_MEDIA_WIDTHS = [{ width: '750' }];
 
 function textParts(cell) {
@@ -92,8 +92,9 @@ function createCaseTags(cells) {
   return list;
 }
 
-function createCaseMetadata(cells) {
-  const entries = cells.map((cell) => textParts(cell)).filter((parts) => parts.length).slice(0, 2);
+function createCaseMetadata(cells, limit = 2) {
+  const entries = cells.map((cell) => textParts(cell))
+    .filter((parts) => parts.length).slice(0, limit);
   if (!entries.length) return null;
 
   const metadata = document.createElement('dl');
@@ -197,6 +198,19 @@ function createServiceCard(row) {
   return item;
 }
 
+/** Label/value, heading, description, optional impact. All copy stays authored. */
+function createInfoCard(row) {
+  const cells = [...row.children];
+  const title = textParts(cells[1]).join(' ');
+  if (!title) return null;
+  const { item, article } = createCard();
+  appendText(article, 'cards-info-label', textParts(cells[0]).join(' '));
+  appendText(article, 'cards-title', title, 'h3');
+  appendText(article, 'cards-info-description', textParts(cells[2]).join(' '));
+  appendText(article, 'cards-info-impact', textParts(cells[3]).join(' '));
+  return item;
+}
+
 function createEditorialMetaParts(category, details) {
   if (!category && !details) return null;
 
@@ -231,6 +245,32 @@ function createEditorialHeading(cell) {
     heading.textContent = title;
   }
   return { heading, title };
+}
+
+/** A single proof card authored as labelled rows, with repeated Metric rows. */
+function createFeaturedCaseCard(block) {
+  const rows = [...block.children];
+  const fields = new Map(rows.map((row) => [
+    row.firstElementChild?.textContent.trim().replace(/\s+/g, ' ').toLowerCase(),
+    row.children[1],
+  ]));
+  const titleData = createEditorialHeading(fields.get('title'));
+  if (!titleData) return null;
+  const { item, article } = createCard();
+  appendMedia(article, fields.get('image'), `${titleData.title} case study image`);
+  const content = document.createElement('div');
+  content.className = 'cards-case-content';
+  appendText(content, 'cards-proof-topics', textParts(fields.get('topics')).join(' '));
+  content.append(titleData.heading);
+  appendText(content, 'cards-proof-summary', textParts(fields.get('summary')).join(' '));
+  const metricCells = rows.filter((row) => (
+    row.firstElementChild?.textContent.trim().toLowerCase() === 'metric'
+  )).map((row) => row.children[1]).filter((cell) => textParts(cell).length > 1);
+  const metrics = createCaseMetadata(metricCells, metricCells.length);
+  if (metrics) content.append(metrics);
+  appendLink(content, fields.get('link'), 'cards-proof-link');
+  article.append(content);
+  return item;
 }
 
 function createInsightCard(row) {
@@ -319,11 +359,11 @@ function createModelCard(row) {
   return item;
 }
 
-function decorateVariant(block, buildCard) {
+function decorateVariant(block, buildCard, rows = [...block.children]) {
   const list = document.createElement('ul');
   list.className = 'cards-list';
   list.setAttribute('role', 'list');
-  [...block.children].forEach((row) => {
+  rows.forEach((row) => {
     const card = buildCard(row);
     if (card) list.append(card);
   });
@@ -353,7 +393,11 @@ export default function decorate(block) {
 
   switch (variant) {
     case 'case':
-      decorateVariant(block, createCaseCard);
+      if (block.classList.contains('featured-case')) {
+        decorateVariant(block, createFeaturedCaseCard, [block]);
+      } else {
+        decorateVariant(block, createCaseCard);
+      }
       break;
     case 'service':
       decorateVariant(block, createServiceCard);
@@ -366,6 +410,11 @@ export default function decorate(block) {
       break;
     case 'model':
       decorateVariant(block, createModelCard);
+      break;
+    case 'challenge':
+    case 'outcome':
+    case 'reason':
+      decorateVariant(block, createInfoCard);
       break;
     default:
       decorateDefault(block);
