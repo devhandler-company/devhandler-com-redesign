@@ -305,6 +305,12 @@ body.service-detail-page main > .section {
   overflow-wrap: anywhere;
 }
 
+@media (width < 900px) {
+  .service-detail-page main > .section > .hero-wrapper:has(> .hero.services) {
+    padding-inline: var(--grid-margin-mobile);
+  }
+}
+
 @media (width >= 600px) {
   .service-detail-page .client-logos.compact .client-logos-list {
     grid-template-columns: repeat(5, minmax(0, 1fr));
