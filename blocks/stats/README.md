@@ -41,3 +41,10 @@ For DOCX imports, convert the uploaded file to a **native Google Doc** before
 using Sidekick Preview. Inspect the resulting `/services.plain.html` and verify
 the branch page before publishing. Local HTML checks alone do not establish a
 completed Google Docs roundtrip.
+
+## Service Detail snapshot
+
+`Stats (snapshot)` accepts an optional `Heading | Engagement snapshot` row,
+followed by the same value/label rows. Its horizontal definition-list layout is
+supplied by the `service-detail-page` template. See the
+[Service Detail contract](../../styles/service-detail.md) for placement and metadata.
