@@ -85,6 +85,7 @@ Do not edit `scripts/aem.js`; it is vendored from the Adobe boilerplate.
 - [Services Root composition and authoring](styles/services.md)
 - [Our Work gallery composition and authoring](styles/our-work.md)
 - [Service Detail composition and authoring](styles/service-detail.md)
+- [Case Study composition and authoring](styles/case-study.md)
 - [Developer tutorial](https://www.aem.live/developer/tutorial)
 - [Set up Google Drive](https://www.aem.live/developer/setup-google-drive)
 - [Project anatomy](https://www.aem.live/developer/anatomy-of-a-project)

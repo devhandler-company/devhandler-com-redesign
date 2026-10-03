@@ -5,8 +5,8 @@
   padding: var(--spacing-20) clamp(var(--grid-margin-mobile), 8vw, var(--grid-margin-desktop));
 }
 
-/* Preserve the original EDS hero outside the authored home/services variants. */
-.hero:where(:not(.home, .services)) {
+/* Preserve the original EDS hero outside the authored home/services/case variants. */
+.hero:where(:not(.home, .services, .case)) {
   position: relative;
   isolation: isolate;
   display: grid;
@@ -21,7 +21,7 @@
   color: var(--text-primary);
 }
 
-.hero:where(:not(.home, .services))::after {
+.hero:where(:not(.home, .services, .case))::after {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -29,16 +29,16 @@
   content: '';
 }
 
-.hero:where(:not(.home, .services)) > div,
-.hero:where(:not(.home, .services)) > div > div {
+.hero:where(:not(.home, .services, .case)) > div,
+.hero:where(:not(.home, .services, .case)) > div > div {
   display: contents;
 }
 
-.hero:where(:not(.home, .services)) p {
+.hero:where(:not(.home, .services, .case)) p {
   margin: 0;
 }
 
-.hero:where(:not(.home, .services)) h1 {
+.hero:where(:not(.home, .services, .case)) h1 {
   max-width: 18ch;
   margin: 0;
   color: var(--text-primary);
@@ -50,14 +50,14 @@
   text-wrap: balance;
 }
 
-.hero:where(:not(.home, .services)) picture {
+.hero:where(:not(.home, .services, .case)) picture {
   position: absolute;
   z-index: -2;
   inset: 0;
   box-sizing: border-box;
 }
 
-.hero:where(:not(.home, .services)) img {
+.hero:where(:not(.home, .services, .case)) img {
   display: block;
   width: 100%;
   height: 100%;

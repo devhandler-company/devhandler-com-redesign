@@ -1,6 +1,6 @@
 # Hero
 
-Home and Services hero variants with one Google Docs table for every viewport. Content remains
+Home, Services and Case Study hero variants with one Google Docs table for every viewport. Content remains
 in the document; JavaScript only groups it for layout. No animation, video,
 carousel, external API, or cross-block dependency is required.
 
@@ -41,6 +41,29 @@ Keep the Hero in its own EDS section using an unformatted `---` paragraph after
 the table. Use native Google Docs formatting, not literal Markdown markers.
 Do not use both `home` and `services` on the same table. Plain **Hero** and
 **Hero (home)** retain their existing appearance and behavior.
+
+## Case Study variant
+
+Use **Hero (case)** in a `case-study-page` document. The named two-column rows
+are Breadcrumbs, Eyebrow, Content, Tags and Image. Content holds the page's one
+native Heading 1 and description; bold heading text receives the blue accent.
+Breadcrumbs are separate linked paragraphs followed by the unlinked current
+page. Tags are a native bullet list. Image holds an inline image with meaningful
+alt text. Optional rows may be omitted.
+
+The page stylesheet arranges tags above the desktop title and below mobile
+copy. It keeps one authored story and wraps tags rather than clipping them.
+**Hero (case, desktop-media)** hides the illustration on mobile. Add
+`placeholder-media` only while the artwork is missing: an ordinary Image-row
+paragraph then labels the placeholder. Remove these modifiers when approved
+artwork should appear at every width. Foreground images use the existing EDS
+image optimizer with 750 px mobile and 850 px desktop sources. The hidden
+mobile image retains native lazy loading and does not delay the title; it
+loads normally when the viewport changes to desktop. Native Docs images use
+lazy loading; manually authored eager images may request before decoration.
+
+The [Case Study authoring guide](../../styles/case-study.md) describes the full
+page, document metadata and content approval requirements.
 
 ## Authoring
 

@@ -1,7 +1,10 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
 /** One authored hero, with layout differences handled by CSS. */
 export default function decorate(block) {
   const services = block.classList.contains('services');
-  if (!block.classList.contains('home') && !services) return;
+  const caseStudy = block.classList.contains('case');
+  if (!block.classList.contains('home') && !services && !caseStudy) return;
   if (block.querySelector(':scope > .hero-content')) return;
 
   const content = document.createElement('div');
@@ -13,6 +16,11 @@ export default function decorate(block) {
   const badges = document.createElement('div');
   badges.className = 'hero-badges';
   const trust = document.createElement('ul');
+  const media = document.createElement('div');
+  media.className = 'hero-media';
+  const tags = document.createElement('ul');
+  tags.className = 'hero-tags';
+  tags.setAttribute('role', 'list');
   const breadcrumbs = document.createElement('nav');
   breadcrumbs.className = 'hero-breadcrumbs';
   breadcrumbs.setAttribute('aria-label', 'Breadcrumb');
@@ -25,7 +33,8 @@ export default function decorate(block) {
     const cells = [...row.children];
     const label = cells.length > 1 ? cells[0].textContent.trim().replace(/\s+/g, ' ').toLowerCase() : '';
     const targets = { background, content, badges };
-    if (services && label === 'breadcrumbs') {
+    if (caseStudy) targets.image = media;
+    if ((services || caseStudy) && label === 'breadcrumbs') {
       legacy = false;
       const list = document.createElement('ol');
       list.setAttribute('role', 'list');
@@ -50,9 +59,21 @@ export default function decorate(block) {
         if (!safe) link.replaceWith(...link.childNodes);
       });
       breadcrumbs.append(list);
-    } else if (services && label === 'eyebrow') {
+    } else if ((services || caseStudy) && label === 'eyebrow') {
       legacy = false;
       eyebrow.textContent = cells.slice(1).map((cell) => cell.textContent.trim()).join(' ');
+    } else if (caseStudy && label === 'tags') {
+      legacy = false;
+      cells.slice(1).forEach((cell) => {
+        const items = cell.querySelectorAll('li');
+        const entries = items.length ? items : cell.querySelectorAll('p');
+        (entries.length ? [...entries] : [cell]).forEach((entry) => {
+          if (!entry.textContent.trim()) return;
+          const item = document.createElement('li');
+          item.textContent = entry.textContent.trim();
+          tags.append(item);
+        });
+      });
     } else if (Object.hasOwn(targets, label)) {
       legacy = false;
       cells.slice(1).forEach((cell) => targets[label].append(...cell.childNodes));
@@ -104,7 +125,7 @@ export default function decorate(block) {
     background.replaceChildren(picture);
   }
 
-  [content, badges, trust].flatMap((container) => [...container.querySelectorAll('a[href]')])
+  [content, badges, trust, media].flatMap((container) => [...container.querySelectorAll('a[href]')])
     .forEach((link) => {
       const href = link.getAttribute('href')?.trim();
       let safe = false;
@@ -125,7 +146,7 @@ export default function decorate(block) {
         if (!link.textContent.trim()) return;
         const primary = link.classList.contains('primary')
           || link.classList.contains('accent') || Boolean(link.closest('strong') || link.querySelector('strong'));
-        if (services) {
+        if (services || caseStudy) {
           link.querySelectorAll('strong, em').forEach((format) => format.replaceWith(...format.childNodes));
         }
         link.classList.add('button', primary ? 'primary' : 'secondary');
@@ -137,6 +158,7 @@ export default function decorate(block) {
   content.querySelectorAll('p').forEach((p) => {
     if (!p.textContent.trim() && !p.querySelector('img')) p.remove();
   });
+  if (tags.hasChildNodes()) content.append(tags);
   if (actions.hasChildNodes()) content.append(actions);
   if (eyebrow.textContent.trim()) content.prepend(eyebrow);
   if (breadcrumbs.textContent.trim()) content.prepend(breadcrumbs);
@@ -144,6 +166,18 @@ export default function decorate(block) {
   badges.querySelectorAll('img').forEach((image) => { image.loading = 'eager'; });
   block.replaceChildren();
   block.append(content);
+  if (caseStudy && (media.hasChildNodes() || block.classList.contains('placeholder-media'))) {
+    const eager = !block.classList.contains('desktop-media')
+      || window.matchMedia('(min-width: 900px)').matches;
+    media.querySelectorAll('img').forEach((image) => {
+      const picture = createOptimizedPicture(image.src, image.alt, eager, [
+        { media: '(min-width: 900px)', width: '850' }, { width: '750' },
+      ]);
+      picture.querySelector('img').setAttribute('fetchpriority', eager ? 'high' : 'auto');
+      (image.closest('picture') || image).replaceWith(picture);
+    });
+    block.append(media);
+  }
   if (badges.textContent.trim() || badges.querySelector('img')) block.append(badges);
   if (trust.hasChildNodes()) block.append(trust);
   // Do not make EDS wait for the decorative background before loading fonts/header.
