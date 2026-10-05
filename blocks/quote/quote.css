@@ -1,0 +1,63 @@
+.quote {
+  box-sizing: border-box;
+  padding: var(--spacing-32);
+  border-left: var(--size-border) solid var(--accent-mint);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+}
+
+.quote figure {
+  margin: 0;
+}
+
+.quote blockquote {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--type-body-emphasis-lg-font-size);
+  line-height: var(--type-body-md-line-height);
+}
+
+.quote p {
+  margin: 0;
+}
+
+.quote figcaption {
+  display: flex;
+  gap: var(--spacing-16);
+  align-items: center;
+  margin-top: var(--spacing-32);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.quote figcaption strong {
+  color: var(--text-primary);
+}
+
+.quote figcaption img {
+  display: block;
+  width: var(--size-control-md);
+  height: var(--size-control-md);
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+}
+
+.quote:empty {
+  display: none;
+}
+
+.quote.placeholder-portrait figcaption:not(:has(img))::before {
+  content: "";
+  flex: 0 0 var(--size-control-md);
+  width: var(--size-control-md);
+  height: var(--size-control-md);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface-2);
+}
+
+@media (width < 900px) {
+  .quote {
+    padding: var(--spacing-24);
+    border-left-color: var(--accent-blue-light);
+  }
+}
