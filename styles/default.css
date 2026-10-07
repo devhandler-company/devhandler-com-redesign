@@ -1,5 +1,5 @@
-/* Loaded only by Template: default. One continuous background behind header, sections and footer. */
-body.default-background {
+/* One continuous background behind header, sections and footer. */
+:root body {
   background:
     radial-gradient(ellipse 120% 9% at 50% 22%,
       color-mix(in srgb, var(--action-primary) 38%, transparent), transparent),
@@ -15,9 +15,11 @@ body.default-background {
 }
 
 /* Section surfaces reveal the page background; cards keep their fills. */
-body.default-background main > .section { background: transparent; }
-body.default-background footer .footer { background: transparent; }
+/* `:root` adds the specificity the old `body.default-background` had, so block rules like
+   `main > .section.client-logos-container { background: … }` do not override these. */
+:root body main > .section { background: transparent; }
+:root body footer .footer { background: transparent; }
 
 /* Blocks whose own surface differs from the page background. */
-body.default-background main .hero.services,
-body.default-background main > .section.stats-container { background: transparent; }
+:root body main .hero.services,
+:root body main > .section.stats-container { background: transparent; }
