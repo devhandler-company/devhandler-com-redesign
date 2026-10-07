@@ -3,14 +3,11 @@
 The `reviews` block renders a responsive, touch-friendly carousel. Every content
 row becomes one review card.
 
-| Reviews | | |
-| --- | --- | --- |
-| Successful Magento to AEM Migration with $300K annual savings | July 2024 - April 2025 | DevHandler successfully migrated Magento to AEM as a Cloud Service, ensuring zero data loss and improved web performance. The team optimized load times, redesigned the homepage for better UX, and implemented a fully responsive design. Clear documentation simplified future management. The project streamlined operations and saved $300K annually. |
-| Successful Magento to AEM Migration with $300K annual savings | July 2024 - April 2025 | DevHandler successfully migrated Magento to AEM as a Cloud Service, ensuring zero data loss and improved web performance. The team optimized load times, redesigned the homepage for better UX, and implemented a fully responsive design. Clear documentation simplified future management. The project streamlined operations and saved $300K annually. |
-| Successful Magento to AEM Migration with $300K annual savings | July 2024 - April 2025 | DevHandler successfully migrated Magento to AEM as a Cloud Service, ensuring zero data loss and improved web performance. The team optimized load times, redesigned the homepage for better UX, and implemented a fully responsive design. Clear documentation simplified future management. The project streamlined operations and saved $300K annually. |
-| Successful Magento to AEM Migration with $300K annual savings | July 2024 - April 2025 | DevHandler successfully migrated Magento to AEM as a Cloud Service, ensuring zero data loss and improved web performance. The team optimized load times, redesigned the homepage for better UX, and implemented a fully responsive design. Clear documentation simplified future management. The project streamlined operations and saved $300K annually. |
+| Reviews | | | |
+| --- | --- | --- | --- |
+| Review title | Date or engagement period | Review copy | Reviewer photo, followed by name and role in separate paragraphs |
 
-In Google Docs, merge the three cells in the `Reviews` row. That structural row
+In Google Docs, merge all cells in the `Reviews` row. That structural row
 names the block; every row beneath it maps to a card.
 
 Each review row accepts:
@@ -18,6 +15,11 @@ Each review row accepts:
 1. Review title (required)
 2. Date or engagement period (optional)
 3. Review copy (optional)
+4. Reviewer (optional): photo, followed by name and role in separate paragraphs
+   or separated by a line break. `Name - Role` also works. The photo sits beside
+   the name and role at the bottom of the card. Use an empty cell when omitted.
+   Alternatively, use Cell 4 for the photo and Cell 5 for name/role, or Cells 4,
+   5, and 6 for photo, name, and role separately.
 
 The decorator tolerates missing optional cells. Keep the section heading and
 other section-level configuration outside this block. Mobile exposes the next
@@ -28,6 +30,11 @@ with the last card peeking before card one, so four authored cards appear as
 `4, 1, 2, 3` on a wide screen. The carousel loops continuously and supports
 mouse drag, touch, wheel/trackpad scrolling, and left/right arrow keys when
 focused.
+
+Clicking a card advances the carousel by one review, including at the loop
+boundary. Each card also has a keyboard-accessible next-review button (Enter or
+Space). Dragging does not trigger a click. A block with only one review has no
+next-review button.
 
 ## Layout configuration
 
@@ -45,3 +52,13 @@ The block surface is transparent so its section controls the background. Edge
 fades default to `--bg-page`; a section with a different surface can set
 `--reviews-fade-color` on the block or an ancestor without changing the
 carousel logic.
+
+## Local preview
+
+With `npm start` running, open `http://localhost:3000/test/cards-preview.html`.
+The fixture uses sample content and covers all reviewer structures above, an
+existing three-cell review, and the case-card title font. Files in `test/` are
+excluded from deployment by `.hlxignore`.
+
+The regular homepage still uses backend-authored content. Add reviewer data to
+that source table and preview the content before expecting the footer there.

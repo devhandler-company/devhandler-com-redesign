@@ -99,6 +99,14 @@
   background: var(--bg-surface-2);
 }
 
+.cards.case .cards-title {
+  font-family: var(--type-display-caption-font-family);
+  font-size: var(--type-display-caption-font-size);
+  font-weight: var(--type-display-caption-font-weight);
+  letter-spacing: var(--type-display-caption-letter-spacing);
+  line-height: var(--type-display-caption-line-height);
+}
+
 .cards.case .cards-media {
   aspect-ratio: 16 / 9;
   overflow: hidden;

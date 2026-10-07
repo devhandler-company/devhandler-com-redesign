@@ -42,6 +42,41 @@ function hasContent(element) {
   return Boolean(element?.textContent.trim() || element?.querySelector('img, picture'));
 }
 
+function decorateReviewer(cells) {
+  const populated = cells.filter(hasContent);
+  if (!populated.length) return null;
+
+  const reviewer = document.createElement('div');
+  reviewer.className = 'reviews-card-reviewer';
+  const image = populated.map((cell) => cell.querySelector('picture, img')).find(Boolean);
+  if (image) reviewer.append(image);
+
+  const parts = populated.flatMap((cell) => {
+    const copy = cell.cloneNode(true);
+    copy.querySelectorAll('br').forEach((br) => br.replaceWith('\n'));
+    const paragraphs = [...copy.querySelectorAll('p')];
+    return (paragraphs.length ? paragraphs : [copy])
+      .flatMap((element) => element.textContent.split(/\r?\n|\s+[-–—·]\s+/));
+  })
+    .map((text) => text.trim()).filter(Boolean);
+  if (parts.length) {
+    const details = document.createElement('div');
+    details.className = 'reviews-card-reviewer-details';
+    const name = document.createElement('p');
+    name.className = 'reviews-card-reviewer-name';
+    [name.textContent] = parts;
+    details.append(name);
+    if (parts.length > 1) {
+      const role = document.createElement('p');
+      role.className = 'reviews-card-reviewer-role';
+      role.textContent = parts.slice(1).join(' ');
+      details.append(role);
+    }
+    reviewer.append(details);
+  }
+  return reviewer;
+}
+
 function decorateReview(row) {
   const cells = [...row.children];
   const title = cells[0];
@@ -70,13 +105,16 @@ function decorateReview(row) {
 
   item.append(header);
 
-  const quoteCells = cells.slice(2).filter(hasContent);
+  const quoteCells = cells.slice(2, 3).filter(hasContent);
   if (quoteCells.length) {
     const quote = document.createElement('div');
     quote.className = 'reviews-card-quote';
     quoteCells.forEach((cell) => quote.append(...cell.childNodes));
     item.append(quote);
   }
+
+  const reviewer = decorateReviewer(cells.slice(3));
+  if (reviewer) item.append(reviewer);
 
   return item;
 }
@@ -159,6 +197,7 @@ function createLoop(track, cards) {
 function enableDrag(track, loop) {
   const block = track.closest('.reviews');
   let dragging = false;
+  let hasDragged = false;
   let startX = 0;
   let startScroll = 0;
 
@@ -171,12 +210,11 @@ function enableDrag(track, loop) {
   };
 
   track.addEventListener('pointerdown', (event) => {
-    if (event.pointerType === 'touch') return;
+    hasDragged = false;
+    if (event.pointerType === 'touch' || event.button !== 0) return;
     dragging = true;
     startX = event.clientX;
     startScroll = track.scrollLeft;
-    track.classList.add('is-dragging');
-    track.setPointerCapture(event.pointerId);
   });
 
   track.addEventListener('pointermove', (event) => {
@@ -186,14 +224,36 @@ function enableDrag(track, loop) {
     }
     if (!dragging) return;
     if (Math.abs(event.clientX - startX) > REVIEWS_CAROUSEL_CONFIG.dragThreshold) {
+      hasDragged = true;
+      track.classList.add('is-dragging');
+      track.setPointerCapture(event.pointerId);
       markInteracted();
     }
+    if (!hasDragged) return;
     track.scrollLeft = startScroll - (event.clientX - startX);
     startScroll += loop?.normalize() || 0;
   });
 
   track.addEventListener('pointerup', stopDragging);
   track.addEventListener('pointercancel', stopDragging);
+  track.addEventListener('lostpointercapture', stopDragging);
+
+  track.addEventListener('click', (event) => {
+    if (hasDragged && event.detail !== 0) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    const next = event.target.closest('.reviews-card-next');
+    if (!next) return;
+    markInteracted();
+    const card = next.closest('.reviews-card');
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    track.scrollBy({
+      left: card.getBoundingClientRect().width + gap,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
+  });
 
   track.addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
@@ -237,6 +297,13 @@ export default function decorate(block) {
   cards.forEach((card, index) => {
     card.setAttribute('aria-posinset', index + 1);
     card.setAttribute('aria-setsize', cards.length);
+    if (cards.length > 1) {
+      const next = document.createElement('button');
+      next.className = 'reviews-card-next';
+      next.type = 'button';
+      next.setAttribute('aria-label', `Show next review after ${card.querySelector('.reviews-card-title').textContent.trim()}`);
+      card.append(next);
+    }
   });
   if (!cards.length) {
     block.replaceChildren();
