@@ -198,13 +198,10 @@ async function loadEager(doc) {
       /* Preserve readable content if the page stylesheet is unavailable. */
     });
   }
-  let defaultBackground;
-  if (doc.body.classList.contains('default-background')) {
-    defaultBackground = loadCSS(`${window.hlx.codeBasePath}/styles/default.css`).catch(() => {
-      /* Preserve readable content if the page stylesheet is unavailable. */
-    });
-    if (!doc.body.classList.contains('case-study-page')) await defaultBackground;
-  }
+  const defaultBackground = loadCSS(`${window.hlx.codeBasePath}/styles/default.css`).catch(() => {
+    /* Preserve readable content if the page stylesheet is unavailable. */
+  });
+  if (!doc.body.classList.contains('case-study-page')) await defaultBackground;
   if (doc.body.classList.contains('our-work-page')) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/our-work.css`).catch(() => {
       /* Preserve readable content if the page stylesheet is unavailable. */
