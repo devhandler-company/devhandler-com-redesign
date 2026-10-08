@@ -1,0 +1,32 @@
+/* Blog listing only. Article pages may share the old template name. */
+.blog-listing-page main > .section {
+  margin-block: 0;
+}
+
+.blog-listing-page main > .section:not(.hero-container) {
+  padding-block: var(--spacing-40);
+}
+
+.blog-listing-page main > .section:not(.hero-container) > div {
+  box-sizing: border-box;
+  max-width: calc(var(--grid-max-width) + var(--grid-margin-mobile) * 2);
+  padding-inline: var(--grid-margin-mobile);
+}
+
+.blog-listing-page main .section-intro {
+  padding-inline: 0;
+}
+
+.blog-listing-page .section-intro-wrapper + .cards-wrapper {
+  margin-top: var(--spacing-24);
+}
+
+@media (width >= 900px) {
+  .blog-listing-page main > .section:not(.hero-container) {
+    padding-block: var(--spacing-64);
+  }
+
+  .blog-listing-page .section-intro-wrapper + .cards-wrapper {
+    margin-top: var(--spacing-32);
+  }
+}

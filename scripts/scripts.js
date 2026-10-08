@@ -193,6 +193,14 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (doc.querySelector('main .hero.blog, main .blog-cards')
+    || (/^\/blog\/?$/.test(window.location.pathname) && doc.querySelector('main .cards.insight'))) {
+    const { default: prepareBlogPage } = await import('./blog-page.js');
+    prepareBlogPage(doc);
+    await loadCSS(`${window.hlx.codeBasePath}/styles/blog.css`).catch(() => {
+      /* Keep the authored Blog content readable if page styling fails. */
+    });
+  }
   if (doc.body.classList.contains('services-page')) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/services.css`).catch(() => {
       /* Preserve readable content if the page stylesheet is unavailable. */
