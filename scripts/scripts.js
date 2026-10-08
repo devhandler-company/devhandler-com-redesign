@@ -13,6 +13,7 @@ import {
   readBlockConfig,
   toClassName,
 } from './aem.js';
+import { isBlogArticle, prepareBlogArticle, decorateBlogArticle } from './blog-article.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -193,8 +194,15 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
-  if (doc.querySelector('main .hero.blog, main .blog-cards')
-    || (/^\/blog\/?$/.test(window.location.pathname) && doc.querySelector('main .cards.insight'))) {
+  const blogArticle = isBlogArticle(doc);
+  if (blogArticle) {
+    prepareBlogArticle(doc);
+    await loadCSS(`${window.hlx.codeBasePath}/styles/blog-article.css`).catch(() => {
+      /* Preserve readable article content when styling is unavailable. */
+    });
+  }
+  if (!blogArticle && (doc.querySelector('main .hero.blog, main .blog-cards')
+    || (/^\/blog\/?$/.test(window.location.pathname) && doc.querySelector('main .cards.insight')))) {
     const { default: prepareBlogPage } = await import('./blog-page.js');
     prepareBlogPage(doc);
     await loadCSS(`${window.hlx.codeBasePath}/styles/blog.css`).catch(() => {
@@ -269,6 +277,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    if (blogArticle) decorateBlogArticle(doc);
     const hero = main.firstElementChild?.querySelector('.hero.home');
     if (hero) {
       // Hidden sections do not request their fonts until decoration finishes.

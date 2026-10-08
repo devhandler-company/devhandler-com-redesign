@@ -15,6 +15,7 @@
 }
 
 /* Section surfaces reveal the page background; cards keep their fills. */
+
 /* `:root` adds the specificity the old `body.default-background` had, so block rules like
    `main > .section.client-logos-container { background: … }` do not override these. */
 :root body main > .section { background: transparent; }
