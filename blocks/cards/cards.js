@@ -43,14 +43,18 @@ function createCard() {
   return { item, article };
 }
 
-function appendMedia(article, cell, fallbackAlt) {
+function appendMedia(article, cell, fallbackAlt, reserveSpace = false) {
   const sourceImage = cell?.querySelector('picture img, img');
-  if (!sourceImage?.src) return null;
+  if (!sourceImage?.src && !reserveSpace) return null;
 
   const media = document.createElement('div');
   media.className = 'cards-media';
-  const alt = sourceImage.getAttribute('alt')?.trim() || fallbackAlt;
-  media.append(createOptimizedPicture(sourceImage.src, alt, false, CARD_MEDIA_WIDTHS));
+  if (sourceImage?.src) {
+    const alt = sourceImage.getAttribute('alt')?.trim() || fallbackAlt;
+    media.append(createOptimizedPicture(sourceImage.src, alt, false, CARD_MEDIA_WIDTHS));
+  } else {
+    media.setAttribute('aria-hidden', 'true');
+  }
   article.append(media);
   return media;
 }
@@ -275,18 +279,26 @@ function createFeaturedCaseCard(block) {
 
 function createInsightCard(row) {
   const cells = [...row.children];
-  const titleData = createEditorialHeading(cells[3]);
+  const noImageCell = cells.length === 3
+    && !cells[0].querySelector('picture img, img') && textParts(cells[0]).length > 0;
+  const compact = cells.length < 5;
+  const metadataIndex = noImageCell ? 0 : 1;
+  const titleIndex = compact ? metadataIndex + 1 : 3;
+  const titleData = createEditorialHeading(cells[titleIndex]);
   if (!titleData) return null;
 
   const { item, article } = createCard();
-  appendMedia(article, cells[0], `${titleData.title} article image`);
+  appendMedia(article, noImageCell ? null : cells[0], `${titleData.title} article image`, true);
 
   const content = document.createElement('div');
   content.className = 'cards-editorial-content';
-  const meta = createEditorialMeta(cells[1], cells[2]);
+  const metadata = compact ? textParts(cells[metadataIndex]) : [];
+  const meta = compact
+    ? createEditorialMetaParts(metadata[0] || '', metadata.slice(1).join(' · '))
+    : createEditorialMeta(cells[1], cells[2]);
   if (meta) content.append(meta);
   content.append(titleData.heading);
-  appendText(content, 'cards-editorial-summary', textParts(cells[4]).join(' '));
+  appendText(content, 'cards-editorial-summary', textParts(cells[titleIndex + 1]).join(' '));
   article.append(content);
   return item;
 }
@@ -387,8 +399,8 @@ function decorateDefault(block) {
   block.replaceChildren(list);
 }
 
-export default function decorate(block) {
-  if (block.querySelector(':scope > .cards-list')) return;
+export default async function decorate(block) {
+  if (block.querySelector(':scope > .cards-list, :scope > .cards-index-content')) return;
   const variant = CARD_VARIANTS.find((name) => block.classList.contains(name));
 
   switch (variant) {
@@ -403,7 +415,14 @@ export default function decorate(block) {
       decorateVariant(block, createServiceCard);
       break;
     case 'insight':
-      decorateVariant(block, createInsightCard);
+      if ([...block.children].some((row) => row.children.length === 2
+        && /^(queryindexlink|source)$/.test(row.firstElementChild.textContent
+          .trim().toLowerCase().replace(/[^a-z0-9]/g, '')))) {
+        const { default: decorateIndex } = await import('../../scripts/cards-index.js');
+        await decorateIndex(block, createInsightCard);
+      } else {
+        decorateVariant(block, createInsightCard);
+      }
       break;
     case 'featured':
       decorateVariant(block, createFeaturedCard);

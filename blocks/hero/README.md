@@ -1,6 +1,6 @@
 # Hero
 
-Home, Services and Case Study hero variants with one Google Docs table for every viewport. Content remains
+Home, Services, Blog and Case Study hero variants with one Google Docs table for every viewport. Content remains
 in the document; JavaScript only groups it for layout. No animation, video,
 carousel, external API, or cross-block dependency is required.
 
@@ -41,6 +41,54 @@ Keep the Hero in its own EDS section using an unformatted `---` paragraph after
 the table. Use native Google Docs formatting, not literal Markdown markers.
 Do not use both `home` and `services` on the same table. Plain **Hero** and
 **Hero (home)** retain their existing appearance and behavior.
+
+## Blog variant
+
+Use **Hero (blog)** for the Blog introduction. It reuses the Services text-hero
+decorator, breadcrumbs and responsive typography. There is no second hero block
+or separate Blog JavaScript. One two-column Google Docs table serves all widths;
+merge its heading cells and author these named rows:
+
+| Label | Content |
+| --- | --- |
+| Breadcrumbs | A linked Home paragraph, then an unlinked Blog paragraph. Use the actual homepage URL. |
+| Eyebrow | Blog, as normal text. Use Insights instead if that is the approved overline. |
+| Content | One native Heading 1: What we learned, a soft line break, then shipping Adobe platforms. Follow with the lead as a normal paragraph. |
+
+Lead copy:
+
+> Architecture decisions, migration trade-offs and delivery practice — written by the engineers and architects who run these projects, not by a content agency.
+
+Breadcrumbs and Eyebrow are optional. The current crumb receives
+`aria-current="page"`. Keep the lead inside Content; do not give it heading
+formatting. Use a soft break inside the one H1 rather than two headings.
+No Background, Badges, Trust or CTA rows are needed for this composition.
+Separate the following section with a standalone unformatted `---` paragraph.
+
+Both **Hero (services)** and **Hero (blog)** use a solid dark background by
+default and support a CSS custom property for its color:
+
+```css
+.hero.blog {
+  --hero-background-color: var(--bg-hero-dark);
+}
+
+/* Let the containing page/section background show through instead. */
+.hero.blog {
+  --hero-background-color: transparent;
+}
+```
+
+Choose one rule or scope overrides to a page/section class. This is a CSS setting,
+not an authored Background row: Background rows remain image URLs. Blog keeps
+the Services mobile layout; on desktop it gives breadcrumbs more space above
+and lets the title/lead use the content grid width. Existing Services appearance
+stays the same unless its background property is explicitly overridden.
+
+Local preview: `/test/blog-hero.html`. It uses EDS section/block decoration and
+the real Hero module with the above content, and is excluded from publication by
+the existing `test/*` entry in `.hlxignore`. It does not prove a Google Docs
+round-trip; after authoring, preview the native Doc and inspect its plain HTML.
 
 ## Case Study variant
 

@@ -2,9 +2,9 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 
 /** One authored hero, with layout differences handled by CSS. */
 export default function decorate(block) {
-  const services = block.classList.contains('services');
+  const textHero = block.classList.contains('services') || block.classList.contains('blog');
   const caseStudy = block.classList.contains('case');
-  if (!block.classList.contains('home') && !services && !caseStudy) return;
+  if (!block.classList.contains('home') && !textHero && !caseStudy) return;
   if (block.querySelector(':scope > .hero-content')) return;
 
   const content = document.createElement('div');
@@ -34,7 +34,7 @@ export default function decorate(block) {
     const label = cells.length > 1 ? cells[0].textContent.trim().replace(/\s+/g, ' ').toLowerCase() : '';
     const targets = { background, content, badges };
     if (caseStudy) targets.image = media;
-    if ((services || caseStudy) && label === 'breadcrumbs') {
+    if ((textHero || caseStudy) && label === 'breadcrumbs') {
       legacy = false;
       const list = document.createElement('ol');
       list.setAttribute('role', 'list');
@@ -59,7 +59,7 @@ export default function decorate(block) {
         if (!safe) link.replaceWith(...link.childNodes);
       });
       breadcrumbs.append(list);
-    } else if ((services || caseStudy) && label === 'eyebrow') {
+    } else if ((textHero || caseStudy) && label === 'eyebrow') {
       legacy = false;
       eyebrow.textContent = cells.slice(1).map((cell) => cell.textContent.trim()).join(' ');
     } else if (caseStudy && label === 'tags') {
@@ -146,7 +146,7 @@ export default function decorate(block) {
         if (!link.textContent.trim()) return;
         const primary = link.classList.contains('primary')
           || link.classList.contains('accent') || Boolean(link.closest('strong') || link.querySelector('strong'));
-        if (services || caseStudy) {
+        if (textHero || caseStudy) {
           link.querySelectorAll('strong, em').forEach((format) => format.replaceWith(...format.childNodes));
         }
         link.classList.add('button', primary ? 'primary' : 'secondary');
