@@ -102,8 +102,13 @@ Both modes use the same Insight card renderer; Featured remains `Cards (featured
 One table serves every width, with six articles initially and six more per click.
 Tags are multi-select OR filters. All articles clears all selections; clearing
 the last selected topic also returns to all articles. Changing filters resets
-the visible batch. Newest first / Oldest first sorting sits to the right of the
-topic pills and also resets the batch while retaining selected topics. Load more
+the visible batch. A sort button sits to the right of the topic pills. Each click
+toggles Newest first / Oldest first directly, with no dropdown menu. Enter and
+Space activate it as well. A single down/up arrow reflects the current sort order.
+Below 900px, the topic pills stay on one horizontally scrollable line.
+On desktop, cards in each row share the tallest card's height, with extra space
+below the content. Titles and summaries retain their natural spacing and length.
+Sorting resets the batch while retaining selected topics. Load more
 focuses the first newly revealed article. No visible heading or result count is
 added; result counts are announced to screen readers.
 

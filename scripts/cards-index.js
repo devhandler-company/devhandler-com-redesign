@@ -55,13 +55,11 @@ export default async function decorate(block, createCard) {
     ? Math.min(requestedSize, 100) : 6;
   const content = node('div', '', 'cards-index-content');
   const header = node('div', '', 'cards-index-header');
-  const sort = node('select', '', 'cards-index-sort');
-  sort.setAttribute('aria-label', 'Sort articles');
-  [['newest', 'Newest first'], ['oldest', 'Oldest first']].forEach(([value, label]) => {
-    const option = node('option', label);
-    option.value = value;
-    sort.append(option);
-  });
+  const sort = node('button', 'Newest first', 'cards-index-sort');
+  sort.type = 'button';
+  sort.dataset.order = 'newest';
+  sort.setAttribute('aria-label', 'Newest first. Switch to oldest first');
+  let sortOrder = 'newest';
   const filters = node('div', '', 'cards-index-filters');
   filters.setAttribute('role', 'group');
   filters.setAttribute('aria-label', 'Filter articles by topic');
@@ -87,7 +85,7 @@ export default async function decorate(block, createCard) {
   let matches = [];
 
   function render() {
-    const ordered = sortArticles(articles, sort.value);
+    const ordered = sortArticles(articles, sortOrder);
     matches = matchingArticles(ordered, selected);
     const visible = new Set(matches.slice(0, visibleCount));
     items.forEach((item, index) => { item.hidden = !visible.has(articles[index]); });
@@ -105,7 +103,12 @@ export default async function decorate(block, createCard) {
     more.hidden = shown >= matches.length;
   }
 
-  sort.addEventListener('change', () => {
+  sort.addEventListener('click', () => {
+    sortOrder = sortOrder === 'newest' ? 'oldest' : 'newest';
+    sort.dataset.order = sortOrder;
+    sort.textContent = sortOrder === 'newest' ? 'Newest first' : 'Oldest first';
+    sort.setAttribute('aria-label', sortOrder === 'newest'
+      ? 'Newest first. Switch to oldest first' : 'Oldest first. Switch to newest first');
     visibleCount = batchSize;
     render();
   });

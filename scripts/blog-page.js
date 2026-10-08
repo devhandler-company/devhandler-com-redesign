@@ -12,6 +12,33 @@ function element(tag, text) {
   return node;
 }
 
+/** Shared migration for the authored legacy CTA on listing and article pages. */
+export function prepareBlogCTA(main) {
+  main.querySelectorAll('.blog-lets-talk').forEach((legacy) => {
+    const fields = labeledFields(legacy);
+    const content = document.createElement('div');
+    const heading = document.createElement('h2');
+    ['headline', 'highlighted-text'].forEach((name) => {
+      const value = fields.get(name)?.textContent.trim();
+      if (!value) return;
+      if (heading.hasChildNodes()) heading.append(document.createElement('br'));
+      heading.append(document.createTextNode(value));
+    });
+    if (heading.hasChildNodes()) content.append(heading);
+    const copy = fields.get('text')?.textContent.trim();
+    if (copy) content.append(element('p', copy));
+    fields.get('button')?.querySelectorAll('a[href]').forEach((link) => {
+      const paragraph = document.createElement('p');
+      const strong = document.createElement('strong');
+      strong.append(link);
+      paragraph.append(strong);
+      content.append(paragraph);
+    });
+    const cta = buildBlock('cta', { elems: [...content.children] });
+    legacy.replaceWith(cta);
+  });
+}
+
 /** Migrate the existing listing's document contracts without affecting article pages. */
 export default function prepareBlogPage(doc) {
   doc.body.classList.add('blog-listing-page');
@@ -42,27 +69,5 @@ export default function prepareBlogPage(doc) {
     legacy.classList.remove('blog-cards', 'mobile-hidden');
     legacy.classList.add('cards', 'insight');
   });
-  main.querySelectorAll('.blog-lets-talk').forEach((legacy) => {
-    const fields = labeledFields(legacy);
-    const content = document.createElement('div');
-    const heading = document.createElement('h2');
-    ['headline', 'highlighted-text'].forEach((name) => {
-      const value = fields.get(name)?.textContent.trim();
-      if (!value) return;
-      if (heading.hasChildNodes()) heading.append(document.createElement('br'));
-      heading.append(document.createTextNode(value));
-    });
-    if (heading.hasChildNodes()) content.append(heading);
-    const copy = fields.get('text')?.textContent.trim();
-    if (copy) content.append(element('p', copy));
-    fields.get('button')?.querySelectorAll('a[href]').forEach((link) => {
-      const paragraph = document.createElement('p');
-      const strong = document.createElement('strong');
-      strong.append(link);
-      paragraph.append(strong);
-      content.append(paragraph);
-    });
-    const cta = buildBlock('cta', { elems: [...content.children] });
-    legacy.replaceWith(cta);
-  });
+  prepareBlogCTA(main);
 }
