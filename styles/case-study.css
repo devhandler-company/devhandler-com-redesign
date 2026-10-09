@@ -568,6 +568,12 @@
   text-underline-offset: 0.15em;
 }
 
+.case-study-page main .default-content-wrapper a:any-link:not(.button) {
+  color: var(--accent-blue-light);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .case-study-page a:focus-visible {
   outline: var(--size-border-strong) solid var(--focus-ring);
   outline-offset: var(--spacing-4);

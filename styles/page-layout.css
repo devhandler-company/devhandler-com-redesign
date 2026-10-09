@@ -138,6 +138,10 @@ body:is(.home-page, .services-page, .our-work-page, .case-study-page) {
   --form-supporting-text: var(--text-placeholder);
 }
 
+:is(.home-page, .services-page, .our-work-page) .form .form-eyebrow {
+  color: var(--action-primary);
+}
+
 :is(.services-page, .case-study-page) .cta {
   padding: var(--spacing-32);
   text-align: center;
