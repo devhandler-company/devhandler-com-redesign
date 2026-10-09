@@ -216,12 +216,12 @@
   .services-page main {
     background:
       radial-gradient(
-        ellipse 70% 14% at 0% 20%,
+        ellipse 70% 14% at 0% 20% in srgb,
         var(--action-primary-chip),
         transparent
       ),
       radial-gradient(
-        ellipse 105% 43% at 100% 66%,
+        ellipse 105% 43% at 100% 66% in srgb,
         color-mix(in srgb, var(--action-primary) 65%, transparent),
         transparent
       ),

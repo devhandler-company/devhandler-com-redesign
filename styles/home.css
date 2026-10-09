@@ -579,7 +579,7 @@
 
   body.home-page main > .section.home-hero {
     background: radial-gradient(
-      ellipse 160% 80% at 100% 10%,
+      ellipse 160% 80% at 100% 10% in srgb,
       color-mix(in srgb, var(--action-primary) 55%, transparent),
       transparent 80%
     );
@@ -607,7 +607,7 @@
 
   .home-page .home-hero {
     background: radial-gradient(
-      ellipse 160% 80% at 100% 10%,
+      ellipse 160% 80% at 100% 10% in srgb,
       var(--action-primary-chip),
       transparent 80%
     );
@@ -647,22 +647,22 @@
   :root body.home-page {
     background:
       radial-gradient(
-        ellipse 75% 9% at 0% 13%,
+        ellipse 75% 9% at 0% 13% in srgb,
         color-mix(in srgb, var(--action-primary) 55%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 85% 11% at 100% 33%,
+        ellipse 85% 11% at 100% 33% in srgb,
         color-mix(in srgb, var(--action-primary) 40%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 100% 32% at 100% 66%,
+        ellipse 100% 32% at 100% 66% in srgb,
         color-mix(in srgb, var(--action-primary) 55%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 80% 12% at 50% 97%,
+        ellipse 80% 12% at 50% 97% in srgb,
         color-mix(in srgb, var(--action-primary) 65%, transparent),
         transparent
       ),

@@ -35,7 +35,7 @@
 
   body.case-study-page main > .section.case-hero {
     background: radial-gradient(
-      ellipse 150% 55% at 100% 5%,
+      ellipse 150% 55% at 100% 5% in srgb,
       color-mix(in srgb, var(--action-primary) 55%, transparent),
       transparent 85%
     );
@@ -582,7 +582,7 @@
 @media (width < 900px) {
   .case-study-page .case-hero {
     background: radial-gradient(
-      ellipse 150% 80% at 100% 5%,
+      ellipse 150% 80% at 100% 5% in srgb,
       var(--action-primary-chip),
       transparent 85%
     );

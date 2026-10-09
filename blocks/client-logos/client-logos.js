@@ -79,9 +79,10 @@ export default function decorate(block) {
   if (block.classList.contains('strip')) {
     list.setAttribute('aria-label', heading?.textContent || 'Client logos');
     const mobile = window.matchMedia('(width < 900px)');
+    const desktopRows = list.children.length >= 12 && !block.classList.contains('compact');
     const updateFocus = () => {
-      list.tabIndex = mobile.matches ? 0 : -1;
-      if (!mobile.matches) list.blur();
+      list.tabIndex = list.children.length && (mobile.matches || !desktopRows) ? 0 : -1;
+      if (!mobile.matches && desktopRows) list.blur();
     };
     updateFocus();
     mobile.addEventListener('change', updateFocus);

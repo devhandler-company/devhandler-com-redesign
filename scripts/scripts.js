@@ -40,10 +40,11 @@ if (window.trustedTypes && window.trustedTypes.createPolicy) {
 }
 
 /**
- * load fonts.css and set a session storage flag
+ * Load font definitions and optionally warm the faces needed before first paint.
  */
-async function loadFonts() {
+async function loadFonts(faces = []) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
+  await Promise.all(faces.map((font) => document.fonts.load(font)));
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
@@ -218,18 +219,20 @@ async function loadEager(doc) {
         .catch(() => { /* Preserve readable content if styling is unavailable. */ })),
       ...(caseHero ? [loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero.css`)
         .catch(() => { /* Keep the authored hero readable without block styling. */ })] : []),
-      loadFonts().then(() => Promise.all(
-        ['700 1em ample-alt', '400 1em hind', '600 1em hind']
-          .map((font) => document.fonts.load(font)),
-      )).catch(() => { /* Keep readable fallback text when a font is unavailable. */ }),
+      loadFonts(['700 1em ample-alt', '400 1em hind', '600 1em hind'])
+        .catch(() => { /* Keep readable fallback text when a font is unavailable. */ }),
     ]);
   }
   const blogArticle = isBlogArticle(doc);
   if (blogArticle) {
     prepareBlogArticle(doc);
-    await loadCSS(`${window.hlx.codeBasePath}/styles/blog-article.css`).catch(() => {
-      /* Preserve readable article content when styling is unavailable. */
-    });
+    await Promise.all([
+      loadCSS(`${window.hlx.codeBasePath}/styles/blog-article.css`).catch(() => {
+        /* Preserve readable article content when styling is unavailable. */
+      }),
+      loadFonts(['700 1em ample-alt', '400 1em hind', '600 1em hind', '700 1em hind'])
+        .catch(() => { /* Keep the fallback when an article font is unavailable. */ }),
+    ]);
   }
   if (!blogArticle && (doc.querySelector('main .hero.blog, main .blog-cards')
     || (/^\/blog\/?$/.test(window.location.pathname) && doc.querySelector('main .cards.insight')))) {
@@ -252,9 +255,8 @@ async function loadEager(doc) {
       preload.href = `${window.hlx.codeBasePath}/blocks/${name}/${name}.js`;
       doc.head.append(preload);
     });
-    const fonts = loadFonts().then(() => Promise.all(
-      ['700 1em ample-alt', '400 1em hind', '600 1em hind'].map((font) => document.fonts.load(font)),
-    )).catch(() => { /* Preserve the normal fallback if a font request fails. */ });
+    const fonts = loadFonts(['700 1em ample-alt', '400 1em hind', '600 1em hind'])
+      .catch(() => { /* Preserve the normal fallback if a font request fails. */ });
     await Promise.all([
       fonts,
       loadCSS(`${window.hlx.codeBasePath}/styles/service-detail.css`).catch(() => {
@@ -268,13 +270,15 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     if (blogArticle) decorateBlogArticle(doc);
-    document.body.classList.add('appear');
+    // The article's unsectioned sidebar must not paint above a still-hidden hero.
+    if (!blogArticle) document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), (section) => {
       // The mobile case starts with text; its phone sits below the first viewport.
       const mobileCase = doc.body.classList.contains('case-study-page')
         && !window.matchMedia('(min-width: 900px)').matches;
       return mobileCase ? undefined : waitForFirstImage(section);
     });
+    if (blogArticle) document.body.classList.add('appear');
   }
 
   try {

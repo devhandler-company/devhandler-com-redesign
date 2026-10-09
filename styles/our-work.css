@@ -149,12 +149,12 @@
   .our-work-page main {
     background:
       radial-gradient(
-        ellipse 75% 21% at 0% 28%,
+        ellipse 75% 21% at 0% 28% in srgb,
         var(--action-primary-chip),
         transparent
       ),
       radial-gradient(
-        ellipse 95% 45% at 100% 82%,
+        ellipse 95% 45% at 100% 82% in srgb,
       var(--action-primary),
         transparent
       ),
