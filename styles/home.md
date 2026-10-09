@@ -23,6 +23,9 @@ decorative loop copies or an overlay button. The desktop edge hint clears on
 focus or interaction, making every complete testimonial available.
 Header and Footer come from their shared documents. Layout follows the October
 2026 desktop/mobile originals; unknown copy remains an explicit placeholder.
-The map is an independent public-domain illustration, not extracted screenshot
-artwork. Import DOCX as a native Doc, Preview, and inspect actual `.plain.html`
+The office map uses `/icons/office-map.svg`, supplied from the design and kept unchanged.
+CSS accounts for its export margins and frames Europe on mobile as in the design.
+The home loader replaces the office picture's source with this vector asset;
+keep one inline map image in the office section and its meaningful alt text.
+Import DOCX as a native Doc, Preview, and inspect actual `.plain.html`
 before claiming content integration. Code and document changes ship separately.

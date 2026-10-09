@@ -183,6 +183,19 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateSectionMetadata(main);
+  if (document.body.classList.contains('home-page')) {
+    const picture = main.querySelector('.home-office picture');
+    const image = picture?.querySelector('img');
+    if (image) {
+      picture.querySelectorAll('source').forEach((source) => source.remove());
+      image.removeAttribute('srcset');
+      image.removeAttribute('sizes');
+      image.src = `${window.hlx.codeBasePath}/icons/office-map.svg`;
+      image.width = 1440;
+      image.height = 952;
+      image.loading = 'lazy';
+    }
+  }
   decorateBlocks(main);
   decorateButtons(main);
 }
