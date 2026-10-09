@@ -1,4 +1,4 @@
-/* One continuous background behind header, sections and footer. */
+/* Continuous page background; the shared footer has its own opaque surface. */
 :root body {
   background:
     radial-gradient(ellipse 120% 9% at 50% 22%,
@@ -19,7 +19,7 @@
 /* `:root` adds the specificity the old `body.default-background` had, so block rules like
    `main > .section.client-logos-container { background: … }` do not override these. */
 :root body main > .section { background: transparent; }
-:root body footer .footer { background: transparent; }
+:root body footer .footer { background: var(--bg-footer); }
 
 /* Blocks whose own surface differs from the page background. */
 :root body main .hero.services,

@@ -42,34 +42,36 @@ formatting must be native Docs formatting, not literal Markdown characters.
 | `case-changes` | Section Intro; [Table (comparison)](../blocks/table/README.md), with three headings and one full story per row. |
 | `case-results` | Section Intro; Table (results), four columns; Columns (case-result-media) with optional image; ordinary measurement note; Columns (case-outcomes) with Heading 3 and list; [Quote](../blocks/quote/README.md). Optional Section Metadata `Id`: `case-results`. |
 | `case-cta` | CTA with native Heading 2, description and linked paragraphs. Bold link is primary, italic link secondary. Authors supply approved destinations. |
-| `case-related` | Section Intro; Cards (case), using the existing [Case Cards contract](../blocks/cards/README.md); ordinary See all AEM cases link. |
+| `case-related` | Section Intro; Cards (case), using the existing [Case Cards contract](../blocks/cards/README.md). |
 
 Section Intro uses three one-cell rows. Stats uses value first and label second.
 Keep the At a glance Heading 2: it supplies the hierarchy for metric Heading 3s
-and is visually hidden on desktop. Do not add another Heading 1. Metadata
+and is visually hidden at all widths. Do not add another Heading 1. Metadata
 should also contain an approved Title and Description.
 
 ## Media and provisional content
 
 The supplied exports contain different stories: desktop has an agribusiness
-headline with repeated draft metrics, while mobile describes a pharmaceutical
-publishing case. The selected story is agribusiness. Mobile uses that same
+headline, a Haleon breadcrumb and pharmaceutical sample metadata. The selected
+story remains agribusiness. Mobile uses that same
 authored story with the supplied mobile composition. Related cases likewise
 remain the same at every width. Shared site Header/Footer and the approved
 continuous background are retained.
 
 The development document contains design sample copy, repeated `+18%` and LCP
-values, an example testimonial and an illustrative Haleon mockup extracted
-from the desktop export. These are not approved claims about agribusiness.
+values, an example testimonial and an independently assembled Haleon reference
+mockup using previously supplied product artwork. These are not approved claims about agribusiness.
 Replace them with verified case copy, actual measurements and their source,
 approved attribution, project artwork and real case destinations before
 publishing. Unknown metadata is explicitly “To be confirmed”.
 
 Images belong in Docs, not hardcoded page assets. Hero and testimonial portraits
 use the existing EDS optimizer at their component sizes; give each image
-meaningful alt text in Docs. The page loader preloads the Hero module and its
-display/body font faces only for this template, alongside the shared theme CSS.
-It does not wait for the hidden mobile Hero illustration.
+meaningful alt text in Docs. The page loader preloads the Hero module for this
+template and the display/body font faces for the reviewed templates, alongside
+their page and shared CSS.
+The Hero illustration is visible at both widths. Desktop waits for the foreground
+image; mobile keeps it lazy below the first viewport so it does not delay navigation.
 
 Ordinary links in Hero descriptions, Columns and Table use a brighter semantic
 color, underline and visible keyboard focus. Table headings use secondary text
@@ -78,8 +80,8 @@ existing styles and destinations.
 
 `placeholder-media` and
 `placeholder-portrait` modifiers support the draft's empty media areas. A
-mobile results visual is omitted when no image is authored; a real image is
-shown. Remove Hero's `desktop-media` when its image should appear on mobile.
+mobile results placeholder reserves the same area as an authored image. The current
+document omits Hero's `desktop-media`, displaying its reference artwork on mobile.
 Cards without destinations remain informational; add authored case links only
 when those documents exist. No fake link or test image URL belongs in a live Doc.
 

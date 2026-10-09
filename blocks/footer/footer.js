@@ -16,7 +16,6 @@ function validLink(link) {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  block.classList.toggle('footer-home', ['/', '/index', '/index.html'].includes(window.location.pathname));
   // load footer as fragment
   const footerMeta = getMetadata('footer');
   let fragment;
@@ -115,6 +114,21 @@ export default async function decorate(block) {
       link.replaceChildren(icon, text);
     }
   });
+
+  // One contact order on every page, independent of the authored section order.
+  const contacts = footer.querySelector('.footer-contacts ul');
+  if (contacts) {
+    const order = ['phone', 'email', 'location'];
+    [...contacts.children].sort((a, b) => {
+      const index = (item) => order.findIndex((name) => item.querySelector(`.icon-footer-${name}`));
+      return index(a) - index(b);
+    }).forEach((item) => contacts.append(item));
+  }
+  const copyright = footer.querySelector('.footer-brand p + p');
+  if (copyright) {
+    copyright.classList.add('footer-copyright');
+    footer.append(copyright);
+  }
 
   footer.querySelectorAll('a').forEach((link) => {
     link.classList.remove('button', 'primary', 'secondary');

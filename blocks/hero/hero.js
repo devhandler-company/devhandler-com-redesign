@@ -93,6 +93,17 @@ export default function decorate(block) {
     }
   });
 
+  if (block.classList.contains('home')) {
+    const heading = content.querySelector('h1');
+    const lastBreak = [...(heading?.querySelectorAll('br') || [])].at(-1);
+    if (lastBreak) {
+      const lastLine = document.createElement('span');
+      lastLine.className = 'hero-lastline';
+      while (lastBreak.nextSibling) lastLine.append(lastBreak.nextSibling);
+      lastBreak.replaceWith(lastLine);
+    }
+  }
+
   // A single-cell legacy hero puts its background before the heading.
   if (legacy && !background.hasChildNodes() && content.firstElementChild?.querySelector('picture')) {
     background.append(content.firstElementChild.querySelector('picture'));
@@ -150,7 +161,7 @@ export default function decorate(block) {
         if (!link.textContent.trim()) return;
         const primary = link.classList.contains('primary')
           || link.classList.contains('accent') || Boolean(link.closest('strong') || link.querySelector('strong'));
-        if (textHero || caseStudy) {
+        if (textHero || caseStudy || block.classList.contains('home')) {
           link.querySelectorAll('strong, em').forEach((format) => format.replaceWith(...format.childNodes));
         }
         link.classList.add('button', primary ? 'primary' : 'secondary');
@@ -179,11 +190,10 @@ export default function decorate(block) {
     content.append(media);
   }
   if (caseStudy && (media.hasChildNodes() || block.classList.contains('placeholder-media'))) {
-    const eager = !block.classList.contains('desktop-media')
-      || window.matchMedia('(min-width: 900px)').matches;
+    const eager = window.matchMedia('(min-width: 900px)').matches;
     media.querySelectorAll('img').forEach((image) => {
       const picture = createOptimizedPicture(image.src, image.alt, eager, [
-        { media: '(min-width: 900px)', width: '850' }, { width: '750' },
+        { media: '(min-width: 900px)', width: '450' }, { width: '400' },
       ]);
       picture.querySelector('img').setAttribute('fetchpriority', eager ? 'high' : 'auto');
       (image.closest('picture') || image).replaceWith(picture);

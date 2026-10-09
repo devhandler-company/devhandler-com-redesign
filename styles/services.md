@@ -30,13 +30,13 @@ the existing `Style` field; EDS delivers it as `data-style` on the section.
 | Section Intro + Cards (model) | services-models |
 | Section Intro + Process | services-process |
 | Section Intro + Cards (case, placeholder-media) | services-cases |
-| Client Logos (compact) | services-clients |
+| Client Logos (strip) | services-clients |
 | Section Intro + FAQ (first-open) | services-faq |
-| Form | services-form |
+| Form (labelled) | services-form |
 | CTA | services-cta |
 
 Header and Footer remain shared fragments, not tables in this document. The
-Services Footer stays solid; the homepage-only footer gradient remains unchanged.
+Footer uses the same solid surface and layout on every page.
 
 Breadcrumbs are optional in Hero (services): add a row labelled `Breadcrumbs`
 whose second cell has one paragraph per crumb. Link ancestors; leave the final
@@ -52,9 +52,10 @@ Unlinked Model CTA labels remain text, not fake links.
 
 The working design repeats Service, Model, Process and FAQ copy. These examples
 are intentionally retained pending final content. Case titles and metrics are
-design samples; no real case destinations or images are inferred. Unknown Model
-and Case destinations remain unlinked. Contact/audit actions use the existing
-public Contact us page until distinct destinations are supplied.
+design samples; no real case destinations or images are inferred. Case destinations
+remain unlinked until their pages exist. Model and service actions use the existing
+implementation page. Contact actions target the authored `services-contact`
+section ID, using the shared form.
 
 The Services Form reuses the existing Form block and homepage configuration.
 Endpoint and scheduling URL must be reviewed by the content owner. Browser tests
@@ -67,5 +68,5 @@ Full HTTPS links in DOCX avoid the malformed relative URLs observed in earlier
 imports. Check the actual `.plain.html` and page after preview; an offline DOCX
 fixture is not a substitute for that final Google Docs roundtrip.
 
-Only a desktop Services Root export is available. Mobile/tablet layouts are
-responsive adaptations, not claims of pixel parity with an absent mobile design.
+The October 2026 delivery provides desktop 1440 px and mobile 390 px exports.
+Both define the current layout; tablet and narrower widths adapt the same content.

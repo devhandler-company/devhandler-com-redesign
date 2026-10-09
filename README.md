@@ -82,6 +82,7 @@ Do not edit `scripts/aem.js`; it is vendored from the Adobe boilerplate.
 
 ## Documentation
 
+- [Home composition and authoring](styles/home.md)
 - [Services Root composition and authoring](styles/services.md)
 - [Our Work gallery composition and authoring](styles/our-work.md)
 - [Service Detail composition and authoring](styles/service-detail.md)

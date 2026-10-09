@@ -29,6 +29,14 @@ function urlOf(cell) {
   return linkOf(cell)?.href || textOf(cell);
 }
 
+function safeURL(value) {
+  if (!value) return '';
+  try {
+    const url = new URL(value, window.location.href);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+  } catch { return ''; }
+}
+
 function buildEyebrow(config) {
   const text = textOf(config.eyebrow);
   if (!text) return null;
@@ -111,7 +119,7 @@ function buildIntro(config) {
   return intro;
 }
 
-function buildField(tag, type, name, labelText, required, instanceId) {
+function buildField(tag, type, name, labelText, required, instanceId, labelled) {
   const wrapper = document.createElement('div');
   wrapper.className = 'form-field';
   const fieldId = `form-${instanceId}-${name}`;
@@ -126,14 +134,21 @@ function buildField(tag, type, name, labelText, required, instanceId) {
   field.name = name;
   field.className = 'form-input';
   if (tag === 'input') field.type = type;
-  field.placeholder = labelText;
+  const placeholders = {
+    name: '{full name}', phone: '{phone}', email: '{email}', industry: '{industry}', description: '{message}',
+  };
+  field.placeholder = labelled ? placeholders[name] : labelText;
+  const autocomplete = {
+    name: 'name', phone: 'tel', email: 'email',
+  };
+  if (autocomplete[name]) field.autocomplete = autocomplete[name];
   if (required) field.required = true;
 
   wrapper.append(label, field);
   return wrapper;
 }
 
-function buildConsent() {
+function buildConsent(labelled) {
   const wrapper = document.createElement('div');
   wrapper.className = 'form-consent';
 
@@ -146,23 +161,25 @@ function buildConsent() {
   checkbox.required = true;
 
   const text = document.createElement('span');
-  text.textContent = 'I accept the Privacy Policy and Cookie Terms*';
+  text.textContent = labelled
+    ? 'I accept Privacy Policy and Cookie Policy*'
+    : 'I accept the Privacy Policy and Cookie Terms*';
 
   label.append(checkbox, text);
   wrapper.append(label);
   return wrapper;
 }
 
-function buildFields(instanceId) {
+function buildFields(instanceId, labelled) {
   const fields = document.createElement('div');
   fields.className = 'form-fields';
   fields.append(
-    buildField('input', 'text', 'name', 'Full name*', true, instanceId),
-    buildField('input', 'tel', 'phone', 'Phone number*', true, instanceId),
-    buildField('input', 'email', 'email', 'Enter your email*', true, instanceId),
-    buildField('input', 'text', 'industry', 'Enter your project industry', false, instanceId),
-    buildField('textarea', null, 'description', 'Describe your project', false, instanceId),
-    buildConsent(),
+    buildField('input', 'text', 'name', 'Full name*', true, instanceId, labelled),
+    buildField('input', 'tel', 'phone', 'Phone number*', true, instanceId, labelled),
+    buildField('input', 'email', 'email', 'Enter your email*', true, instanceId, labelled),
+    buildField('input', 'text', 'industry', 'Enter your project industry', false, instanceId, labelled),
+    buildField('textarea', null, 'description', 'Describe your project', false, instanceId, labelled),
+    buildConsent(labelled),
   );
   return fields;
 }
@@ -178,10 +195,11 @@ function buildActions(config) {
   actions.append(submit);
 
   const scheduleLink = linkOf(config['schedule link']);
-  if (scheduleLink?.href) {
+  const scheduleURL = safeURL(scheduleLink?.getAttribute('href'));
+  if (scheduleURL) {
     const schedule = document.createElement('a');
     schedule.className = 'form-schedule';
-    schedule.href = scheduleLink.href;
+    schedule.href = scheduleURL;
     schedule.target = '_blank';
     schedule.rel = 'noopener noreferrer';
     schedule.textContent = scheduleLink.textContent.trim() || DEFAULT_SCHEDULE_LABEL;
@@ -248,8 +266,9 @@ function handleSubmit(form, endpoint, config) {
 }
 
 export default function decorate(block) {
+  if (block.querySelector(':scope > .form-card')) return;
   const config = readConfig(block);
-  const endpoint = urlOf(config.endpoint);
+  const endpoint = safeURL(urlOf(config.endpoint));
   instanceCount += 1;
 
   const card = document.createElement('div');
@@ -259,7 +278,7 @@ export default function decorate(block) {
 
   const form = document.createElement('form');
   form.className = 'form-panel';
-  form.append(buildFields(instanceCount), buildActions(config), buildError());
+  form.append(buildFields(instanceCount, block.classList.contains('labelled')), buildActions(config), buildError());
 
   const submit = form.querySelector('.form-submit');
   if (!endpoint) {

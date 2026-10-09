@@ -1,0 +1,203 @@
+/* Shared composition for the four reviewed templates. Other templates keep their layout. */
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .section-intro-cta::after {
+  content: "";
+  display: block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentcolor;
+  mask: url("/icons/arrow-right.svg") center / contain no-repeat;
+}
+
+body:is(.home-page, .services-page, .our-work-page, .case-study-page) {
+  --case-media-height: 216px;
+  --page-title-mobile-font-size: clamp(32px, 10.3vw, 40px);
+  --page-title-line-height: 1.125;
+  --page-section-line-height: 1.25;
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .section-intro {
+  padding: 0;
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .section-intro-content {
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .section-intro-title {
+  max-width: none;
+  line-height: var(--page-section-line-height);
+  letter-spacing: var(--type-display-section-letter-spacing);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .section-intro-subtitle {
+  max-width: none;
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .section-intro-cta {
+  color: var(--accent-blue-light);
+  min-height: var(--size-control-sm);
+  white-space: normal;
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-list {
+  align-items: start;
+  gap: var(--spacing-32);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-card {
+  min-height: 0;
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case.placeholder-media
+  .cards-card:not(:has(.cards-media))::before,
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-media {
+  height: var(--case-media-height);
+  aspect-ratio: auto;
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--type-heading-lg-font-size);
+  line-height: var(--type-heading-lg-line-height);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-case-tags {
+  margin-bottom: var(--spacing-16);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-case-tags
+  li {
+  border-radius: var(--radius-sm);
+  padding: 6px var(--spacing-12);
+  font-size: var(--type-body-xs-font-size);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-case-metadata {
+  margin-top: 0;
+  padding-top: var(--spacing-24);
+  gap: var(--spacing-24);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-case-metadata
+  dd {
+  font-family: var(--font-family-display);
+  font-size: var(--type-display-subsection-font-size);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--type-display-subsection-line-height);
+}
+
+:is(.home-page, .services-page, .our-work-page, .case-study-page)
+  .cards.case
+  .cards-case-metadata
+  dt {
+  font-size: var(--type-body-xs-font-size);
+}
+
+:is(.home-page, .services-page) .cards.service .cards-card {
+  display: flex;
+  min-height: 0;
+}
+
+:is(.home-page, .services-page) .cards.service .cards-service-relevance {
+  min-height: 0;
+}
+
+:is(.home-page, .services-page) .cards.service .cards-service-link {
+  color: var(--text-primary);
+  min-height: var(--spacing-24);
+}
+
+:is(.home-page, .services-page, .our-work-page) .form.labelled {
+  --form-supporting-text: var(--text-placeholder);
+}
+
+:is(.services-page, .case-study-page) .cta {
+  padding: var(--spacing-32);
+  text-align: center;
+}
+
+:is(.services-page, .case-study-page) .cta h2 {
+  font-size: var(--type-display-subsection-font-size);
+  line-height: var(--page-section-line-height);
+}
+
+:is(.services-page, .case-study-page) .cta a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--type-label-md-font-size);
+  border-width: var(--size-border);
+  border-color: var(--text-primary);
+}
+
+:is(.services-page, .case-study-page) .cta a.button.primary {
+  border-color: var(--action-primary);
+}
+
+@media (width >= 900px) {
+  :is(.home-page, .services-page, .our-work-page, .case-study-page)
+    .section-intro-subtitle {
+    font-size: var(--type-body-md-font-size);
+  }
+
+  :is(.home-page, .services-page, .our-work-page, .case-study-page)
+    .cards.case
+    .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-24);
+  }
+
+  :is(.home-page, .services-page, .our-work-page, .case-study-page)
+    .cards.case
+    .cards-card::before,
+  :is(.home-page, .services-page, .our-work-page, .case-study-page)
+    .cards.case
+    .cards-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  :is(.home-page, .services-page) .cards.service .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  :is(.services-page, .case-study-page) .cta {
+    padding: var(--spacing-64) var(--spacing-48);
+  }
+
+  :is(.services-page, .case-study-page) .cta h2 {
+    font-size: var(--type-display-section-font-size);
+    line-height: var(--type-display-section-line-height);
+  }
+}
+
+/* Long authored titles remain inside the content grid at enlarged text sizes. */
+body:is(.home-page, .services-page, .our-work-page, .case-study-page) .section-intro-title {
+  overflow-wrap: anywhere;
+}

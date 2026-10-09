@@ -25,6 +25,9 @@ export default function decorate(block) {
     if (surfaceCell?.textContent.trim().toLowerCase() === 'light') {
       item.classList.add('client-logos-light');
     }
+    if (surfaceCell?.textContent.trim().toLowerCase() === 'monochrome') {
+      item.classList.add('client-logos-monochrome');
+    }
     const authoredImage = imageCell?.querySelector('img');
     const raw = authoredImage?.getAttribute('src')
       || imageCell?.querySelector('a[href]')?.getAttribute('href')
@@ -73,14 +76,27 @@ export default function decorate(block) {
   block.replaceChildren();
   if (heading) block.append(heading);
   block.append(list);
+  if (block.classList.contains('strip')) {
+    list.setAttribute('aria-label', heading?.textContent || 'Client logos');
+    const mobile = window.matchMedia('(width < 900px)');
+    const updateFocus = () => {
+      list.tabIndex = mobile.matches ? 0 : -1;
+      if (!mobile.matches) list.blur();
+    };
+    updateFocus();
+    mobile.addEventListener('change', updateFocus);
+  }
 
   // Short lists remain static; decorative groups repeat to cover wide viewports.
   if (list.children.length >= 12 && !block.classList.contains('compact')) {
     const rows = document.createElement('div');
     rows.className = 'client-logos-rows';
     rows.setAttribute('aria-hidden', 'true');
-    const items = [...list.children];
+    let items = [...list.children];
     const midpoint = Math.ceil(items.length / 2);
+    if (block.classList.contains('rotated')) {
+      items = [...items.slice(midpoint), ...items.slice(0, midpoint)];
+    }
     const renderRows = [items.slice(0, midpoint), items.slice(midpoint)].map((clients) => {
       const row = document.createElement('div');
       row.className = 'client-logos-row';
@@ -94,7 +110,8 @@ export default function decorate(block) {
         previousCopies = copies;
         track.replaceChildren();
         track.style.setProperty('--client-logos-duration', `${(clients.length * copies * 264) / 40}s`);
-        for (let repeat = 0; repeat < 2; repeat += 1) {
+        const groupCount = block.classList.contains('roster') || block.classList.contains('strip') ? 1 : 2;
+        for (let repeat = 0; repeat < groupCount; repeat += 1) {
           const group = document.createElement('div');
           group.className = 'client-logos-group';
           Array.from({ length: copies }, () => clients).flat().forEach((client) => {

@@ -32,18 +32,14 @@ independently. A missing or failed fragment request leaves existing content inta
 Only HTTP(S), email and telephone destinations are accepted. Missing, malformed
 or unsupported URLs render as static content; new-tab links receive safe rel values.
 
-Desktop layout follows the detailed 1440px footer export. Mobile uses the same
-content in a vertical layout, without accordions, as agreed for this implementation.
-The homepage (`/`, `/index`, `/index.html`) uses the blue gradient from the full
-homepage export. Other pages, including Services, retain the solid footer surface.
-This is a page-specific background; all pages still share the same `/footer` content.
-The older full-page mobile export has a different navigation structure and is not
-a pixel-parity target. As explicitly agreed, the supplied document retains the
-desktop design's sample address, email, phone, copyright and three legal entries,
-including the repeated Terms label. These are placeholders, not verified company
-contacts. Instagram and LinkedIn use known company destinations; Facebook and X
-remain unlinked because their account URLs have not been supplied.
-Desktop column spacing and lower-row alignment follow the design.
+The October 2026 Main Page exports define one shared footer at 1440 and 390 px.
+Every template uses the same opaque surface and fragment. Desktop places the
+logo, social tiles and contacts in three columns, with copyright and legal links
+below. Mobile stacks these groups; links have comfortable touch targets.
+The document keeps the design's explicit `{phone}`, `{email}` and `{address}`
+placeholders and authored copyright. Cookie Policy remains static until its page
+destination is supplied. Unknown contacts stay static. Instagram and LinkedIn have known destinations; Facebook and X remain
+unlinked until their account URLs are supplied.
 
 Instagram and LinkedIn SVG paths are adapted from the read-only reference site's
 `icons/social-networks/` assets; colors are adjusted for the white icon tiles.
