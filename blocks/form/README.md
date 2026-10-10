@@ -5,7 +5,9 @@ Services and Our Work layouts. The optional `labelled` modifier adds visible fie
 labels and the design's brace placeholders; ordinary Form tables retain their
 earlier appearance. Keep Title, Labels, After Label Text, Submit Label, Endpoint,
 Schedule Link and thank-you rows in the document. Endpoint and scheduling URLs
-accept only HTTP(S).
+accept HTTP(S) URLs or relative paths. Use a complete URL such as
+`https://example.com/contact` or `/api/contact`. Empty links, brace placeholders
+and malformed HTTP(S) URLs leave submission disabled and omit the scheduling link.
 
 Required name, phone, email and consent fields use native validation. A failed
 submission announces an alert and allows retry. Success replaces the panel with

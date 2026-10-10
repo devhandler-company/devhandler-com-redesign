@@ -621,14 +621,6 @@
     padding-bottom: 0;
   }
 
-  .home-page .home-hero {
-    background: radial-gradient(
-      ellipse 160% 80% at 100% 10% in srgb,
-      var(--action-primary-chip),
-      transparent 80%
-    );
-  }
-
   .home-page main > .section:is(.home-work, .home-services, .home-blog) {
     display: grid;
     padding-inline: var(--grid-margin-mobile);
@@ -661,6 +653,17 @@
 
 @media (width >= 900px) {
   :root body.home-page {
+    position: relative;
+    isolation: isolate;
+  }
+
+  :root body.home-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
     background:
       radial-gradient(
         ellipse 75% 9% at 0% 13% in srgb,

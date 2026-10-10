@@ -268,7 +268,7 @@ function enableDrag(track, loop) {
     const distance = (card?.getBoundingClientRect().width || track.clientWidth) + gap;
     track.scrollBy({
       left: event.key === 'ArrowRight' ? distance : -distance,
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   });
 

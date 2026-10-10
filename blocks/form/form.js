@@ -26,13 +26,16 @@ function linkOf(cell) {
 }
 
 function urlOf(cell) {
-  return linkOf(cell)?.href || textOf(cell);
+  const link = linkOf(cell);
+  return link ? link.getAttribute('href') : textOf(cell);
 }
 
 function safeURL(value) {
-  if (!value) return '';
+  const raw = value?.trim();
+  if (!raw || /[{}]/.test(raw)
+    || (/^https?:/i.test(raw) && !/^https?:\/\/[^/\s?#]/i.test(raw))) return '';
   try {
-    const url = new URL(value, window.location.href);
+    const url = new URL(raw, window.location.href);
     return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
   } catch { return ''; }
 }
