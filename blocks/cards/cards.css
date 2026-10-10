@@ -942,6 +942,14 @@
   outline-offset: var(--spacing-4);
 }
 
+.cards.insight.placeholder-media .cards-card:not(:has(.cards-media))::before {
+  content: '';
+  display: block;
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-surface-2);
+}
+
 .cards.insight .cards-card .cards-title-link:focus-visible {
   outline: none;
 }

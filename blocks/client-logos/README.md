@@ -56,7 +56,8 @@ exports, with empty canvas margins trimmed. Complete existing artwork replaces
 clipped strip exports. Raster sources use transparent 192x64, 384x128 and 576x192
 WebP canvases without upscaling the source artwork. The base path selects 1x/2x/3x
 automatically through srcset. SVGs containing raster payloads are not shipped
-as fake vector assets. Original artwork is not recolored or recreated.
+as fake vector assets. These existing bundled files retain their artwork;
+the opt-in Monochrome treatment changes only their display.
 
 BMW, Prinova and Six Flags reuse the existing public site's artwork, served by
 the reference site as `media_113b8ce2d692d30d325b3bd25f0aec215ce63c334.png`,
@@ -66,7 +67,18 @@ WebP versions use the same 1x/2x/3x canvas convention as the existing raster ros
 
 ## Compact variant
 
-Use **Client Logos (compact)** for Services Root. It always uses a static grid,
+The current pages use **Client Logos (roster)** on Home and Our Work, and
+**Client Logos (strip)** on Services Root. Both share the same
+three-cell contract. `Monochrome` in the optional surface cell applies a light
+mark for selected mobile roster tiles. Roster uses a static mobile grid;
+Strip uses a compact horizontal row on mobile, with keyboard focus, native arrow-key
+scrolling and a visible focus outline. The hidden desktop list is excluded from
+the tab order. Desktop retains two clipped,
+static rows. Existing default/compact variants keep their earlier behavior.
+The expanded roster adds Qiddiya and Novo Nordisk from the existing public site's
+separately served artwork, and an independently redrawn AIDA mark.
+
+Use **Client Logos (compact)** for legacy compact placements. It uses a static grid,
 including rosters with 12 or more clients: two columns on mobile, three from
 600px, five from 900px. It has no marquee duplicates or blue section background.
 The default homepage variant is unchanged. The same three-cell authoring contract

@@ -10,11 +10,11 @@ pipeline exposes it as `data-style` on the section.
 
 | Section | Authoring |
 | --- | --- |
-| Introduction | H1 `Our work`, plain paragraph for the description; Style `our-work-hero` |
+| Introduction | Home breadcrumb, H1 `Our work`, plain description; Style `our-work-hero` |
 | Gallery | H2 `Case studies` for screen readers, then `Cards (case, placeholder-media)` with one row per case; Style `our-work-cases` |
-| Clients | Existing `Client Logos` with 13 names and assets; Style `our-work-clients` |
+| Clients | `Client Logos (roster)` with the shared 19-client roster; Style `our-work-clients` |
 | Adobe solutions | H2 with the highlighted phrase italicized, then `Client Logos (compact)` with solution names and optional icon images; Style `our-work-solutions` |
-| Contact | Existing `Form` table, using the shared homepage configuration; Style `our-work-form` |
+| Contact | `Form (labelled)`, using the shared homepage configuration; Style `our-work-form`, Id `our-work-contact` |
 
 Use the existing [Case card contract](../blocks/cards/README.md): image,
 taxonomy, title, and two optional statistic cells. A card with no image may use

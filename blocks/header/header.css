@@ -11,6 +11,7 @@ header .nav-wrapper {
   z-index: 100;
   width: 100%;
   background: var(--bg-header);
+  border-bottom: var(--size-border) solid var(--border-dark);
 }
 
 header .nav-wrapper.nav-compact nav {
@@ -80,7 +81,7 @@ header nav {
 }
 
 header nav[data-expanded='true'] {
-  --header-height: 69px;
+  --header-height: var(--nav-height);
 
   min-height: 100dvh;
   height: 100dvh;
@@ -208,11 +209,11 @@ header nav[data-expanded='true'] .nav-hamburger-icon {
 }
 
 header nav[data-expanded='true'] .nav-hamburger-icon::before {
-  top: -3px;
+  top: -4px;
 }
 
 header nav[data-expanded='true'] .nav-hamburger-icon::after {
-  top: 5px;
+  top: 4px;
 }
 
 /* mobile navigation */
@@ -243,9 +244,9 @@ header .nav-sections > .default-content-wrapper > ul > li > .nav-submenu-toggle 
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 67px;
-  min-height: 67px;
-  padding: calc(var(--spacing-16) + var(--spacing-2)) 0;
+  height: 64px;
+  min-height: 64px;
+  padding: var(--spacing-16) 0;
   color: var(--text-primary);
   font-family: var(--type-heading-lg-font-family);
   font-size: var(--type-heading-lg-font-size);
@@ -260,17 +261,21 @@ header .nav-sections > .default-content-wrapper > ul > li > .nav-submenu-toggle 
 
 header .nav-sections > .default-content-wrapper > ul > li:first-child > a,
 header .nav-sections > .default-content-wrapper > ul > li:first-child > .nav-submenu-toggle {
-  height: 75px;
-  min-height: 75px;
+  height: 72px;
+  min-height: 72px;
+  padding-top: var(--spacing-24);
 }
 
 header .nav-sections > .default-content-wrapper > ul > li:not(.nav-drop) > a::after {
   margin-left: var(--spacing-16);
   color: var(--text-secondary);
-  font-family: var(--font-family-body);
-  font-size: var(--type-heading-lg-font-size);
-  font-weight: var(--font-weight-regular);
-  content: '→';
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  background: currentcolor;
+  mask: url('/icons/arrow-right.svg') center / contain no-repeat;
+  content: '';
 }
 
 header .nav-drop {
@@ -288,7 +293,7 @@ header .nav-sections > .default-content-wrapper > ul > li.nav-drop > .nav-submen
   grid-column: 2;
   width: var(--size-control-md);
   min-width: var(--size-control-md);
-  min-height: var(--size-control-md);
+  min-height: var(--size-control-lg);
   padding-left: var(--spacing-16);
 }
 
@@ -374,14 +379,15 @@ header .nav-action-link {
 }
 
 header .nav-action-link.nav-action-primary {
-  background: var(--action-primary);
-  border-color: var(--action-primary);
+  min-height: var(--size-control-lg);
+  background: transparent;
+  border-color: var(--action-ghost-border);
 }
 
 header .nav-action-link.nav-action-primary:hover,
 header .nav-action-link.nav-action-primary:focus-visible {
-  background: var(--action-primary-hover);
-  border-color: var(--action-primary-hover);
+  background: var(--bg-hover-row);
+  border-color: var(--action-ghost-border-hover);
 }
 
 header .nav-action-link.nav-action-secondary:hover,
@@ -391,7 +397,7 @@ header .nav-action-link.nav-action-secondary:focus-visible {
 }
 
 header .nav-action-link.nav-action-secondary {
-  height: 50px;
+  height: var(--size-control-lg);
 }
 
 @media (width >= 900px) {
@@ -405,7 +411,8 @@ header .nav-action-link.nav-action-secondary {
     grid-template: 'brand sections tools' var(--header-height) / auto 1fr auto;
     min-height: var(--header-height);
     height: var(--header-height);
-    padding: 0 var(--spacing-12) 0 var(--spacing-32);
+    max-width: calc(var(--grid-max-width) + 2 * var(--grid-margin-mobile));
+    padding-inline: var(--grid-margin-mobile);
     overflow: visible;
     background: var(--bg-header);
   }
@@ -445,11 +452,11 @@ header .nav-action-link.nav-action-secondary {
     width: auto;
     min-height: var(--size-control-md);
     padding: 0;
-    font-family: var(--type-heading-md-font-family);
-    font-size: var(--type-heading-md-font-size);
-    font-weight: var(--type-heading-md-font-weight);
-    letter-spacing: var(--type-heading-md-letter-spacing);
-    line-height: var(--type-heading-md-line-height);
+    font-family: var(--type-label-md-font-family);
+    font-size: var(--type-label-md-font-size);
+    font-weight: var(--type-label-md-font-weight);
+    letter-spacing: var(--type-label-md-letter-spacing);
+    line-height: var(--type-label-md-line-height);
   }
 
   header .nav-sections > .default-content-wrapper > ul > li:not(.nav-drop) > a::after {
@@ -549,16 +556,16 @@ header .nav-action-link.nav-action-secondary {
   header .nav-action-link.nav-action-secondary {
     height: var(--size-control-md);
     width: auto;
-    min-width: 143px;
+    min-width: 124px;
     min-height: var(--size-control-md);
     color: var(--text-primary);
     background: transparent;
-    border-color: var(--text-secondary);
-    border-radius: var(--radius-md);
-    font-family: var(--type-heading-md-font-family);
-    font-size: var(--type-heading-md-font-size);
-    font-weight: var(--type-heading-md-font-weight);
-    line-height: var(--type-heading-md-line-height);
+    border-color: var(--action-ghost-border);
+    border-radius: var(--radius-pill);
+    font-family: var(--type-label-md-font-family);
+    font-size: var(--type-label-md-font-size);
+    font-weight: var(--type-label-md-font-weight);
+    line-height: var(--type-label-md-line-height);
   }
 
   header .nav-action-link:hover,

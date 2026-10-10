@@ -23,24 +23,28 @@ The current design content is:
 :header-logo: -> /
 ---
 Desktop navigation
-- Adobe Services -> /services/adobe
+- Adobe Services -> /services
 - Services
-  - Implementation -> /services/implementation
-  - Support -> /services/support
+  - Implementation -> /services/aem-project-implementation
+  - Support -> /services
 - Blog -> /blog/
 - Our Work -> /our-work
-- About Us -> /about
-- Contact us -> /contact-us [bold]
+- About Us -> https://www.devhandler.com/about
+- Contact us -> /#contact-us-form [bold]
 ---
 Mobile navigation
-- AEM Services -> /services
+- Adobe Services -> /services
+- Services -> /services
+- Blog -> /blog
 - Our Work -> /our-work
-- Industries -> /industries
-- About -> /about
-- Insights -> /insights
-- Talk to an AEM expert -> /contact-us [bold]
-- Book a free audit -> /audit [bold]
+- About Us -> https://www.devhandler.com/about
+- Contact us -> /#contact-us-form [bold]
 ---
 Metadata
 Robots | noindex, nofollow
 ```
+
+The mobile menu locks page scrolling and makes the main/footer inert while open.
+Tab and Shift+Tab stay inside the menu; Escape closes it and returns focus to the
+toggle. Following a link restores page interaction. Desktop dropdowns support
+ArrowDown and Escape in addition to pointer and Tab navigation.

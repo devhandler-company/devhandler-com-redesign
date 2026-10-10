@@ -52,6 +52,8 @@ authored titles remain static until an article URL is supplied.
 ## Featured post variant
 
 Name the block `Cards (featured)`. The first authored row is normally the only featured card.
+Its title is a Heading 2, so a standalone featured post can follow the page's
+Heading 1 without skipping a level. Insight and Case card titles remain Heading 3.
 
 | Cell 1 | Cell 2 | Cell 3 | Cell 4 | Cell 5 | Cell 6 |
 | --- | --- | --- | --- | --- | --- |

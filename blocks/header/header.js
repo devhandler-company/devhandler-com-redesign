@@ -4,6 +4,7 @@ import { loadFragment } from '../fragment/fragment.js';
 const isDesktop = window.matchMedia('(min-width: 900px)');
 const mediaChangeRegistrationKey = Symbol.for('devhandler.header.mediaChangeRegistration');
 const scrollRegistrationKey = Symbol.for('devhandler.header.scrollRegistration');
+const menuIsolation = new WeakMap();
 
 function setSubmenuExpanded(item, expanded) {
   const toggle = item.querySelector(':scope > .nav-submenu-toggle');
@@ -59,6 +60,14 @@ function setMenuExpanded(nav, expanded) {
     }
   }
   setBodyScrollLocked(nav, mobileExpanded);
+  if (mobileExpanded && !menuIsolation.has(nav)) {
+    const content = [...document.querySelectorAll('body > main, body > footer')];
+    menuIsolation.set(nav, content.map((element) => [element, element.inert]));
+    content.forEach((element) => { element.inert = true; });
+  } else if (!mobileExpanded && menuIsolation.has(nav)) {
+    menuIsolation.get(nav).forEach(([element, inert]) => { element.inert = inert; });
+    menuIsolation.delete(nav);
+  }
 
   if (!mobileExpanded) closeSubmenus(nav);
 }
@@ -87,6 +96,7 @@ function decorateBrand(navBrand, navigationSections) {
   logoItems.forEach((item) => item.remove());
 
   logoLink.className = 'nav-logo-link';
+  logoLink.href = '/';
   logoLink.setAttribute('aria-label', 'DevHandler home');
   let logoImage = logoLink.querySelector('img');
   if (!logoImage) {
@@ -107,7 +117,16 @@ function ensureSafeLinks(nav) {
   nav.querySelectorAll('a').forEach((link) => {
     if (link.target === '_blank') link.relList.add('noopener', 'noreferrer');
 
-    const linkUrl = new URL(link.href, window.location.href);
+    let linkUrl;
+    try {
+      linkUrl = new URL(link.href, window.location.href);
+    } catch { /* Incomplete authored destinations remain readable. */ }
+    if (!linkUrl || !['https:', 'http:', 'mailto:', 'tel:'].includes(linkUrl.protocol)) {
+      const text = document.createElement('span');
+      text.append(...link.childNodes);
+      link.replaceWith(text);
+      return;
+    }
     if (linkUrl.origin === currentUrl.origin && linkUrl.pathname === currentUrl.pathname) {
       link.setAttribute('aria-current', 'page');
     }
@@ -203,6 +222,19 @@ function decorateNavigation(navSections, navTools, variant) {
 }
 
 function handleNavKeydown(event, nav) {
+  if (event.key === 'Tab' && !isDesktop.matches && nav.dataset.expanded === 'true') {
+    const controls = [...nav.querySelectorAll('a[href], button:not([hidden])')]
+      .filter((element) => element.getClientRects().length);
+    const first = controls[0];
+    const last = controls.at(-1);
+    if (event.shiftKey && event.target === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && event.target === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  }
   if (event.code === 'Escape') {
     const expandedItem = nav.querySelector('.nav-drop[data-expanded="true"]');
     if (expandedItem) {
@@ -235,6 +267,7 @@ function bindNavigation(nav) {
   });
 
   nav.addEventListener('click', (event) => {
+    if (event.target.closest('a[href]') && !isDesktop.matches) setMenuExpanded(nav, false);
     const toggle = event.target.closest('.nav-submenu-toggle');
     if (!toggle) return;
 
@@ -418,7 +451,10 @@ export default async function decorate(block) {
   }
 
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  let navPath = '/nav';
+  try {
+    if (navMeta) navPath = new URL(navMeta, window.location).pathname;
+  } catch { /* Keep the default navigation when authored metadata is malformed. */ }
   const fragment = await loadFragment(navPath);
 
   block.textContent = '';

@@ -279,3 +279,125 @@ main .form-thank-you p {
     padding-inline: 32px;
   }
 }
+
+/* The new page documents opt into visible labels and the compact shared form. */
+.form.labelled .form-card {
+  padding: var(--spacing-32) var(--spacing-20) var(--spacing-16);
+  gap: var(--spacing-32);
+}
+
+.form.labelled .form-intro { gap: var(--spacing-32); }
+.form.labelled .form-eyebrow { color: var(--action-primary); }
+
+.form.labelled .form-title {
+  max-width: none;
+  font-family: var(--font-family-display);
+  font-size: var(--type-display-subsection-font-size);
+  line-height: 1.25;
+}
+
+.form.labelled .form-title strong { color: inherit; }
+.form.labelled .form-labels { gap: var(--spacing-8); }
+
+.form.labelled .form-labels li {
+  box-sizing: border-box;
+  padding: var(--spacing-12) var(--spacing-16);
+  font-size: var(--type-label-sm-font-size);
+  line-height: 1.2;
+  font-weight: var(--font-weight-semibold);
+  background: var(--bg-step-light);
+  max-width: 100%;
+  white-space: normal;
+}
+
+.form.labelled .form-after-text {
+  max-width: none;
+  color: var(--form-supporting-text, var(--text-placeholder));
+  font-size: var(--type-body-sm-font-size);
+}
+
+.form.labelled .form-field-label {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  margin-bottom: var(--spacing-8);
+  color: var(--text-primary-dark);
+  font-size: var(--type-body-xs-font-size);
+  line-height: var(--type-body-xs-line-height);
+}
+
+.form.labelled .form-fields { gap: var(--spacing-16); }
+.form.labelled .form-panel { gap: var(--spacing-32); }
+
+.form.labelled .form-input {
+  height: var(--size-control-lg);
+  padding-inline: var(--spacing-20);
+  border-radius: var(--radius-md);
+  font-size: var(--type-body-sm-font-size);
+  color: var(--text-primary-dark);
+}
+
+.form.labelled textarea.form-input {
+  height: var(--spacing-120);
+  padding-block: var(--spacing-16);
+}
+
+.form.labelled .form-consent { margin-top: 0; }
+.form.labelled .form-consent-label { gap: var(--spacing-12); }
+
+.form.labelled .form-consent-label input[type='checkbox'] {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  margin: 0;
+}
+
+.form.labelled .form-consent-label span {
+  font-size: var(--type-body-xs-font-size);
+  color: var(--text-primary-dark);
+}
+
+.form.labelled :is(.form-submit, .form-schedule) {
+  height: var(--size-control-lg);
+  font-size: var(--type-label-md-font-size);
+}
+
+.form.labelled .form-actions { gap: var(--spacing-12); }
+
+.form.labelled :is(input, textarea, button, a):focus-visible {
+  outline: var(--size-border-strong) solid var(--action-primary);
+  outline-offset: var(--spacing-4);
+}
+
+@media (width >= 900px) {
+  .form.labelled .form-card {
+    display: grid;
+    grid-template-columns: minmax(0, 476fr) minmax(0, 530fr);
+    gap: var(--spacing-96);
+    padding: var(--spacing-80) var(--spacing-96) var(--spacing-64);
+    border-radius: var(--spacing-32);
+  }
+
+  .form.labelled .form-intro { gap: var(--spacing-48); }
+
+  .form.labelled .form-title {
+    font-size: var(--type-display-section-font-size);
+    line-height: var(--type-display-section-line-height);
+    letter-spacing: var(--type-display-section-letter-spacing);
+  }
+  .form.labelled .form-fields { gap: var(--spacing-24); }
+  .form.labelled .form-labels { gap: var(--spacing-12); }
+
+  .form.labelled .form-panel {
+    width: auto;
+    min-width: 0;
+    padding-top: var(--spacing-64);
+    gap: var(--spacing-24);
+  }
+
+  .form.labelled .form-actions { flex-flow: row wrap; }
+  .form.labelled .form-submit { padding-inline: var(--spacing-32); }
+  .form.labelled .form-schedule { padding-inline: var(--spacing-32); }
+}

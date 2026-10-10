@@ -42,7 +42,7 @@ function hasContent(element) {
   return Boolean(element?.textContent.trim() || element?.querySelector('img, picture'));
 }
 
-function decorateReviewer(cells) {
+function decorateReviewer(cells, preserveLabel = false) {
   const populated = cells.filter(hasContent);
   if (!populated.length) return null;
 
@@ -56,7 +56,8 @@ function decorateReviewer(cells) {
     copy.querySelectorAll('br').forEach((br) => br.replaceWith('\n'));
     const paragraphs = [...copy.querySelectorAll('p')];
     return (paragraphs.length ? paragraphs : [copy])
-      .flatMap((element) => element.textContent.split(/\r?\n|\s+[-–—·]\s+/));
+      .flatMap((element) => (preserveLabel
+        ? [element.textContent.trim()] : element.textContent.split(/\r?\n|\s+[-–—·]\s+/)));
   })
     .map((text) => text.trim()).filter(Boolean);
   if (parts.length) {
@@ -77,7 +78,7 @@ function decorateReviewer(cells) {
   return reviewer;
 }
 
-function decorateReview(row) {
+function decorateReview(row, preserveReviewerLabel = false) {
   const cells = [...row.children];
   const title = cells[0];
   if (!title?.textContent.trim()) return null;
@@ -89,11 +90,14 @@ function decorateReview(row) {
   header.className = 'reviews-card-header';
 
   title.className = 'reviews-card-title';
-  if (!title.querySelector('h3, h4, h5, h6')) {
-    const heading = document.createElement('h3');
-    heading.innerHTML = title.innerHTML;
-    title.replaceChildren(heading);
-  }
+  const heading = document.createElement('h3');
+  const authoredId = title.querySelector('h1, h2, h3, h4, h5, h6')?.id;
+  if (authoredId) heading.id = authoredId;
+  title.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach((element) => {
+    element.replaceWith(...element.childNodes, document.createTextNode(' '));
+  });
+  heading.append(...title.childNodes);
+  title.replaceChildren(heading);
 
   const date = cells[1];
   if (hasContent(date)) {
@@ -113,7 +117,7 @@ function decorateReview(row) {
     item.append(quote);
   }
 
-  const reviewer = decorateReviewer(cells.slice(3));
+  const reviewer = decorateReviewer(cells.slice(3), preserveReviewerLabel);
   if (reviewer) item.append(reviewer);
 
   return item;
@@ -264,7 +268,7 @@ function enableDrag(track, loop) {
     const distance = (card?.getBoundingClientRect().width || track.clientWidth) + gap;
     track.scrollBy({
       left: event.key === 'ArrowRight' ? distance : -distance,
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   });
 
@@ -283,6 +287,7 @@ function enableDrag(track, loop) {
 }
 
 export default function decorate(block) {
+  if (block.querySelector(':scope > .reviews-track')) return;
   const rows = [...block.children].filter((row) => row.children.length);
   if (!rows.length) return;
 
@@ -293,11 +298,11 @@ export default function decorate(block) {
   track.setAttribute('role', 'list');
   track.setAttribute('aria-label', 'Customer reviews carousel');
 
-  const cards = rows.map(decorateReview).filter(Boolean);
+  const cards = rows.map((row) => decorateReview(row, block.classList.contains('contained'))).filter(Boolean);
   cards.forEach((card, index) => {
     card.setAttribute('aria-posinset', index + 1);
     card.setAttribute('aria-setsize', cards.length);
-    if (cards.length > 1) {
+    if (cards.length > 1 && !block.classList.contains('contained')) {
       const next = document.createElement('button');
       next.className = 'reviews-card-next';
       next.type = 'button';
@@ -314,6 +319,10 @@ export default function decorate(block) {
   block.replaceChildren(track);
   applyCarouselConfig(block);
   updateLayoutMode(block);
+  if (block.classList.contains('contained')) {
+    enableDrag(track, null);
+    return;
+  }
   const loop = createLoop(track, cards);
   enableDrag(track, loop);
   requestAnimationFrame(() => loop?.setInitialPosition());

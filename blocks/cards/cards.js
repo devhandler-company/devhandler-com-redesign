@@ -4,7 +4,7 @@ const TEXT_ELEMENTS = 'p, li, h1, h2, h3, h4, h5, h6';
 const CARD_VARIANTS = ['case', 'service', 'insight', 'featured', 'model', 'challenge', 'outcome', 'reason'];
 const CARD_MEDIA_WIDTHS = [{ width: '750' }];
 
-function textParts(cell) {
+function textParts(cell, deduplicate = true) {
   if (!cell) return [];
 
   const listItems = [...cell.querySelectorAll('li')];
@@ -18,7 +18,8 @@ function textParts(cell) {
     return copy.textContent.split(/\r?\n/);
   }).map((text) => text.trim()).filter(Boolean);
 
-  return parts.filter((part, index) => index === 0 || part !== parts[index - 1]);
+  return deduplicate
+    ? parts.filter((part, index) => index === 0 || part !== parts[index - 1]) : parts;
 }
 
 function findTextLink(cell) {
@@ -232,12 +233,12 @@ function createEditorialMeta(categoryCell, detailsCell) {
   );
 }
 
-function createEditorialHeading(cell) {
+function createEditorialHeading(cell, headingTag = 'h3') {
   const titleLink = findTextLink(cell);
   const title = (textParts(cell).join(' ') || titleLink?.textContent || '').trim();
   if (!title) return null;
 
-  const heading = document.createElement('h3');
+  const heading = document.createElement(headingTag);
   heading.className = 'cards-title';
   if (titleLink) {
     const fullTitleLink = titleLink.cloneNode(false);
@@ -306,7 +307,7 @@ function createInsightCard(row) {
 function createFeaturedCard(row) {
   const cells = [...row.children];
   const compact = cells.length < 7;
-  const titleData = createEditorialHeading(cells[compact ? 2 : 3]);
+  const titleData = createEditorialHeading(cells[compact ? 2 : 3], 'h2');
   if (!titleData) return null;
 
   const { item, article } = createCard();
@@ -357,7 +358,7 @@ function createModelCard(row) {
   appendText(article, 'cards-title', title, 'h3');
   appendText(article, 'cards-model-description', textParts(cells[2]).join(' '));
 
-  const benefits = textParts(cells[3]);
+  const benefits = textParts(cells[3], false);
   if (benefits.length) {
     const list = document.createElement('ul');
     list.className = 'cards-model-benefits';

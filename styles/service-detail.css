@@ -1,9 +1,9 @@
 /* Loaded only by Template: service-detail-page. */
 body.service-detail-page main {
   background:
-    radial-gradient(ellipse 1100px 1500px at -10% 56%, var(--action-primary-subtle), transparent),
+    radial-gradient(ellipse 1100px 1500px at -10% 56% in srgb, var(--action-primary-subtle), transparent),
     radial-gradient(
-      ellipse 1100px 2600px at 100% 32%,
+      ellipse 1100px 2600px at 100% 32% in srgb,
       color-mix(in srgb, var(--action-primary) 35%, transparent),
       transparent
     ),
@@ -333,22 +333,22 @@ body.service-detail-page main > .section {
     will-change: transform;
     background:
       radial-gradient(
-        ellipse 1400px 2400px at -12% 55%,
+        ellipse 1400px 2400px at -12% 55% in srgb,
         color-mix(in srgb, var(--action-primary) 52%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 1100px 2200px at 108% 34%,
+        ellipse 1100px 2200px at 108% 34% in srgb,
         color-mix(in srgb, var(--action-primary) 52%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 800px 950px at -8% 12%,
+        ellipse 800px 950px at -8% 12% in srgb,
         color-mix(in srgb, var(--action-primary) 32%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 1100px 1250px at 110% 86%,
+        ellipse 1100px 1250px at 110% 86% in srgb,
         color-mix(in srgb, var(--action-primary) 34%, transparent),
         transparent
       ),

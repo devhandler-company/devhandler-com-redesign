@@ -72,7 +72,7 @@ export default function decorate(block) {
     const blank = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>')}`;
     const mobile = document.createElement('source');
     mobile.media = '(width < 900px)';
-    mobile.srcset = blank;
+    mobile.srcset = block.classList.contains('mobile-portrait') ? url : blank;
     picture.append(mobile);
     image?.closest('picture')?.querySelectorAll('source').forEach((source) => picture.append(source));
     const desktop = document.createElement('source');

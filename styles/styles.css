@@ -46,7 +46,7 @@
 
 @media (width >= 900px) {
   :root {
-    --nav-height: 74px;
+    --nav-height: 80px;
   }
 }
 

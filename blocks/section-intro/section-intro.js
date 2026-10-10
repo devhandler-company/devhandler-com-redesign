@@ -1,4 +1,5 @@
 export default function decorate(block) {
+  if (block.querySelector(':scope > .section-intro-content')) return;
   const [eyebrowRow, titleRow, subtitleRow, ctaRow] = block.children;
 
   const eyebrowText = eyebrowRow?.textContent.trim();
@@ -31,6 +32,16 @@ export default function decorate(block) {
   block.replaceChildren(content);
 
   if (cta) {
+    let safe = false;
+    try {
+      safe = ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(cta.href, window.location.href).protocol);
+    } catch { /* Preserve incomplete authored action text without an unsafe link. */ }
+    if (!safe) {
+      const text = document.createElement('span');
+      text.textContent = cta.textContent;
+      block.append(text);
+      return;
+    }
     cta.className = 'section-intro-cta';
     block.append(cta);
   }

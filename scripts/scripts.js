@@ -10,7 +10,6 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
-  readBlockConfig,
   toClassName,
 } from './aem.js';
 import { isBlogArticle, prepareBlogArticle, decorateBlogArticle } from './blog-article.js';
@@ -41,10 +40,11 @@ if (window.trustedTypes && window.trustedTypes.createPolicy) {
 }
 
 /**
- * load fonts.css and set a session storage flag
+ * Load font definitions and optionally warm the faces needed before first paint.
  */
-async function loadFonts() {
+async function loadFonts(faces = []) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
+  await Promise.all(faces.map((font) => document.fonts.load(font)));
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
@@ -161,8 +161,8 @@ function decorateSectionMetadata(main) {
       section.classList.add('grid');
       section.style.setProperty('--section-grid-columns', dataset.grid.trim());
     }
-    if ((document.body.classList.contains('service-detail-page')
-      || document.body.classList.contains('case-study-page')) && dataset.id) {
+    if (dataset.id && ['home-page', 'services-page', 'our-work-page', 'service-detail-page', 'case-study-page']
+      .some((name) => document.body.classList.contains(name))) {
       section.id = dataset.id.trim();
     }
     Object.keys(dataset).forEach((key) => {
@@ -183,6 +183,19 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateSectionMetadata(main);
+  if (document.body.classList.contains('home-page')) {
+    const picture = main.querySelector('.home-office picture');
+    const image = picture?.querySelector('img');
+    if (image) {
+      picture.querySelectorAll('source').forEach((source) => source.remove());
+      image.removeAttribute('srcset');
+      image.removeAttribute('sizes');
+      image.src = `${window.hlx.codeBasePath}/icons/office-map.svg`;
+      image.width = 1440;
+      image.height = 952;
+      image.loading = 'lazy';
+    }
+  }
   decorateBlocks(main);
   decorateButtons(main);
 }
@@ -194,12 +207,45 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (doc.querySelector('main .hero.home')) doc.body.classList.add('home-page');
+  const visualTemplate = ['home-page', 'services-page', 'our-work-page', 'case-study-page']
+    .find((name) => doc.body.classList.contains(name));
+  if (visualTemplate) {
+    ['ample-alt-bold.otf', 'hind-regular.woff2', 'hind-semibold.woff2'].forEach((file) => {
+      const preload = doc.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'font';
+      preload.crossOrigin = 'anonymous';
+      preload.href = `${window.hlx.codeBasePath}/fonts/${file}`;
+      doc.head.append(preload);
+    });
+    const caseHero = visualTemplate === 'case-study-page' && doc.querySelector('main .hero.case');
+    if (caseHero) {
+      const preload = doc.createElement('link');
+      preload.rel = 'modulepreload';
+      preload.href = `${window.hlx.codeBasePath}/blocks/hero/hero.js`;
+      doc.head.append(preload);
+    }
+    const pageStyle = visualTemplate.replace('-page', '');
+    await Promise.all([
+      ...['default', 'page-layout', pageStyle].map((name) => loadCSS(`${window.hlx.codeBasePath}/styles/${name}.css`)
+        .catch(() => { /* Preserve readable content if styling is unavailable. */ })),
+      ...(caseHero ? [loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero.css`)
+        .catch(() => { /* Keep the authored hero readable without block styling. */ })] : []),
+      loadFonts(['700 1em ample-alt', '400 1em hind', '600 1em hind'])
+        .catch(() => { /* Keep readable fallback text when a font is unavailable. */ }),
+    ]);
+  }
   const blogArticle = isBlogArticle(doc);
   if (blogArticle) {
     prepareBlogArticle(doc);
-    await loadCSS(`${window.hlx.codeBasePath}/styles/blog-article.css`).catch(() => {
-      /* Preserve readable article content when styling is unavailable. */
-    });
+    await Promise.all([
+      loadCSS(`${window.hlx.codeBasePath}/styles/blog-article.css`).catch(() => {
+        /* Preserve readable article content when styling is unavailable. */
+      }),
+      loadFonts(['700 1em ample-alt', '400 1em hind', '600 1em hind', '700 1em hind'])
+        .catch(() => { /* Keep the fallback when an article font is unavailable. */ }),
+    ]);
   }
   if (!blogArticle && (doc.querySelector('main .hero.blog, main .blog-cards')
     || (/^\/blog\/?$/.test(window.location.pathname) && doc.querySelector('main .cards.insight')))) {
@@ -209,50 +255,10 @@ async function loadEager(doc) {
       /* Keep the authored Blog content readable if page styling fails. */
     });
   }
-  if (doc.body.classList.contains('services-page')) {
-    await loadCSS(`${window.hlx.codeBasePath}/styles/services.css`).catch(() => {
-      /* Preserve readable content if the page stylesheet is unavailable. */
-    });
-  }
   const defaultBackground = loadCSS(`${window.hlx.codeBasePath}/styles/default.css`).catch(() => {
     /* Preserve readable content if the page stylesheet is unavailable. */
   });
-  if (!doc.body.classList.contains('case-study-page')) await defaultBackground;
-  if (doc.body.classList.contains('our-work-page')) {
-    await loadCSS(`${window.hlx.codeBasePath}/styles/our-work.css`).catch(() => {
-      /* Preserve readable content if the page stylesheet is unavailable. */
-    });
-  }
-  if (doc.body.classList.contains('case-study-page')) {
-    const firstHero = doc.querySelector('main > div')?.querySelector('.hero');
-    if (firstHero) {
-      const preload = doc.createElement('link');
-      preload.rel = 'modulepreload';
-      preload.href = `${window.hlx.codeBasePath}/blocks/hero/hero.js`;
-      doc.head.append(preload);
-    }
-    ['ample-alt-bold.otf', 'hind-regular.woff2', 'hind-semibold.woff2', 'hind-bold.woff2'].forEach((file) => {
-      const preload = doc.createElement('link');
-      preload.rel = 'preload';
-      preload.as = 'font';
-      preload.crossOrigin = 'anonymous';
-      preload.href = `${window.hlx.codeBasePath}/fonts/${file}`;
-      doc.head.append(preload);
-    });
-    const fonts = loadFonts().then(() => Promise.all(
-      ['700 1em ample-alt', '400 1em hind', '600 1em hind'].map((font) => document.fonts.load(font)),
-    )).catch(() => { /* Preserve readable content when a font is unavailable. */ });
-    await Promise.all([
-      defaultBackground,
-      fonts,
-      loadCSS(`${window.hlx.codeBasePath}/styles/case-study.css`).catch(() => {
-        /* Keep the normal document flow when the page stylesheet is unavailable. */
-      }),
-      loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero.css`).catch(() => {
-        /* Keep the authored hero readable without block styling. */
-      }),
-    ]);
-  }
+  await defaultBackground;
   if (doc.body.classList.contains('service-detail-page')) {
     const firstSection = doc.querySelector('main > div');
     const firstBlocks = ['hero', 'stats'].filter((name) => firstSection?.querySelector(`.${name}`));
@@ -262,9 +268,8 @@ async function loadEager(doc) {
       preload.href = `${window.hlx.codeBasePath}/blocks/${name}/${name}.js`;
       doc.head.append(preload);
     });
-    const fonts = loadFonts().then(() => Promise.all(
-      ['700 1em ample-alt', '400 1em hind', '600 1em hind'].map((font) => document.fonts.load(font)),
-    )).catch(() => { /* Preserve the normal fallback if a font request fails. */ });
+    const fonts = loadFonts(['700 1em ample-alt', '400 1em hind', '600 1em hind'])
+      .catch(() => { /* Preserve the normal fallback if a font request fails. */ });
     await Promise.all([
       fonts,
       loadCSS(`${window.hlx.codeBasePath}/styles/service-detail.css`).catch(() => {
@@ -278,49 +283,15 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     if (blogArticle) decorateBlogArticle(doc);
-    const hero = main.firstElementChild?.querySelector('.hero.home');
-    if (hero) {
-      // Hidden sections do not request their fonts until decoration finishes.
-      // Warm only the above-the-fold faces without delaying content on failure.
-      loadFonts().then(() => {
-        const fonts = window.matchMedia('(min-width: 900px)').matches
-          ? ['700 1em ample-alt', '600 1em hind']
-          : ['700 1em hind', '400 1em hind', '600 1em hind'];
-        return Promise.all(fonts.map((font) => document.fonts.load(font)));
-      }).catch(() => { /* Keep the normal font fallback if a request fails. */ });
-      const authoredBackground = readBlockConfig(hero).background;
-      const background = typeof authoredBackground === 'string' ? authoredBackground.trim() : '';
-      if (background && /^(https?:\/\/|\/(?!\/))\S+$/.test(background)
-        && !hero.querySelector('.hero-background')) {
-        let url;
-        try {
-          url = new URL(background, window.location.href).href;
-        } catch {
-          // A malformed authored image URL must not interrupt page loading.
-        }
-        const insertedImage = [...hero.querySelectorAll('img')].some((image) => image.src === url);
-        const existingPreload = [...document.querySelectorAll('link[rel="preload"][as="image"]')]
-          .some((link) => link.href === url);
-        if (url && !insertedImage && !existingPreload) {
-          const preload = document.createElement('link');
-          preload.rel = 'preload';
-          preload.as = 'image';
-          preload.href = url;
-          preload.media = '(min-width: 900px)';
-          preload.setAttribute('fetchpriority', 'high');
-          document.head.append(preload);
-        }
-      }
-    }
-    document.body.classList.add('appear');
+    // The article's unsectioned sidebar must not paint above a still-hidden hero.
+    if (!blogArticle) document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), (section) => {
-      const image = section.querySelector('img');
-      // The EDS callback promotes its first image to eager, even when CSS hides it.
-      const deferredCaseImage = doc.body.classList.contains('case-study-page')
-        && !window.matchMedia('(min-width: 900px)').matches
-        && image?.closest('.hero.case.desktop-media .hero-media');
-      return deferredCaseImage ? undefined : waitForFirstImage(section);
+      // The mobile case starts with text; its phone sits below the first viewport.
+      const mobileCase = doc.body.classList.contains('case-study-page')
+        && !window.matchMedia('(min-width: 900px)').matches;
+      return mobileCase ? undefined : waitForFirstImage(section);
     });
+    if (blogArticle) document.body.classList.add('appear');
   }
 
   try {
