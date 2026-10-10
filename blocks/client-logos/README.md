@@ -73,8 +73,8 @@ three-cell contract. `Monochrome` in the optional surface cell applies a light
 mark for selected mobile roster tiles. Roster uses a static mobile grid;
 Strip uses a compact horizontal row on mobile, with keyboard focus, native arrow-key
 scrolling and a visible focus outline. The hidden desktop list is excluded from
-the tab order. Desktop retains two clipped,
-static rows. Existing default/compact variants keep their earlier behavior.
+the tab order while the desktop marquee is visible. Desktop uses two continuously
+moving rows with a Pause/Resume control. Compact variants remain static.
 The expanded roster adds Qiddiya and Novo Nordisk from the existing public site's
 separately served artwork, and an independently redrawn AIDA mark.
 
@@ -101,13 +101,14 @@ and optional Light surface remain available.
   A ResizeObserver updates copies only when the required repetition count changes.
   There are no duplicate
   IDs or repeated accessible list entries. Authored order determines row order.
-- The design has no animation controls. Hover/focus temporarily pauses the rows;
-  movement resumes when the pointer/focus leaves the block.
+- A native Pause/Resume button provides a persistent stop for desktop motion.
+  Hover/focus also temporarily pauses the rows; movement resumes when the
+  pointer/focus leaves the block unless the user explicitly paused it.
 - `prefers-reduced-motion` disables motion, including when the setting changes
   while the page is open. Mobile never animates.
-- There is no persistent pause/stop/hide control, so this design does not satisfy
-  WCAG 2.2.2 for continuously moving content. Hover and reduced-motion support do
-  not replace that requirement; automated accessibility scores are not proof of it.
+- Reduced-motion mode exposes the original static roster or keyboard-scrollable
+  strip and hides the motion control. Every client remains available once to
+  assistive technology; the two repeated visual groups stay aria-hidden.
 - The desktop retains the two-row logo-wall treatment. The mobile design's six
   text placeholders are replaced by the full real-logo list, so its height grows.
   Amana/LanguageWire use light surfaces to keep original dark lettering readable.
