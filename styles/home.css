@@ -206,6 +206,10 @@
   gap: var(--spacing-16);
 }
 
+.home-page .cards.service .cards-service-link:any-link {
+  color: var(--text-primary);
+}
+
 .home-page main > .section.home-context {
   padding-top: var(--spacing-64);
 }
