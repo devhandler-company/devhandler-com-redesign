@@ -666,26 +666,31 @@
     will-change: transform;
     background:
       radial-gradient(
-        ellipse 75% 9% at 0% 13% in srgb,
+        ellipse 75% 50% at 0% 50% in srgb,
         color-mix(in srgb, var(--action-primary) 55%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 85% 11% at 100% 33% in srgb,
+        ellipse 85% 50% at 100% 50% in srgb,
         color-mix(in srgb, var(--action-primary) 40%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 100% 32% at 100% 66% in srgb,
+        ellipse 100% 50% at 100% 50% in srgb,
         color-mix(in srgb, var(--action-primary) 55%, transparent),
         transparent
       ),
       radial-gradient(
-        ellipse 80% 12% at 50% 97% in srgb,
+        ellipse 80% 50% at 50% 50% in srgb,
         color-mix(in srgb, var(--action-primary) 65%, transparent),
         transparent
       ),
       var(--bg-page);
+
+    /* Paint only each ellipse's bounds; retain its original body-relative centre and radius. */
+    background-size: 100% 18%, 100% 22%, 100% 64%, 100% 24%;
+    background-position: 0 calc(4% / 0.82), 0 calc(22% / 0.78), 0 calc(34% / 0.36), 0 calc(85% / 0.76);
+    background-repeat: no-repeat;
   }
 
   .home-page main > .section {
