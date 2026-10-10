@@ -3,6 +3,9 @@
 Set Metadata Template to `home-page`. Use native Docs block tables, a standalone
 `---` between sections and Section Metadata Style as below. The loader also
 recognizes an existing Hero (home). Keep one H1 and native H2/H3 formatting.
+Keep an empty paragraph between adjacent block tables and Section Metadata tables:
+Google Docs conversion can merge tables that touch. After Preview, check that
+`home-services` contains six service cards and `home-blog` contains three insight cards.
 
 | Style | Blocks/content |
 | --- | --- |
