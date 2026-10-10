@@ -147,44 +147,6 @@ main > .section > .client-logos-wrapper {
 }
 
 @media (width >= 900px) {
-  .client-logos:is(.roster, .strip).client-logos-animated > .client-logos-list {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-  }
-
-  .client-logos:is(.roster, .strip) .client-logos-rows {
-    display: grid;
-    gap: var(--spacing-40);
-  }
-
-  .client-logos:is(.roster, .strip) .client-logos-row {
-    overflow: hidden;
-    min-width: 0;
-  }
-
-  .client-logos:is(.roster, .strip) .client-logos-track {
-    display: flex;
-    width: max-content;
-    animation: none;
-    transform: translateX(-400px);
-  }
-  .client-logos:is(.roster, .strip) .client-logos-row:nth-child(2) .client-logos-track { transform: translateX(-264px); }
-
-  .client-logos:is(.roster, .strip) .client-logos-group {
-    display: flex;
-    flex-shrink: 0;
-    gap: var(--spacing-40);
-    padding-right: var(--spacing-40);
-  }
-
-  .client-logos:is(.roster, .strip) .client-logos-group > .client-logos-item {
-    flex: 0 0 224px;
-    width: 224px;
-  }
-
   .client-logos.strip img {
     height: var(--spacing-64);
     max-width: 220px;
@@ -197,8 +159,30 @@ main > .section > .client-logos-wrapper {
   }
 }
 
+.client-logos .client-logos-pause {
+  display: none;
+}
+
 @media (width >= 900px) and (prefers-reduced-motion: no-preference) {
-  .client-logos-animated > .client-logos-list {
+  .client-logos .client-logos-pause {
+    display: block;
+    width: max-content;
+    margin: var(--spacing-8) var(--spacing-24) 0 auto;
+    padding: var(--spacing-8) var(--spacing-12);
+    border: var(--size-border) solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: var(--type-label-sm-font-size);
+    cursor: pointer;
+  }
+
+  .client-logos .client-logos-pause:focus-visible {
+    outline: var(--size-border-strong) solid var(--accent-blue-light);
+    outline-offset: var(--spacing-4);
+  }
+
+  .client-logos.client-logos-animated > .client-logos-list {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -235,7 +219,8 @@ main > .section > .client-logos-wrapper {
   }
 
   .client-logos:hover .client-logos-track,
-  .client-logos:focus-within .client-logos-track {
+  .client-logos:focus-within .client-logos-track,
+  .client-logos.client-logos-paused .client-logos-track {
     animation-play-state: paused;
   }
 

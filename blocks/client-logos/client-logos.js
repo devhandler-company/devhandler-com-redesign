@@ -79,13 +79,16 @@ export default function decorate(block) {
   if (block.classList.contains('strip')) {
     list.setAttribute('aria-label', heading?.textContent || 'Client logos');
     const mobile = window.matchMedia('(width < 900px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const desktopRows = list.children.length >= 12 && !block.classList.contains('compact');
     const updateFocus = () => {
-      list.tabIndex = list.children.length && (mobile.matches || !desktopRows) ? 0 : -1;
-      if (!mobile.matches && desktopRows) list.blur();
+      list.tabIndex = list.children.length
+        && (mobile.matches || reducedMotion.matches || !desktopRows) ? 0 : -1;
+      if (!mobile.matches && !reducedMotion.matches && desktopRows) list.blur();
     };
     updateFocus();
     mobile.addEventListener('change', updateFocus);
+    reducedMotion.addEventListener('change', updateFocus);
   }
 
   // Short lists remain static; decorative groups repeat to cover wide viewports.
@@ -111,8 +114,7 @@ export default function decorate(block) {
         previousCopies = copies;
         track.replaceChildren();
         track.style.setProperty('--client-logos-duration', `${(clients.length * copies * 264) / 40}s`);
-        const groupCount = block.classList.contains('roster') || block.classList.contains('strip') ? 1 : 2;
-        for (let repeat = 0; repeat < groupCount; repeat += 1) {
+        for (let repeat = 0; repeat < 2; repeat += 1) {
           const group = document.createElement('div');
           group.className = 'client-logos-group';
           Array.from({ length: copies }, () => clients).flat().forEach((client) => {
@@ -135,6 +137,15 @@ export default function decorate(block) {
     });
     block.classList.add('client-logos-animated');
     block.append(rows);
+    const pause = document.createElement('button');
+    pause.type = 'button';
+    pause.className = 'client-logos-pause';
+    pause.textContent = 'Pause logos';
+    pause.addEventListener('click', () => {
+      const paused = block.classList.toggle('client-logos-paused');
+      pause.textContent = paused ? 'Resume logos' : 'Pause logos';
+    });
+    block.append(pause);
     const resize = () => renderRows.forEach((fill) => fill(block.clientWidth));
     resize();
     const observer = new ResizeObserver(resize);
