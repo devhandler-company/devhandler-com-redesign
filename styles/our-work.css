@@ -1,10 +1,6 @@
 /* stylelint-disable no-descending-specificity -- Page sections refine disjoint shared block elements. */
 
 /* The existing Our Work desktop composition, with its responsive continuation. */
-:root body.our-work-page {
-  background: var(--bg-page);
-}
-
 .our-work-page main > .section {
   margin: 0;
 }
@@ -146,21 +142,6 @@
 }
 
 @media (width >= 900px) {
-  .our-work-page main {
-    background:
-      radial-gradient(
-        ellipse 75% 21% at 0% 28% in srgb,
-        var(--action-primary-chip),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 95% 45% at 100% 82% in srgb,
-      var(--action-primary),
-        transparent
-      ),
-      var(--bg-page);
-  }
-
   .our-work-page main > .section.our-work-hero {
     padding-block: var(--spacing-96) var(--spacing-120);
   }

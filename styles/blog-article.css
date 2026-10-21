@@ -1,11 +1,4 @@
 /* Article presentation preserves authored sections and their native content. */
-:root body.blog-article-page {
-  background:
-    radial-gradient(ellipse 80% 18% at 100% 48%,
-      color-mix(in srgb, var(--action-primary) 50%, transparent), transparent),
-    var(--bg-page);
-}
-
 .blog-article-page main > .blog-article-layout {
   display: grid;
   box-sizing: border-box;

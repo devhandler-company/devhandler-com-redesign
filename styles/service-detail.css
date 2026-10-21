@@ -1,15 +1,3 @@
-/* Loaded only by Template: service-detail-page. */
-body.service-detail-page main {
-  background:
-    radial-gradient(ellipse 1100px 1500px at -10% 56% in srgb, var(--action-primary-subtle), transparent),
-    radial-gradient(
-      ellipse 1100px 2600px at 100% 32% in srgb,
-      color-mix(in srgb, var(--action-primary) 35%, transparent),
-      transparent
-    ),
-    linear-gradient(var(--bg-page), var(--bg-hero-dark));
-}
-
 .service-detail-page main > .section {
   margin: 0;
   padding-block: var(--spacing-48);
@@ -318,43 +306,6 @@ body.service-detail-page main > .section {
 }
 
 @media (width >= 900px) {
-  body.service-detail-page main {
-    position: relative;
-    isolation: isolate;
-    background: var(--bg-page);
-  }
-
-  body.service-detail-page main::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    will-change: transform;
-    background:
-      radial-gradient(
-        ellipse 1400px 2400px at -12% 55% in srgb,
-        color-mix(in srgb, var(--action-primary) 52%, transparent),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 1100px 2200px at 108% 34% in srgb,
-        color-mix(in srgb, var(--action-primary) 52%, transparent),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 800px 950px at -8% 12% in srgb,
-        color-mix(in srgb, var(--action-primary) 32%, transparent),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 1100px 1250px at 110% 86% in srgb,
-        color-mix(in srgb, var(--action-primary) 34%, transparent),
-        transparent
-      ),
-      var(--bg-page);
-  }
-
   .service-detail-page main > .section {
     padding-block: var(--spacing-80);
   }

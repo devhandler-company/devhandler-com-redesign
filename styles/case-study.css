@@ -58,10 +58,6 @@
   }
 }
 
-:root body.case-study-page {
-  background: var(--bg-page);
-}
-
 .case-study-page :is(h1, h2, h3, p, li, dt, dd) {
   overflow-wrap: anywhere;
 }
@@ -590,40 +586,6 @@
 }
 
 @media (width >= 900px) {
-  .case-study-page main {
-    position: relative;
-    isolation: isolate;
-    background: var(--bg-page);
-  }
-
-  .case-study-page main::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    will-change: transform;
-
-    /* Explicit sRGB keeps rasterization of the tall gradient layer inexpensive. */
-    background:
-      radial-gradient(
-        ellipse 80% 15% at 100% 13% in srgb,
-        var(--action-primary-chip),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 65% 10% at 0% 43% in srgb,
-        var(--action-primary-chip),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 100% 35% at 100% 83% in srgb,
-        color-mix(in srgb, var(--action-primary) 70%, transparent),
-        transparent
-      ),
-      var(--bg-page);
-  }
-
   .case-study-page main > .section {
     padding-block: var(--spacing-80);
   }

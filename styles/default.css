@@ -1,17 +1,27 @@
 /* Continuous page background; the shared footer has its own opaque surface. */
 :root body {
-  background:
-    radial-gradient(ellipse 120% 9% at 50% 22% in srgb,
-      color-mix(in srgb, var(--action-primary) 38%, transparent), transparent),
-    radial-gradient(ellipse 110% 10% at 100% 44% in srgb,
-      color-mix(in srgb, var(--action-primary) 70%, transparent), transparent),
-    radial-gradient(ellipse 90% 7% at 0% 65% in srgb,
-      color-mix(in srgb, var(--action-primary) 55%, transparent), transparent),
-    radial-gradient(ellipse 100% 8% at 100% 82% in srgb,
-      color-mix(in srgb, var(--action-primary) 40%, transparent), transparent),
-    radial-gradient(ellipse 100% 8% at 0% 90% in srgb,
-      color-mix(in srgb, var(--action-primary) 50%, transparent), transparent),
-    var(--bg-hero-dark);
+  background: var(--bg-page);
+}
+
+/* Bands are sized and placed in pixels, never as a share of the body height: the body is short while
+   sections load, so percentages would stretch the bands as content renders. */
+@media (width >= 900px) {
+  :root body {
+    background:
+      radial-gradient(ellipse 75% 50% at 0% 50% in srgb,
+        color-mix(in srgb, var(--action-primary) 55%, transparent), transparent)
+        0 381px / 100% 1716px no-repeat,
+      radial-gradient(ellipse 85% 50% at 100% 50% in srgb,
+        color-mix(in srgb, var(--action-primary) 40%, transparent), transparent)
+        0 2097px / 100% 2097px no-repeat,
+      radial-gradient(ellipse 100% 50% at 100% 50% in srgb,
+        color-mix(in srgb, var(--action-primary) 55%, transparent), transparent)
+        0 3240px / 100% 6100px no-repeat,
+      radial-gradient(ellipse 80% 50% at 50% 50% in srgb,
+        color-mix(in srgb, var(--action-primary) 65%, transparent), transparent)
+        0 8100px / 100% 2287px no-repeat,
+      var(--bg-page);
+  }
 }
 
 /* Section surfaces reveal the page background; cards keep their fills. */
