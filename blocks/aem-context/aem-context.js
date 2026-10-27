@@ -1,12 +1,19 @@
-/** Authored problem/solution panels, engagement steps and a company quote. */
+/**
+ * Authored problem/solution panels, engagement steps and a company quote.
+ * The `cards` variant ignores Problem/Solution/Step and renders every such row
+ * (plus rows labelled Card) as one uniform card in a grid.
+ */
 export default function decorate(block) {
   if (block.querySelector(':scope > .aem-context-panels')) return;
+  const cardsOnly = block.classList.contains('cards');
 
   const details = document.createElement('div');
   details.className = 'aem-context-details';
   const steps = document.createElement('ol');
   steps.className = 'aem-context-steps';
   steps.setAttribute('role', 'list');
+  const grid = document.createElement('ul');
+  grid.className = 'aem-context-cards';
   const quote = document.createElement('blockquote');
   const caption = document.createElement('figcaption');
   const portrait = document.createElement('div');
@@ -18,7 +25,14 @@ export default function decorate(block) {
     const cells = [...row.children];
     const label = cells.length > 1 ? cells[0].textContent.trim().replace(/\s+/g, ' ').toLowerCase() : '';
     const content = cells.slice(1);
-    if (['problem', 'solution', 'step'].includes(label)) {
+    const isCard = cardsOnly && ['problem', 'solution', 'step', 'card'].includes(label);
+    if (isCard) {
+      if (!content.some((cell) => cell.textContent.trim() || cell.querySelector('img'))) return;
+      const card = document.createElement('li');
+      card.className = 'aem-context-card';
+      content.forEach((cell) => card.append(...cell.childNodes));
+      grid.append(card);
+    } else if (['problem', 'solution', 'step'].includes(label)) {
       if (!content.some((cell) => cell.textContent.trim() || cell.querySelector('img'))) return;
       const card = document.createElement(label === 'step' ? 'li' : 'article');
       card.className = `aem-context-${label}`;
@@ -54,6 +68,7 @@ export default function decorate(block) {
   panels.className = 'aem-context-panels';
   if (details.hasChildNodes()) panels.append(details);
   if (steps.hasChildNodes()) panels.append(steps);
+  if (grid.hasChildNodes()) panels.append(grid);
   const figure = document.createElement('div');
   figure.className = 'aem-context-quote';
   const statement = document.createElement('figure');

@@ -56,6 +56,14 @@ Use an approved quote and attribution. Do not add promises such as a 24-hour
 response unless those are approved business commitments. The sample Read more
 destination is not a production booking/contact contract; author the real URL.
 
+## Variants
+
+- **AEM Context (Cards)**: a uniform grid of title + description cards (two
+  columns from 600 px, one below). Problem, Solution, Step and Card rows all
+  render as identical cards: no eyebrow, numbering or highlighted panel. Quote,
+  Attribution, Portrait and Link rows work as in the default block.
+- **AEM Context (Mobile Portrait)**: also loads the portrait below 900 px.
+
 ## Responsive contract
 
 One table serves all widths. DOM reading order is problem, solution, ordered
