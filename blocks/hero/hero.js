@@ -58,7 +58,7 @@ export default function decorate(block) {
         let safe = false;
         try {
           safe = Boolean(href) && !(/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))
-            && ['http:', 'https:'].includes(new URL(href, window.location).protocol);
+            && ['http:', 'https:'].includes(new URL(href, document.baseURI).protocol);
         } catch { /* Incomplete crumbs remain readable without a link. */ }
         if (!safe) link.replaceWith(...link.childNodes);
       });
@@ -146,7 +146,7 @@ export default function decorate(block) {
       let safe = false;
       try {
         safe = Boolean(href) && !(/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))
-          && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, window.location).protocol);
+          && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, document.baseURI).protocol);
       } catch { /* Invalid authored destinations remain readable without a link. */ }
       if (!safe) link.replaceWith(...link.childNodes);
     });

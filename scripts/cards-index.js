@@ -49,7 +49,7 @@ export default async function decorate(block, createCard) {
   if (block.querySelector(':scope > .cards-index-content')) return;
   block.classList.add('article-listing');
   const config = configOf(block);
-  const source = safeURL(config.queryindexlink || config.source || '/blog/query-index.json', window.location.href);
+  const source = safeURL(config.queryindexlink || config.source || '/blog/query-index.json', document.baseURI);
   const requestedSize = Number(config.countofarticles || config.pagesize || 6);
   const batchSize = Number.isInteger(requestedSize) && requestedSize > 0
     ? Math.min(requestedSize, 100) : 6;

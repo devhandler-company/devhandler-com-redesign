@@ -30,7 +30,7 @@ function findTextLink(cell) {
       const href = link.getAttribute('href')?.trim();
       if (!href || (/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))) return false;
       try {
-        return ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, window.location).protocol);
+        return ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, document.baseURI).protocol);
       } catch { return false; }
     }) || null;
 }
