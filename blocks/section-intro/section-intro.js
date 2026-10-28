@@ -34,7 +34,7 @@ export default function decorate(block) {
   if (cta) {
     let safe = false;
     try {
-      safe = ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(cta.href, window.location.href).protocol);
+      safe = ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(cta.href, document.baseURI).protocol);
     } catch { /* Preserve incomplete authored action text without an unsafe link. */ }
     if (!safe) {
       const text = document.createElement('span');

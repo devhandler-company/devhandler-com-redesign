@@ -59,7 +59,7 @@ export default function decorate(block) {
     let safe = false;
     try {
       safe = Boolean(href) && !(/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))
-        && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, window.location).protocol);
+        && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, document.baseURI).protocol);
     } catch { /* Invalid authored links remain readable as text. */ }
     if (!safe) link.replaceWith(...link.childNodes);
     else if (link.target === '_blank') link.relList.add('noopener', 'noreferrer');

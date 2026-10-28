@@ -10,7 +10,7 @@ function linkHref(link) {
   const href = link?.getAttribute('href')?.trim();
   if (!href || (/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))) return '';
   try {
-    return ['https:', 'http:'].includes(new URL(href, window.location.href).protocol) ? href : '';
+    return ['https:', 'http:'].includes(new URL(href, document.baseURI).protocol) ? href : '';
   } catch {
     return '';
   }

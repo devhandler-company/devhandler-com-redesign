@@ -93,7 +93,7 @@ export default function decorate(block) {
     const desktop = document.createElement('source');
     desktop.media = '(width >= 900px)';
     const bundledPortrait = '/blocks/aem-context/ceo-portrait.webp';
-    const bundledUrl = new URL(bundledPortrait, window.location.href).href;
+    const bundledUrl = new URL(bundledPortrait, document.baseURI).href;
     desktop.srcset = url === bundledPortrait || url === bundledUrl
       ? `${url} 1x, ${url.replace('.webp', '-2x.webp')} 2x, ${url.replace('.webp', '-3x.webp')} 3x`
       : url;

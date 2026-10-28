@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="DevHandler block library for AEM Sidekick" />
+    <meta name="robots" content="noindex" />
+    <base href="/" />
+    <title>DevHandler Block Library</title>
+    <style>
+      :root {
+        --sk-block-table-background-color: #cfe2f3;
+        --sk-block-table-foreground-color: #000;
+        --sk-section-metadata-table-background-color: #d9ead3;
+        --sk-section-metadata-table-foreground-color: #000;
+        --sk-metadata-table-background-color: #fce5cd;
+        --sk-metadata-table-foreground-color: #000;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: sans-serif;
+        background-color: #ededed;
+      }
+
+      helix-sidekick,
+      aem-sidekick {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module" src="https://tools.aem.live/tools/sidekick/library/index.js"></script>
+    <script>
+      const library = document.createElement('sidekick-library');
+      library.config = {
+        base: '/tools/sidekick/library.json',
+        plugins: {
+          blocks: {
+            viewPorts: [
+              { width: '390px', label: 'Mobile', icon: 'device-phone' },
+              { width: '900px', label: 'Tablet', icon: 'device-tablet' },
+              { width: '100%', label: 'Desktop', icon: 'device-desktop', default: true },
+            ],
+          },
+        },
+      };
+      document.body.prepend(library);
+    </script>
+  </body>
+</html>

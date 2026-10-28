@@ -23,7 +23,7 @@ export default function decorate(block) {
         const href = link.getAttribute('href')?.trim();
         try {
           safe = Boolean(href) && !(/^https?:/i.test(href) && !/^https?:\/\/[^/\s?#]/i.test(href))
-            && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, window.location).protocol);
+            && ['http:', 'https:', 'mailto:', 'tel:'].includes(new URL(href, document.baseURI).protocol);
         } catch { /* Incomplete authoring stays readable. */ }
         if (!safe) link.replaceWith(...link.childNodes);
         else if (link.target === '_blank') link.relList.add('noopener', 'noreferrer');

@@ -35,7 +35,7 @@ export default function decorate(block) {
     let url;
     if (raw) {
       try {
-        const candidate = new URL(raw, window.location.href);
+        const candidate = new URL(raw, document.baseURI);
         if (['http:', 'https:'].includes(candidate.protocol)) url = candidate.href;
       } catch { /* An invalid asset falls back to the client name. */ }
     }
@@ -53,7 +53,7 @@ export default function decorate(block) {
       // The cell reserves a fixed image slot; names remain readable if loading fails.
       if (!img.hasAttribute('width')) img.width = 192;
       if (!img.hasAttribute('height')) img.height = 64;
-      const bundled = new URL('/blocks/client-logos/', window.location.href).href;
+      const bundled = new URL('/blocks/client-logos/', document.baseURI).href;
       if (!picture && url.startsWith(bundled)
         && /\/(rx|maytag|helios|smartcat|dhl|languagewire|sonova|bmw|prinova|six-flags)\.webp$/.test(url)) {
         img.srcset = `${url} 1x, ${url.replace('.webp', '-2x.webp')} 2x, ${url.replace('.webp', '-3x.webp')} 3x`;

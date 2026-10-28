@@ -35,7 +35,7 @@ function safeURL(value) {
   if (!raw || /[{}]/.test(raw)
     || (/^https?:/i.test(raw) && !/^https?:\/\/[^/\s?#]/i.test(raw))) return '';
   try {
-    const url = new URL(raw, window.location.href);
+    const url = new URL(raw, document.baseURI);
     return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
   } catch { return ''; }
 }

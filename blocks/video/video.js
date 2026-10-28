@@ -1,6 +1,6 @@
 function mediaURL(value) {
   try {
-    const url = new URL(value, window.location.href);
+    const url = new URL(value, document.baseURI);
     return value && ['http:', 'https:'].includes(url.protocol) ? url.href : '';
   } catch { return ''; }
 }
