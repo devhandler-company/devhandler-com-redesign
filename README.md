@@ -80,6 +80,49 @@ from this checkout and uses previewed content from the configured EDS site.
 
 Do not edit `scripts/aem.js`; it is vendored from the Adobe boilerplate.
 
+## AEM Admin API key
+
+Used to preview / publish content from scripts and from Claude
+(`.claude/skills/aem-preview-publish`). The key is stored only in `.env`
+(git-ignored); `.env.example` shows the format.
+
+**Create a key** (needs an admin on the site):
+
+1. Log in at https://admin.hlx.page/login.
+2. On an `admin.hlx.page` tab open DevTools → Console and run:
+
+   ```js
+   fetch('/config/devhandler-company/sites/devhandler-com-redesign/apiKeys.json', {
+     method: 'POST',
+     credentials: 'include',
+     headers: { 'content-type': 'application/json' },
+     body: JSON.stringify({ description: 'Preview/publish key', roles: ['publish'] }),
+   }).then((r) => r.json()).then((j) => { console.log(j.id, j.expiration); copy(j.value); });
+   ```
+
+   The key value is copied to the clipboard and is shown only once.
+3. Put it into `.env` (copy `.env.example` first):
+
+   ```
+   AEM_ADMIN_KEY_ID="<id from console>"
+   AEM_ADMIN_KEY_EXPIRATION="<expiration from console>"
+   AEM_ADMIN_KEY="<paste>"
+   ```
+
+   Then `chmod 600 .env`.
+
+**Check:**
+`set -a; . ./.env; set +a; curl -s -o /dev/null -w '%{http_code}\n' -H "X-Auth-Token: $AEM_ADMIN_KEY" https://admin.hlx.page/status/devhandler-company/devhandler-com-redesign/main/` → `200`.
+
+**Use:** `curl -X POST -H "X-Auth-Token: $AEM_ADMIN_KEY" https://admin.hlx.page/preview/devhandler-company/devhandler-com-redesign/main/<path>`
+(`/live/` to publish).
+
+**Rotate / revoke:** create a new key, update `.env`, then
+`curl -X DELETE -H "X-Auth-Token: $AEM_ADMIN_KEY" https://admin.hlx.page/config/devhandler-company/sites/devhandler-com-redesign/apiKeys/<old id>.json`.
+Never commit `.env`; if a key leaks, revoke it immediately.
+
+Docs: https://www.aem.live/docs/admin-apikeys
+
 ## Documentation
 
 - [Home composition and authoring](styles/home.md)

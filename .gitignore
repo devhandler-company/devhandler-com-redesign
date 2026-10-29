@@ -13,5 +13,8 @@ helix-importer-ui
 !AGENTS.md
 
 # Local secrets (AEM admin API key etc.)
-.claude/secrets/
 .env
+.env.*
+!.env.example
+.env
+.claude/settings.local.json
