@@ -257,7 +257,7 @@ body.service-detail-page main > .section {
 }
 
 .service-detail-page .process .process-list {
-  align-items: start;
+  align-items: stretch;
 }
 
 .service-detail-page main > .process-container > .section-intro-wrapper + .process-wrapper {

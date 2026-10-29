@@ -375,7 +375,7 @@
 }
 
 .cards.insight .cards-list {
-  align-items: start;
+  align-items: stretch;
 }
 
 /* One native article link covers the card without adding another tab stop. */
@@ -609,7 +609,7 @@
 }
 
 .cards:is(.challenge, .outcome, .reason) .cards-list {
-  align-items: start;
+  align-items: stretch;
 }
 
 .cards:is(.challenge, .outcome, .reason)
