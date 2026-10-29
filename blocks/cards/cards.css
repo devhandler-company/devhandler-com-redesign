@@ -667,6 +667,11 @@
   grid-template-columns: minmax(0, 1fr);
 }
 
+/* Consecutive featured-case blocks in one section: keep the same gutter as cards in a list */
+.cards-wrapper:has(> .cards.featured-case) + .cards-wrapper:has(> .cards.featured-case) {
+  margin-top: var(--grid-gutter);
+}
+
 .cards.case.featured-case .cards-card {
   min-height: 0;
   border-radius: var(--radius-lg);
@@ -776,6 +781,17 @@
 
   .cards.case.featured-case .cards-title {
     font-size: var(--type-display-subsection-font-size);
+  }
+
+  /* Cards (case, featured-case, media-right): content left, image right */
+  .cards.case.featured-case.media-right .cards-card:has(.cards-media),
+  .cards.case.featured-case.media-right.placeholder-media .cards-card {
+    grid-template-columns: minmax(0, 680fr) minmax(0, 520fr);
+  }
+
+  .cards.case.featured-case.media-right .cards-media,
+  .cards.case.featured-case.media-right .cards-card:not(:has(.cards-media))::before {
+    order: 1;
   }
 
 }

@@ -11,3 +11,7 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# Local secrets (AEM admin API key etc.)
+.claude/secrets/
+.env
