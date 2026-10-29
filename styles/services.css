@@ -33,7 +33,7 @@
 }
 
 .services-page .process .process-list {
-  align-items: start;
+  align-items: stretch;
   gap: var(--spacing-32);
 }
 
@@ -168,7 +168,7 @@
 }
 
 .services-page .cards.model .cards-list {
-  align-items: start;
+  align-items: stretch;
   gap: var(--spacing-32);
 }
 
