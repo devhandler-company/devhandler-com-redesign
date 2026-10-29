@@ -94,6 +94,10 @@ rows (value and label in separate paragraphs), and Link. All except Title are
 optional; unlinked titles and CTA labels remain static. The placeholder reserves
 space without requesting an image. This modifier does not change regular cases.
 
+Add `media-right` (`Cards (case, featured-case, media-right)`) to place the
+image on the right and the content on the left from 900px up. Below 900px the
+image stays on top. Authoring rows are unchanged.
+
 See [Service Detail authoring](../../styles/service-detail.md) for the full page
 contract. `Card / Review` and `Card / Change` remain outside these variants.
 
