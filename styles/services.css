@@ -1,73 +1,5 @@
-/* stylelint-disable no-descending-specificity -- Page sections refine disjoint shared block elements. */
-
-/* Services Root; all styles stay within its authored template. */
-.services-page .cards.service .cards-service-link:any-link {
-  color: var(--text-primary);
-}
-
-.services-page .cards.model .cards-model-link {
-  font-size: var(--type-label-md-font-size);
-  line-height: 1.5;
-  padding-top: var(--spacing-24);
-}
-
-.services-page .router .router-list {
-  gap: var(--spacing-32);
-}
-
-.services-page .router .router-entry {
-  min-height: 106px;
-  padding: var(--spacing-24);
-}
-
-.services-page .router .router-content {
-  gap: var(--spacing-8);
-}
-
-.services-page .process .process-number {
-  margin-bottom: var(--spacing-24);
-}
-
-.services-page .process p {
-  margin-top: var(--spacing-16);
-}
-
-.services-page .process .process-list {
-  align-items: stretch;
-  gap: var(--spacing-32);
-}
-
-.services-page .faq summary {
-  min-height: 92px;
-}
-
-@media (width < 900px) {
-  .services-page .faq {
-    gap: var(--spacing-12);
-  }
-
-  .services-page .faq summary {
-    padding-inline: var(--spacing-32);
-  }
-
-  .services-page .faq .faq-answer {
-    padding-inline: var(--spacing-32);
-    padding-bottom: var(--spacing-48);
-  }
-
-  .services-page .form.labelled .form-card {
-    padding: var(--spacing-24);
-    gap: var(--spacing-24);
-  }
-
-  .services-page .form.labelled .form-intro {
-    gap: var(--spacing-24);
-  }
-
-  .services-page .form.labelled .form-panel {
-    gap: var(--spacing-24);
-  }
-}
+/* Services Root page layout: section spacing and section-specific composition only.
+   Block appearance lives in each block's stylesheet and is the same on every page. */
 
 .services-page main > .section {
   margin: 0;
@@ -92,93 +24,16 @@
   padding: 0 0 var(--spacing-32);
 }
 
-.services-page main > .section.services-catalog {
-  padding-top: 0;
-}
-
-.services-page .hero.services {
-  padding: var(--spacing-64) var(--grid-margin-mobile) var(--spacing-120);
-}
-
-.services-page .hero.services .hero-breadcrumbs {
-  margin-bottom: var(--spacing-16);
-}
-
-.services-page .hero.services .hero-eyebrow {
-  margin-bottom: var(--spacing-24);
-}
-
-.services-page .hero.services h1 {
-  font-size: var(--page-title-mobile-font-size);
-  line-height: 1.2;
-  letter-spacing: var(--type-display-hero-letter-spacing);
-}
-
-.services-page .hero.services .hero-content > p:not(.hero-eyebrow) {
-  font-size: var(--type-body-md-font-size);
-  line-height: var(--type-body-md-line-height);
-}
-
-.services-page .hero.services .hero-actions {
-  margin-top: var(--spacing-32);
-}
-
-.services-page .hero.services .hero-actions a.button {
-  font-size: var(--type-label-md-font-size);
-}
-
-.services-page .section-intro-wrapper {
-  margin-bottom: var(--spacing-32);
-}
-
-.services-page .section-intro {
-  gap: var(--spacing-8);
-}
-
-.services-page .services-catalog .cards.service .cards-list {
-  gap: var(--spacing-32);
-}
-
-.services-page .stats .stats-list {
-  padding: 0;
-  border: 0;
-  gap: var(--spacing-24);
-}
-
-.services-page .stats .stats-item {
-  align-items: flex-start;
-  text-align: left;
-  gap: var(--spacing-8);
-}
-
-.services-page .stats dt {
-  max-width: none;
-  font-family: var(--font-family-body);
-  font-size: var(--type-body-xs-font-size);
-  font-weight: var(--font-weight-regular);
-  color: var(--text-secondary);
-}
-
-.services-page .stats dd {
-  font-size: var(--page-title-mobile-font-size);
-}
-
 .services-page main > .section > .stats-wrapper {
   padding-block: 0;
 }
 
-.services-page .cards.model .cards-list {
-  align-items: stretch;
+.services-page main > .section.services-catalog {
+  padding-top: 0;
+}
+
+.services-page .services-catalog .cards.service .cards-list {
   gap: var(--spacing-32);
-}
-
-.services-page .cards.model .cards-card {
-  min-height: 0;
-}
-
-.services-page .cards.model .cards-model-benefits {
-  margin-top: var(--spacing-24);
-  padding-top: var(--spacing-24);
 }
 
 .services-page main > .section.services-clients {
@@ -190,25 +45,11 @@
   padding: 0;
 }
 
-.services-page .client-logos.strip {
-  padding: 0;
-}
-
 .services-page main > .section.services-form {
   padding-top: var(--spacing-64);
 }
 
-.services-page main > .section.services-form > .form-wrapper {
-  max-width: calc(
-    var(--grid-max-width) + var(--spacing-96) + 2 * var(--grid-margin-mobile)
-  );
-}
-
 @media (width >= 900px) {
-  .services-page .router .router-list {
-    gap: var(--spacing-24);
-  }
-
   .services-page main > .section {
     padding-block: var(--spacing-80);
   }
@@ -225,58 +66,7 @@
     padding-top: 0;
   }
 
-  .services-page .hero.services {
-    padding-top: var(--spacing-96);
-    padding-bottom: var(--spacing-120);
-  }
-
-  .services-page .hero.services .hero-breadcrumbs {
-    margin-bottom: var(--spacing-48);
-  }
-
-  .services-page .hero.services h1 {
-    font-size: var(--type-display-hero-font-size);
-    line-height: var(--page-title-line-height);
-    letter-spacing: var(--type-display-hero-letter-spacing);
-  }
-
-  .services-page .hero.services .hero-content > p:not(.hero-eyebrow) {
-    font-size: var(--type-body-lg-font-size);
-    line-height: var(--type-body-lg-line-height);
-    margin-top: var(--spacing-32);
-  }
-
-  .services-page .hero.services .hero-actions {
-    margin-top: var(--spacing-24);
-  }
-
-  .services-page .section-intro-wrapper {
-    margin-bottom: var(--spacing-48);
-  }
-
-  .services-page .stats .stats-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    border: var(--size-border-strong) solid var(--border-stats);
-    padding: var(--spacing-32) var(--spacing-24);
-  }
-
-  .services-page .stats dd {
-    font-size: calc(var(--type-display-section-font-size) + 8px);
-  }
-
-  .services-page .stats dt {
-    font-family: var(--font-family-heading);
-    font-size: var(--type-heading-lg-font-size);
-    font-weight: var(--font-weight-bold);
-    color: var(--text-primary);
-  }
-
   .services-page .services-catalog .cards.service .cards-list {
-    gap: var(--spacing-24);
-  }
-
-  .services-page .cards.model .cards-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--spacing-24);
   }
 

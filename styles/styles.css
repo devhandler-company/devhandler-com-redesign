@@ -40,6 +40,12 @@
   --heading-font-size-s: var(--type-heading-md-font-size);
   --heading-font-size-xs: var(--type-heading-sm-font-size);
 
+  /* page and block composition (shared by every template) */
+  --case-media-height: 216px;
+  --page-title-mobile-font-size: clamp(32px, 10.3vw, 40px);
+  --page-title-line-height: 1.125;
+  --page-section-line-height: 1.25;
+
   /* nav height */
   --nav-height: 76px;
 }

@@ -9,8 +9,14 @@ The existing EDS Metadata table enables this page layout:
 | Robots | noindex, nofollow |
 
 The shared loader fetches `styles/services.css` only when the body has the authored
-`services-page` template class. The stylesheet scopes every rule to that class.
-Homepage and Service Detail layouts are not changed.
+`services-page` template class. That stylesheet holds section layout only (section
+padding, wrapper widths and the `services-*` section styles). Block appearance
+(Hero (services), Stats, Section Intro, Cards, Router, Process, FAQ, Form, CTA,
+Client Logos) lives in each block's own stylesheet, so a block placed on any page
+looks the same as on Services. Do not add `.services-page .<block>` rules; change the
+block stylesheet instead. Shared composition variables (`--page-title-*`,
+`--page-section-line-height`, `--case-media-height`) are defined on `:root` in
+`styles/styles.css`.
 
 Section surfaces, including the Services Hero, stay transparent over the shared
 page background. Do not add per-section fills or gradients. Cards, the Form card
@@ -61,7 +67,7 @@ The Services Form reuses the existing Form block and homepage configuration.
 Endpoint and scheduling URL must be reviewed by the content owner. Browser tests
 intercept submission requests; they do not prove production delivery or send real
 leads. Its error message uses a live alert, and the Services-only eyebrow color
-meets contrast on the white card without restyling the homepage Form.
+meets contrast on the white card.
 
 Import as a native Google Doc named `services`, then Preview using Sidekick.
 Full HTTPS links in DOCX avoid the malformed relative URLs observed in earlier

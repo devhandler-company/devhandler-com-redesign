@@ -228,7 +228,7 @@ async function loadEager(doc) {
     }
     const pageStyle = visualTemplate.replace('-page', '');
     await Promise.all([
-      ...['default', 'page-layout', pageStyle].map((name) => loadCSS(`${window.hlx.codeBasePath}/styles/${name}.css`)
+      ...['default', pageStyle].map((name) => loadCSS(`${window.hlx.codeBasePath}/styles/${name}.css`)
         .catch(() => { /* Preserve readable content if styling is unavailable. */ })),
       ...(caseHero ? [loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero.css`)
         .catch(() => { /* Keep the authored hero readable without block styling. */ })] : []),
@@ -304,6 +304,65 @@ async function loadEager(doc) {
   }
 }
 
+const CONTACT_FORM_FRAGMENT = '/fragments/contact-form';
+// Template -> section style and anchor id already used by page CTAs.
+const CONTACT_FORM_SECTIONS = {
+  'home-page': ['home-form', 'contact-us-form'],
+  'services-page': ['services-form', 'services-contact'],
+  'our-work-page': ['our-work-form', 'our-work-contact'],
+  'service-detail-page': ['service-detail-form', 'service-contact'],
+};
+
+/** True when only empty sections follow, as with the blank section authored docs end with. */
+function trailingIsEmpty(section) {
+  return [...section.parentElement.children].slice([...section.parentElement.children]
+    .indexOf(section) + 1)
+    .every((el) => el.matches('.section') && !el.querySelector('.block') && !el.textContent.trim());
+}
+
+function includesContactForm(main) {
+  const { pathname } = window.location;
+  if (window.isErrorPage || document.body.classList.contains('no-form')) return false;
+  if (pathname.startsWith('/fragments/') || pathname.startsWith('/tools/')) return false;
+  // Pages that still author their own form, or include this fragment, keep a single form.
+  return !main.querySelector('.form')
+    && ![...main.querySelectorAll('.fragment')]
+      .some((block) => block.textContent.includes(CONTACT_FORM_FRAGMENT));
+}
+
+/**
+ * Appends the shared contact form fragment to every page except fragments,
+ * error pages and pages whose template includes `no-form`.
+ */
+async function loadContactForm(main) {
+  if (!main || !includesContactForm(main)) return;
+  try {
+    // eslint-disable-next-line import/no-cycle
+    const { loadFragment } = await import('../blocks/fragment/fragment.js');
+    const fragment = await loadFragment(CONTACT_FORM_FRAGMENT);
+    const sections = [...(fragment?.querySelectorAll(':scope > .section') || [])];
+    if (!sections.length) return;
+    const template = Object.keys(CONTACT_FORM_SECTIONS)
+      .find((name) => document.body.classList.contains(name));
+    const [style, id] = CONTACT_FORM_SECTIONS[template] || [];
+    // The fragment carries the home section style; other pages use their own.
+    if (template !== 'home-page') sections[0].classList.remove('home-form');
+    if (style) sections[0].classList.add(style);
+    sections[0].id = id || 'contact-us-form';
+    // Authored docs end with an empty section, so look at the last one with content.
+    const filled = [...main.querySelectorAll(':scope > .section')]
+      .filter((section) => section.querySelector('.block') || section.textContent.trim());
+    const last = filled[filled.length - 1];
+    // The form sits above a closing CTA, as it did on the Services pages.
+    if (last?.querySelector('.cta, [class*="lets-talk"]')) last.before(...sections);
+    else if (last && trailingIsEmpty(last)) last.after(...sections);
+    else main.append(...sections);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Contact form loading failed', error);
+  }
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -312,7 +371,9 @@ async function loadLazy(doc) {
   loadHeader(doc.querySelector('body > header'));
 
   const main = doc.querySelector('main');
+  const contactForm = loadContactForm(main);
   await loadSections(main);
+  await contactForm;
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

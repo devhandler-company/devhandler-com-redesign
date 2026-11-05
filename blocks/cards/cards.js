@@ -416,7 +416,10 @@ export default async function decorate(block) {
       decorateVariant(block, createServiceCard);
       break;
     case 'insight':
-      if ([...block.children].some((row) => row.children.length === 2
+      if (block.classList.contains('latest')) {
+        const { decorateLatest } = await import('../../scripts/cards-index.js');
+        await decorateLatest(block, createInsightCard);
+      } else if ([...block.children].some((row) => row.children.length === 2
         && /^(queryindexlink|source)$/.test(row.firstElementChild.textContent
           .trim().toLowerCase().replace(/[^a-z0-9]/g, '')))) {
         const { default: decorateIndex } = await import('../../scripts/cards-index.js');

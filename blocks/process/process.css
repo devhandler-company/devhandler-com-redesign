@@ -44,7 +44,8 @@ main > .process-container > .section-intro-wrapper + .process-wrapper {
 .process .process-list {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--spacing-16);
+  align-items: stretch;
+  gap: var(--spacing-32);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -64,7 +65,7 @@ main > .process-container > .section-intro-wrapper + .process-wrapper {
 
 .process .process-number {
   display: block;
-  margin-bottom: var(--spacing-16);
+  margin-bottom: var(--spacing-24);
   color: var(--accent-blue-light);
   font-family: var(--type-display-subsection-font-family);
   font-size: var(--type-display-subsection-font-size);
@@ -83,7 +84,7 @@ main > .process-container > .section-intro-wrapper + .process-wrapper {
 }
 
 .process p {
-  margin: var(--spacing-8) 0 0;
+  margin: var(--spacing-16) 0 0;
   color: var(--text-secondary);
   font-family: var(--type-body-sm-font-family);
   font-size: var(--type-body-sm-font-size);
@@ -94,7 +95,6 @@ main > .process-container > .section-intro-wrapper + .process-wrapper {
 @media (width >= 600px) {
   .process .process-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--grid-gutter);
   }
 }
 

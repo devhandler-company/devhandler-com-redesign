@@ -489,3 +489,64 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
     padding-block: var(--spacing-96) var(--spacing-80);
   }
 }
+
+/* Default composition (formerly scoped to page templates); keep last so it refines the base rules above. */
+/* stylelint-disable no-descending-specificity */
+.hero.services {
+  padding: var(--spacing-64) var(--grid-margin-mobile) var(--spacing-120);
+}
+
+.hero.services .hero-breadcrumbs {
+  margin-bottom: var(--spacing-16);
+}
+
+.hero.services .hero-eyebrow {
+  margin-bottom: var(--spacing-24);
+}
+
+.hero.services h1 {
+  font-size: var(--page-title-mobile-font-size);
+  line-height: 1.2;
+  letter-spacing: var(--type-display-hero-letter-spacing);
+}
+
+.hero.services .hero-content > p:not(.hero-eyebrow) {
+  font-size: var(--type-body-md-font-size);
+  line-height: var(--type-body-md-line-height);
+}
+
+.hero.services .hero-actions {
+  margin-top: var(--spacing-32);
+}
+
+.hero.services .hero-actions a.button {
+  font-size: var(--type-label-md-font-size);
+}
+
+@media (width >= 900px) {
+  .hero.services {
+    padding-top: var(--spacing-96);
+    padding-bottom: var(--spacing-120);
+  }
+
+  .hero.services .hero-breadcrumbs {
+    margin-bottom: var(--spacing-48);
+  }
+
+  .hero.services h1 {
+    font-size: var(--type-display-hero-font-size);
+    line-height: var(--page-title-line-height);
+    letter-spacing: var(--type-display-hero-letter-spacing);
+  }
+
+  .hero.services .hero-content > p:not(.hero-eyebrow) {
+    font-size: var(--type-body-lg-font-size);
+    line-height: var(--type-body-lg-line-height);
+    margin-top: var(--spacing-32);
+  }
+
+  .hero.services .hero-actions {
+    margin-top: var(--spacing-24);
+  }
+}
+/* stylelint-enable no-descending-specificity */

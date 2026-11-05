@@ -1,9 +1,15 @@
+/* Default cards follow the Card / Case look. */
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  color: var(--text-primary);
+}
+
 .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(calc(var(--spacing-160) + var(--spacing-96)), 1fr)
-  );
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--grid-gutter);
   margin: 0;
   padding: 0;
@@ -11,27 +17,74 @@
 }
 
 .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li {
-  border: var(--size-border) solid var(--border-default);
-  background-color: var(--bg-card);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason)
-  .cards-card-body {
-  margin: var(--spacing-16);
-}
-
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason)
-  .cards-card-image {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-image {
   line-height: 0;
+  background: var(--bg-surface-2);
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason)
-  > ul
-  > li
-  img {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li img {
+  display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body {
+  flex: 1;
+  margin: 0;
+  padding: var(--spacing-24);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > :first-child {
+  margin-top: 0;
+}
+
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > :last-child {
+  margin-bottom: 0;
+}
+
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > p:first-child,
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > :is(h2, h3, h4, h5, h6) {
+  color: var(--text-primary);
+  font-family: var(--type-display-caption-font-family);
+  font-size: var(--type-display-caption-font-size);
+  font-weight: var(--type-display-caption-font-weight);
+  letter-spacing: var(--type-display-caption-letter-spacing);
+  line-height: var(--type-display-caption-line-height);
+}
+
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > p:first-child strong {
+  font-weight: inherit;
+}
+
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) a:focus-visible {
+  border-radius: var(--radius-sm);
+  outline: var(--size-border-strong) solid var(--focus-ring);
+  outline-offset: var(--spacing-4);
+}
+
+@media (width >= 600px) {
+  .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1200px) {
+  .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) {
@@ -88,7 +141,7 @@
 }
 
 .cards.case .cards-card {
-  min-height: calc(var(--spacing-160) * 2 + var(--spacing-120));
+  min-height: 0;
 }
 
 .cards.case.placeholder-media .cards-card:not(:has(.cards-media))::before {
@@ -100,11 +153,11 @@
 }
 
 .cards.case .cards-title {
-  font-family: var(--type-display-caption-font-family);
-  font-size: var(--type-display-caption-font-size);
+  font-family: var(--font-family-heading);
+  font-size: var(--type-heading-lg-font-size);
   font-weight: var(--type-display-caption-font-weight);
   letter-spacing: var(--type-display-caption-letter-spacing);
-  line-height: var(--type-display-caption-line-height);
+  line-height: var(--type-heading-lg-line-height);
 }
 
 .cards.case .cards-media {
@@ -139,16 +192,17 @@
   margin: 0 0 var(--spacing-20);
   padding: 0;
   list-style: none;
+  margin-bottom: var(--spacing-16);
 }
 
 .cards.case .cards-case-tags li {
   max-width: 100%;
   border: var(--size-border) solid var(--action-ghost-border);
-  border-radius: var(--radius-pill);
-  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-sm);
+  padding: 6px var(--spacing-12);
   color: var(--text-secondary);
   font-family: var(--type-meta-xs-font-family);
-  font-size: var(--type-meta-xs-font-size);
+  font-size: var(--type-body-xs-font-size);
   font-weight: var(--type-meta-xs-font-weight);
   letter-spacing: var(--type-meta-xs-letter-spacing);
   line-height: var(--type-meta-xs-line-height);
@@ -171,9 +225,10 @@
 .cards.case .cards-case-metadata {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-24) var(--spacing-32);
+  gap: var(--spacing-24);
   margin: auto 0 0;
-  padding-top: var(--spacing-32);
+  padding-top: var(--spacing-24);
+  margin-top: auto;
 }
 
 .cards.case .cards-case-metadata-item {
@@ -186,7 +241,7 @@
   margin: var(--spacing-4) 0 0;
   color: var(--text-meta);
   font-family: var(--type-meta-xs-font-family);
-  font-size: var(--type-meta-xs-font-size);
+  font-size: var(--type-body-xs-font-size);
   font-weight: var(--type-meta-xs-font-weight);
   letter-spacing: var(--type-meta-xs-letter-spacing);
   line-height: var(--type-meta-xs-line-height);
@@ -197,18 +252,19 @@
   grid-row: 1;
   margin: 0;
   color: var(--accent-mint);
-  font-family: var(--type-body-emphasis-xl-font-family);
-  font-size: var(--type-body-emphasis-xl-font-size);
-  font-weight: var(--type-body-emphasis-xl-font-weight);
+  font-family: var(--font-family-display);
+  font-size: var(--type-display-subsection-font-size);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--type-body-emphasis-xl-letter-spacing);
-  line-height: var(--type-body-emphasis-xl-line-height);
+  line-height: var(--type-display-subsection-line-height);
   overflow-wrap: anywhere;
 }
 
 .cards.service .cards-card {
-  min-height: calc(var(--spacing-160) * 2 + var(--spacing-16));
+  min-height: 0;
   gap: var(--spacing-24);
   padding: var(--spacing-32);
+  display: flex;
 }
 
 .cards.service .cards-service-heading {
@@ -247,6 +303,7 @@
   padding: var(--spacing-16);
   border-radius: var(--radius-sm);
   background: var(--accent-mint-faint);
+  min-height: 0;
 }
 
 .cards.service .cards-service-relevance-label {
@@ -284,7 +341,7 @@
 .cards.service .cards-service-link:any-link {
   align-self: flex-start;
   margin-top: auto;
-  color: var(--accent-mint);
+  color: var(--text-primary);
   font-family: var(--type-label-md-font-family);
   font-size: var(--type-label-md-font-size);
   font-weight: var(--type-label-md-font-weight);
@@ -454,7 +511,7 @@
 }
 
 .cards.model .cards-card {
-  min-height: calc(var(--spacing-160) * 2 + var(--spacing-24));
+  min-height: 0;
   padding: var(--spacing-32);
 }
 
@@ -495,6 +552,8 @@
   letter-spacing: var(--type-body-sm-letter-spacing);
   line-height: var(--type-body-sm-line-height);
   list-style: none;
+  margin-top: var(--spacing-24);
+  padding-top: var(--spacing-24);
 }
 
 .cards.model .cards-model-benefits li {
@@ -519,10 +578,10 @@
   padding-top: var(--spacing-24);
   color: var(--accent-blue-light);
   font-family: var(--type-label-sm-font-family);
-  font-size: var(--type-label-sm-font-size);
+  font-size: var(--type-label-md-font-size);
   font-weight: var(--type-label-sm-font-weight);
   letter-spacing: var(--type-label-sm-letter-spacing);
-  line-height: var(--type-label-sm-line-height);
+  line-height: 1.5;
   text-decoration: none;
 }
 
@@ -556,15 +615,6 @@
 @media (width >= 600px) {
   .cards:is(.case, .service, .insight, .model, .challenge, .outcome, .reason) .cards-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .cards.service .cards-card {
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto auto;
-  }
-
-  .cards.service .cards-service-relevance {
-    min-height: calc(var(--spacing-96) + var(--spacing-32));
   }
 
   .cards.service .cards-service-link:any-link {
@@ -969,3 +1019,55 @@
 .cards.insight .cards-card .cards-title-link:focus-visible {
   outline: none;
 }
+
+/* Default card hover, kept last for specificity order. */
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li:hover,
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li:focus-within {
+  border-color: var(--border-hover);
+  background: linear-gradient(var(--bg-hover-row), var(--bg-hover-row)), var(--bg-card);
+}
+
+/* Default composition (formerly scoped to page templates); keep last so it refines the base rules above. */
+/* stylelint-disable no-descending-specificity */
+.cards.case .cards-list {
+  align-items: stretch;
+  gap: var(--spacing-32);
+}
+
+.cards.case.placeholder-media .cards-card:not(:has(.cards-media))::before,
+.cards.case .cards-media {
+  height: var(--case-media-height);
+  aspect-ratio: auto;
+}
+
+.cards.service .cards-service-link {
+  color: var(--text-primary);
+  min-height: var(--spacing-24);
+}
+
+.cards.model .cards-list {
+  align-items: stretch;
+  gap: var(--spacing-32);
+}
+
+@media (width >= 900px) {
+  .cards.case .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-24);
+  }
+
+  .cards.case .cards-card::before,
+  .cards.case .cards-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cards.service .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cards.model .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-24);
+  }
+}
+/* stylelint-enable no-descending-specificity */

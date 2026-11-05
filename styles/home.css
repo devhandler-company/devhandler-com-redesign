@@ -369,6 +369,33 @@
   mask: url("/icons/star.svg") left center / 24px 24px repeat-x;
 }
 
+/* Full-bleed reviews carousel: lift the section width cap and fade the edges with a mask. */
+.home-page .home-reviews .reviews-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.home-page .reviews:not(.contained)::before,
+.home-page .reviews:not(.contained)::after {
+  display: none;
+}
+
+.home-page .reviews:not(.contained) .reviews-track {
+  --reviews-edge: var(--reviews-fade-width, 274px);
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--reviews-edge),
+    #000 calc(100% - var(--reviews-edge)),
+    transparent
+  );
+}
+
+.home-page .reviews.is-mobile:not(.contained) .reviews-track {
+  --reviews-edge: var(--reviews-mobile-fade-width, var(--spacing-64));
+}
+
 .home-page .reviews.contained {
   padding-bottom: 0;
 }
@@ -546,12 +573,6 @@
 
 .home-page .home-process .list-content {
   gap: var(--spacing-8);
-}
-
-.home-page main > .section.home-form > .form-wrapper {
-  max-width: calc(
-    var(--grid-max-width) + var(--spacing-96) + 2 * var(--grid-margin-mobile)
-  );
 }
 
 @media (width < 900px) {
@@ -814,17 +835,14 @@
     flex-basis: calc((100% - 2 * var(--spacing-24)) / 3);
   }
 
-  .home-page .reviews.contained::after {
-    display: block;
-    width: 160px;
-    height: 100%;
-    background: var(--bg-page);
-    opacity: 1;
+  /* Fade the right edge with a mask, so it works on the gradient page background. */
+  .home-page .reviews.contained .reviews-track {
+    mask-image: linear-gradient(90deg, #000 calc(100% - 160px), transparent);
   }
 
-  .home-page .reviews.contained:focus-within::after,
-  .home-page .reviews.contained.has-interacted::after {
-    opacity: 0;
+  .home-page .reviews.contained:focus-within .reviews-track,
+  .home-page .reviews.contained.has-interacted .reviews-track {
+    mask-image: none;
   }
 
   .home-page .reviews.contained .reviews-card-date {

@@ -272,3 +272,10 @@ main > .section > .client-logos-wrapper:has(.client-logos.compact) {
   outline: var(--size-border-strong) solid var(--accent-blue-light);
   outline-offset: var(--spacing-4);
 }
+
+/* Default composition (formerly scoped to page templates); keep last so it refines the base rules above. */
+/* stylelint-disable no-descending-specificity */
+.client-logos.strip {
+  padding: 0;
+}
+/* stylelint-enable no-descending-specificity */

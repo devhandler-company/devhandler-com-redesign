@@ -386,10 +386,6 @@ body.service-detail-page main > .section {
     padding-bottom: var(--spacing-80);
   }
 
-  .service-detail-page main > .service-detail-form > .form-wrapper {
-    max-width: calc(var(--grid-max-width) + var(--spacing-96) + 2 * var(--grid-margin-mobile));
-  }
-
   .service-detail-page .form-card {
     display: grid;
     grid-template-columns: minmax(0, 428fr) minmax(0, 578fr);

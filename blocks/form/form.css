@@ -401,3 +401,29 @@ main .form-thank-you p {
   .form.labelled .form-submit { padding-inline: var(--spacing-32); }
   .form.labelled .form-schedule { padding-inline: var(--spacing-32); }
 }
+
+/* Default composition (formerly scoped to page templates); keep last so it refines the base rules above. */
+/* stylelint-disable no-descending-specificity */
+.form.labelled {
+  --form-supporting-text: var(--text-placeholder);
+}
+
+.form .form-eyebrow {
+  color: var(--action-primary);
+}
+
+@media (width < 900px) {
+  .form.labelled .form-card {
+    padding: var(--spacing-24);
+    gap: var(--spacing-24);
+  }
+
+  .form.labelled .form-intro {
+    gap: var(--spacing-24);
+  }
+
+  .form.labelled .form-panel {
+    gap: var(--spacing-24);
+  }
+}
+/* stylelint-enable no-descending-specificity */

@@ -129,12 +129,6 @@
   padding-block: var(--spacing-64);
 }
 
-.our-work-page main > .section.our-work-form > .form-wrapper {
-  max-width: calc(
-    var(--grid-max-width) + var(--spacing-96) + 2 * var(--grid-margin-mobile)
-  );
-}
-
 @media (width >= 600px) {
   .our-work-page .our-work-solutions .client-logos.compact .client-logos-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));

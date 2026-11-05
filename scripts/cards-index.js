@@ -3,6 +3,8 @@ import {
   loadIndex, matchingArticles, normalizeArticles, safeURL, sortArticles,
 } from './blog-index.js';
 
+const DEFAULT_SOURCE = '/blog/query-index.json';
+
 function node(tag, text, className) {
   const element = document.createElement(tag);
   if (text) element.textContent = text;
@@ -49,7 +51,8 @@ export default async function decorate(block, createCard) {
   if (block.querySelector(':scope > .cards-index-content')) return;
   block.classList.add('article-listing');
   const config = configOf(block);
-  const source = safeURL(config.queryindexlink || config.source || '/blog/query-index.json', document.baseURI);
+  const indexPath = config.queryindexlink || config.source || DEFAULT_SOURCE;
+  const source = safeURL(indexPath, document.baseURI);
   const requestedSize = Number(config.countofarticles || config.pagesize || 6);
   const batchSize = Number.isInteger(requestedSize) && requestedSize > 0
     ? Math.min(requestedSize, 100) : 6;
@@ -192,4 +195,32 @@ export default async function decorate(block, createCard) {
   }
   retry.addEventListener('click', load);
   await load();
+}
+
+/**
+ * Latest articles teaser: the N newest index records as plain Insight cards,
+ * without filters, sorting or pagination. Config rows are optional.
+ */
+export async function decorateLatest(block, createCard) {
+  const config = configOf(block);
+  const indexPath = config.queryindexlink || config.source || DEFAULT_SOURCE;
+  const source = safeURL(indexPath, document.baseURI);
+  const requested = Number(config.countofarticles || config.pagesize || 3);
+  const count = Number.isInteger(requested) && requested > 0 ? Math.min(requested, 12) : 3;
+  const list = node('ul', '', 'cards-list');
+  list.setAttribute('role', 'list');
+  block.replaceChildren(list);
+  try {
+    if (!source) throw new Error('Invalid index URL.');
+    const records = await loadIndex(source);
+    const articles = sortArticles(normalizeArticles(records, source, {
+      template: config.pagetemplate, prefix: config.pathprefix || '/blog/',
+    })).slice(0, count);
+    const rows = buildBlock('cards', articles.map(cardRow));
+    list.append(...[...rows.children].map((row) => createCard(row)).filter(Boolean));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Latest articles loading failed', error);
+  }
+  if (!list.children.length) block.hidden = true;
 }

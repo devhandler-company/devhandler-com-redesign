@@ -1,6 +1,6 @@
 .cta {
   box-sizing: border-box;
-  padding: var(--spacing-40) var(--spacing-24);
+  padding: var(--spacing-32);
   border-radius: var(--radius-lg);
   background: linear-gradient(105deg, var(--action-primary), var(--bg-hero-dark));
   color: var(--text-primary);
@@ -34,19 +34,22 @@
 }
 
 .cta a.button:any-link {
-  display: block;
+  display: inline-flex;
   box-sizing: border-box;
   max-width: 100%;
   min-height: var(--size-control-lg);
   margin: 0;
   padding: calc(var(--spacing-16) - var(--size-border-strong)) var(--spacing-32);
   font-family: var(--type-label-lg-font-family);
-  font-size: var(--type-label-lg-font-size);
+  font-size: var(--type-label-md-font-size);
   font-weight: var(--type-label-lg-font-weight);
   line-height: 1.2;
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
+  align-items: center;
+  justify-content: center;
+  border-width: var(--size-border);
 }
 
 .cta a.button.primary:any-link {
@@ -94,5 +97,18 @@
   .cta p {
     font-size: var(--type-body-lg-font-size);
     line-height: var(--type-body-lg-line-height);
+  }
+}
+
+/* Shared heading sizes; keep after the base :is(h2, h3) rule it refines. */
+.cta h2 {
+  font-size: var(--type-display-subsection-font-size);
+  line-height: var(--page-section-line-height);
+}
+
+@media (width >= 900px) {
+  .cta h2 {
+    font-size: var(--type-display-section-font-size);
+    line-height: var(--type-display-section-line-height);
   }
 }

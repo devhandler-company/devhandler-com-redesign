@@ -49,6 +49,24 @@ card, including its media area. It remains a single keyboard target with a focus
 ring around the card, and retains normal open-in-new-tab behavior. Unlinked
 authored titles remain static until an article URL is supplied.
 
+## Latest articles variant
+
+Name the block `Cards (insight, latest)`. It shows the newest articles from the
+blog query index as regular Insight cards, with no topic filters, sort button or
+Load more. Use it for teaser sections such as "From the DevHandler blog" on Home.
+
+The table may contain only its heading row. Optional labelled rows:
+
+| Label | Value | Default |
+| --- | --- | --- |
+| countOfArticles | Number of cards (1–12) | 3 |
+| queryIndexLink | Index URL | /blog/query-index.json |
+| pageTemplate | Only records with this template | any |
+| Path prefix | Article folder | /blog/ |
+
+Articles are ordered newest first by `lastModified`. If the index fails to load
+or returns no matching articles, the block is hidden instead of showing an empty grid.
+
 ## Featured post variant
 
 Name the block `Cards (featured)`. The first authored row is normally the only featured card.
