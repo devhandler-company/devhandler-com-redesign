@@ -320,10 +320,9 @@ body.service-detail-page main > .section {
 
   .service-detail-page .cards.service .cards-card {
     display: flex;
-    min-height: calc(var(--spacing-160) * 3);
   }
 
-  .service-detail-page .cards.service .cards-service-link { margin-top: 0; }
+  .service-detail-page .cards.service .cards-service-link { margin-top: auto; }
 
   .service-detail-page main > .service-detail-hero {
     box-sizing: border-box;
