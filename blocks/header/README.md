@@ -30,7 +30,7 @@ Desktop navigation
 - Blog -> /blog/
 - Our Work -> /our-work
 - About Us -> https://www.devhandler.com/about
-- Contact us -> /#contact-us-form [bold]
+- Contact us -> #contact-us-form [bold]
 ---
 Mobile navigation
 - Adobe Services -> /services
@@ -38,11 +38,16 @@ Mobile navigation
 - Blog -> /blog
 - Our Work -> /our-work
 - About Us -> https://www.devhandler.com/about
-- Contact us -> /#contact-us-form [bold]
+- Contact us -> #contact-us-form [bold]
 ---
 Metadata
 Robots | noindex, nofollow
 ```
+
+The contact action is authored as the in-page anchor `#contact-us-form`. The
+header repoints it to the form section on the current page (template anchors
+differ, for example `services-contact`) and hides it on pages without a form,
+such as `no-form` pages.
 
 The mobile menu locks page scrolling and makes the main/footer inert while open.
 Tab and Shift+Tab stay inside the menu; Escape closes it and returns focus to the

@@ -374,6 +374,7 @@ async function loadLazy(doc) {
   const contactForm = loadContactForm(main);
   await loadSections(main);
   await contactForm;
+  document.dispatchEvent(new CustomEvent('contact-form-ready'));
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
@@ -391,7 +392,7 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   import('./consent-check.js');
-  // load anything that can be postponed to the latest here
+  window.setTimeout(() => import('./delayed.js'), 3000);
 }
 
 async function loadPage() {

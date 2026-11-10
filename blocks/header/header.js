@@ -127,7 +127,8 @@ function ensureSafeLinks(nav) {
       link.replaceWith(text);
       return;
     }
-    if (linkUrl.origin === currentUrl.origin && linkUrl.pathname === currentUrl.pathname) {
+    if (!linkUrl.hash
+      && linkUrl.origin === currentUrl.origin && linkUrl.pathname === currentUrl.pathname) {
       link.setAttribute('aria-current', 'page');
     }
   });
@@ -218,6 +219,34 @@ function decorateNavigation(navSections, navTools, variant) {
     item.classList.add('nav-item');
     const submenu = item.querySelector(':scope > ul');
     if (submenu) createSubmenuToggle(item, submenu, index, variant);
+  });
+}
+
+const CONTACT_ANCHOR = 'contact-us-form';
+
+/** Anchor id of the form section on this page, or '' when the page has no form. */
+function getContactFormId() {
+  const form = document.querySelector('main .form');
+  if (!form) return '';
+  const section = form.closest('.section') || form;
+  if (!section.id) section.id = CONTACT_ANCHOR;
+  return section.id;
+}
+
+/**
+ * Points the authored contact action at the form on the current page and hides it
+ * on pages without one. Safe to run again once the shared form fragment has loaded.
+ */
+function syncContactActions(nav) {
+  const formId = getContactFormId();
+  nav.querySelectorAll('.nav-action').forEach((item) => {
+    const link = item.querySelector('a');
+    if (!link) return;
+    const authored = link.getAttribute('href') || '';
+    if (!link.dataset.contactAction && !authored.endsWith(`#${CONTACT_ANCHOR}`)) return;
+    link.dataset.contactAction = 'true';
+    item.hidden = !formId;
+    if (formId) link.setAttribute('href', `#${formId}`);
   });
 }
 
@@ -501,6 +530,8 @@ export default async function decorate(block) {
   decorateNavigation(desktopSections, desktopTools, 'desktop');
   decorateNavigation(mobileSections, mobileTools, 'mobile');
   ensureSafeLinks(nav);
+  syncContactActions(nav);
+  document.addEventListener('contact-form-ready', () => syncContactActions(nav), { once: true });
 
   const hamburger = document.createElement('div');
   const menuButton = document.createElement('button');

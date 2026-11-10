@@ -400,6 +400,64 @@ function decorateDefault(block) {
   block.replaceChildren(list);
 }
 
+/** Counts every number in a metric up from zero once the metric scrolls into view. */
+function animateMetrics(block) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const values = block.querySelectorAll('.cards-case-metadata dd');
+  if (!values.length || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
+      observer.unobserve(target);
+      const text = target.textContent;
+      const numbers = [...text.matchAll(/\d[\d,]*(?:\.\d+)?/g)];
+      if (!numbers.length) {
+        // Letters only: scramble them, then settle left to right on the real text.
+        const letters = 'abcdefghijklmnopqrstuvwxyz';
+        const scrambleDuration = 900;
+        const scrambleBegin = performance.now();
+        const scramble = (now) => {
+          const done = Math.min((now - scrambleBegin) / scrambleDuration, 1);
+          const settled = Math.floor(done * text.length);
+          target.textContent = [...text].map((char, i) => {
+            if (i < settled || !/\p{L}/u.test(char)) return char;
+            const random = letters[Math.floor(Math.random() * letters.length)];
+            return char === char.toUpperCase() ? random.toUpperCase() : random;
+          }).join('');
+          if (done < 1) requestAnimationFrame(scramble);
+          else target.textContent = text;
+        };
+        requestAnimationFrame(scramble);
+        return;
+      }
+      const targets = numbers.map(([match]) => Number(match.replace(/,/g, '')));
+      const render = (progress) => {
+        let index = 0;
+        target.textContent = text.replace(/\d[\d,]*(?:\.\d+)?/g, (match) => {
+          const decimals = match.includes('.') ? match.split('.')[1].length : 0;
+          const value = (targets[index] * progress);
+          index += 1;
+          return value.toLocaleString('en-US', {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals,
+            useGrouping: match.includes(','),
+          });
+        });
+      };
+      const duration = 1200;
+      const begin = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - begin) / duration, 1);
+        render(1 - (1 - progress) ** 3);
+        if (progress < 1) requestAnimationFrame(tick);
+        else target.textContent = text;
+      };
+      render(0);
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  values.forEach((value) => observer.observe(value));
+}
+
 export default async function decorate(block) {
   if (block.querySelector(':scope > .cards-list, :scope > .cards-index-content')) return;
   const variant = CARD_VARIANTS.find((name) => block.classList.contains(name));
@@ -442,4 +500,5 @@ export default async function decorate(block) {
     default:
       decorateDefault(block);
   }
+  if (variant === 'case') animateMetrics(block);
 }

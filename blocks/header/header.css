@@ -95,6 +95,10 @@ header nav[data-expanded='true'] {
   );
 }
 
+header .nav-action[hidden] {
+  display: none;
+}
+
 header nav p,
 header nav ul {
   margin: 0;

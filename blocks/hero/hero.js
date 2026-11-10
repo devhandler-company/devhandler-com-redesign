@@ -204,6 +204,20 @@ export default function decorate(block) {
   if (trust.hasChildNodes()) block.append(trust);
   // Do not make EDS wait for the decorative background before loading fonts/header.
   if (backgroundImage) block.append(background);
+  // the live contour field draws here once scripts/delayed.js has loaded
+  if (block.classList.contains('home')) {
+    const field = document.createElement('canvas');
+    field.className = 'hero-field';
+    field.setAttribute('aria-hidden', 'true');
+    block.append(field);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const start = () => (window.requestIdleCallback || window.setTimeout)(() => {
+        import('../../scripts/field.js').then(({ default: draw }) => draw(field));
+      }, { timeout: 1500 });
+      if (document.readyState === 'complete') start();
+      else window.addEventListener('load', start, { once: true });
+    }
+  }
   block.querySelectorAll('a[target="_blank"]').forEach((link) => {
     link.relList.add('noopener', 'noreferrer');
   });

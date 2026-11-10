@@ -115,6 +115,8 @@
   flex: 1;
   flex-direction: column;
   min-width: 0;
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
   border: var(--size-border) solid var(--border-dark);
   border-radius: var(--radius-md);
@@ -254,6 +256,7 @@
   color: var(--accent-mint);
   font-family: var(--font-family-display);
   font-size: var(--type-display-subsection-font-size);
+  font-variant-numeric: tabular-nums;
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--type-body-emphasis-xl-letter-spacing);
   line-height: var(--type-display-subsection-line-height);
@@ -1070,4 +1073,24 @@
     gap: var(--spacing-24);
   }
 }
+
+/* cursor light: a layer between the card background and its content */
+.cards:is(.case, .service, .insight, .featured, .model) .cards-card::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(22rem circle at var(--mx, 50%) var(--my, 0%), rgb(0 99 248 / 22%), transparent 70%);
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+  pointer-events: none;
+}
+
+.cards:is(.case, .service, .insight, .featured, .model) .cards-card:hover::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cards:is(.case, .service, .insight, .featured, .model) .cards-card::after { transition: none; }
+}
+
 /* stylelint-enable no-descending-specificity */
