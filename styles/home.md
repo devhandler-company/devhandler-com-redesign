@@ -9,7 +9,7 @@ Google Docs conversion can merge tables that touch. After Preview, check that
 
 | Style | Blocks/content |
 | --- | --- |
-| home-hero | Hero (home), Content and four Trust rows; omit Background/Badges |
+| home-hero | Hero (home), Content, three Stat rows and Adobe/Clutch Trust rows; omit Background/Badges |
 | home-work | Section Intro, Cards (case, placeholder-media) |
 | home-clients | Client Logos (roster) |
 | home-services | Section Intro, Cards (service) |
@@ -24,8 +24,12 @@ Google Docs conversion can merge tables that touch. After Preview, check that
 `contained` reviews use the existing scroll/drag/arrow-key carousel without
 decorative loop copies or an overlay button. The desktop edge hint clears on
 focus or interaction, making every complete testimonial available.
-Header and Footer come from their shared documents. Layout follows the October
-2026 desktop/mobile originals; unknown copy remains an explicit placeholder.
+Header and Footer come from their shared documents. The hero proof composition
+follows the November 2026 desktop/mobile originals, with readable metric labels
+on a dark mobile panel. Existing numeric Trust rows also render as metrics;
+add the missing Adobe / Silver Partner Trust row to the current document.
+See the [Hero authoring table](../blocks/hero/README.md#home-statistics-and-trust-badges).
+Other sections keep their existing composition; unknown copy remains explicit.
 The office map uses `/icons/office-map.svg`, supplied from the design and kept unchanged.
 CSS accounts for its export margins and frames Europe on mobile as in the design.
 The home loader replaces the office picture's source with this vector asset;

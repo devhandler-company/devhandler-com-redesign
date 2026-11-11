@@ -1,8 +1,65 @@
 # Hero
 
-Home, Services, Blog and Case Study hero variants with one Google Docs table for every viewport. Content remains
-in the document; JavaScript only groups it for layout. No animation, video,
-carousel, external API, or cross-block dependency is required.
+Home, Services, Blog, About and Case Study hero variants with one Google Docs table
+for every viewport. Content remains in the document; JavaScript groups it for
+layout. The existing Home contour animation remains independent of its content.
+
+## Home statistics and trust badges
+
+Keep the existing **Hero (home)** table and its Content row. Below Content,
+use `Stat` rows with value, label and optional explanation in separate cells.
+Trust rows hold a bold brand name followed by a normal description paragraph.
+For a four-column native Docs table, merge the last three cells of Content and
+Trust rows; only Stat rows need the separate cells shown below.
+Merge the whole first row and name it **Hero (home)**. The column headings in
+the example below are explanatory; do not add them as a row in the native Doc.
+
+| Row label | Value / content | Metric label | Optional explanation |
+| --- | --- | --- | --- |
+| Content | Existing H1, description and CTA paragraphs (merged content cells) | | |
+| Stat | 25+ | projects | |
+| Stat | 8 | certifications | Adobe AEM Sites, held by our engineers |
+| Stat | 35+ | specialists | Engineering, QA, DevOps and delivery |
+| Trust | **Adobe**, then a separate paragraph: Silver Partner (merged content cells) | | |
+| Trust | **Clutch**, then a separate paragraph: 5.0 rating (merged content cells) | | |
+
+These figures and credential labels come from the November 2026 design.
+They remain authored claims. The block does not insert a missing Adobe claim
+or invent metrics. An optional explanation can be omitted; a Stat row without
+both a value and label is skipped. Extra Stat rows wrap on desktop. A document
+with only metrics, only Trust rows, or neither remains readable.
+Paragraphs, soft breaks and nonbreaking spaces inside metric cells are
+normalized to spaces, preserving words without carrying rich formatting into metrics.
+
+For compatibility, existing Trust rows whose bold title starts with a number,
+such as **25+ projects**, are rendered as metrics on Home. Their existing
+explanation paragraphs are preserved. This includes the old `Trust (desktop)`
+row, whose metric now appears at every width. Do not duplicate a legacy metric
+as a Stat row: either keep the existing numeric Trust rows or replace them.
+Other hero variants retain their existing Trust handling.
+
+With metrics present, Adobe and Clutch Trust titles use the existing
+`badge-adobe-silver.webp` and `badge-clutch.webp` assets automatically. An
+authored inline image takes precedence. The generated logos have empty alt
+text because the adjacent authored brand title supplies their accessible name.
+Keep titles and descriptions in native Docs paragraphs, with the title bold.
+Put an optional custom logo in its own paragraph, with appropriate alt text.
+Native Docs picture wrappers and optional image links remain supported; a
+linked image needs meaningful alt text so its destination has an accessible name.
+
+Desktop uses three metrics across a bordered panel and a badge column on the
+right. Mobile stacks the metrics, then places badges in two columns. The
+mobile panel intentionally retains the desktop dark surface and readable
+labels: the supplied mobile export has a white panel with invisible labels.
+Values and labels form a definition list; static metrics add no keyboard stops.
+Long text wraps, and forced-colors mode retains visible figures.
+
+The current preview document already has the three figures in numeric Trust
+rows but has no Adobe Trust row. Add **Adobe / Silver Partner** before the
+Clutch row to complete the composition, or replace the proof rows with the
+table above. Convert/import as a native Google Doc, Preview, and inspect the
+actual `/index.plain.html`. A local authoring sample is not proof of that
+native Docs roundtrip. Code and content ship separately.
 
 ## Services variant
 
@@ -85,10 +142,9 @@ the Services mobile layout; on desktop it gives breadcrumbs more space above
 and lets the title/lead use the content grid width. Existing Services appearance
 stays the same unless its background property is explicitly overridden.
 
-Local preview: `/test/blog-hero.html`. It uses EDS section/block decoration and
-the real Hero module with the above content, and is excluded from publication by
-the existing `test/*` entry in `.hlxignore`. It does not prove a Google Docs
-round-trip; after authoring, preview the native Doc and inspect its plain HTML.
+For local checks, use the AEM development proxy with previewed Blog content.
+After authoring, preview the native Doc and inspect its plain HTML; a local
+sample alone does not prove a Google Docs roundtrip.
 
 ## Case Study variant
 
@@ -113,7 +169,7 @@ lazy loading; manually authored eager images may request before decoration.
 The [Case Study authoring guide](../../styles/case-study.md) describes the full
 page, document metadata and content approval requirements.
 
-## Authoring
+## Legacy Home authoring
 
 Create a two-column table headed **Hero (home)** (merge the heading cells). Each row
 below has a plain-text label in the first cell and content in the second:
@@ -187,16 +243,16 @@ uploading an HTML/DOCX file alone does not publish EDS content.
 
 ## Responsive and accessibility contract
 
-- Current Home document: omit Background and Badges. The October 2026 layout
-  uses the page gradient and text trust items. Legacy asset rows remain supported
-  by decoration, but are hidden by the current page composition.
-- Mobile: heading, description, stacked CTAs and a two-column trust grid.
-- Desktop: heading, copy and CTAs on the 1200 px grid, then four trust columns.
+- Current Home document: omit Background and Badges. The page uses its existing
+  gradient/contour background, metrics and authored Trust rows. Legacy asset
+  rows remain supported by decoration but hidden by the page composition.
+- Mobile: heading, description, stacked CTAs, vertical statistics and two badge columns.
+- Desktop: heading, copy and CTAs on the 1200 px grid, then statistics and badges.
 - Content determines height; longer text wraps without fixed-height clipping.
 - Links retain authored URLs, labels and `rel`; new-tab links get `noopener
   noreferrer`. Keyboard focus is visible. There are no scripted key handlers.
-- The background is decorative. Provide meaningful alt text for badges; trust
-  markers are decorative CSS squares, matching the supplied design.
+- The background is decorative. Authored badge images need appropriate alt text;
+  generated brand logos are decorative alongside their visible brand names.
 - Reading order matches content order, with no duplicated responsive links.
 
 ## Verification and rollout

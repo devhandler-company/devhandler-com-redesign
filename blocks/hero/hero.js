@@ -1,5 +1,36 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
+/** Native Docs paragraphs and soft breaks must separate words in plain-text cells. */
+function cellText(cell) {
+  if (!cell) return '';
+  const copy = cell.cloneNode(true);
+  copy.querySelectorAll('br').forEach((br) => br.replaceWith(' '));
+  copy.querySelectorAll('p').forEach((paragraph) => paragraph.after(' '));
+  return copy.textContent.trim().replace(/\s+/g, ' ');
+}
+
+/** Keep the value, label and optional explanation together in the reading order. */
+function appendStat(list, value, label, detail = '') {
+  if (!value || !label) return;
+  const item = document.createElement('div');
+  item.className = 'hero-stat';
+  const term = document.createElement('dt');
+  term.textContent = label;
+  const description = document.createElement('dd');
+  const number = document.createElement('span');
+  number.className = 'hero-stat-value';
+  number.textContent = value;
+  description.append(number);
+  if (detail) {
+    const explanation = document.createElement('span');
+    explanation.className = 'hero-stat-detail';
+    explanation.textContent = detail;
+    description.append(explanation);
+  }
+  item.append(term, description);
+  list.append(item);
+}
+
 /** One authored hero, with layout differences handled by CSS. */
 export default function decorate(block) {
   const textHero = ['services', 'blog', 'about'].some((name) => block.classList.contains(name));
@@ -17,6 +48,8 @@ export default function decorate(block) {
   const badges = document.createElement('div');
   badges.className = 'hero-badges';
   const trust = document.createElement('ul');
+  const stats = document.createElement('dl');
+  stats.className = 'hero-stats';
   const media = document.createElement('div');
   media.className = 'hero-media';
   const metadata = document.createElement('div');
@@ -78,6 +111,11 @@ export default function decorate(block) {
           tags.append(item);
         });
       });
+    } else if (block.classList.contains('home')
+      && (label === 'stat' || (cells.length === 1 && cellText(cells[0]).toLowerCase() === 'stat'))) {
+      legacy = false;
+      const detail = cells.slice(3).map(cellText).filter(Boolean).join(' ');
+      appendStat(stats, cellText(cells[1]), cellText(cells[2]), detail);
     } else if (Object.hasOwn(targets, label)) {
       legacy = false;
       cells.slice(1).forEach((cell) => targets[label].append(...cell.childNodes));
@@ -93,7 +131,15 @@ export default function decorate(block) {
           para.replaceChildren(createOptimizedPicture(path, '', false, [{ width: '240' }]));
         }
       });
-      if (item.textContent.trim() || item.querySelector('img')) trust.append(item);
+      // Existing home documents put "25+ projects" etc. in bold Trust titles.
+      const title = item.querySelector('strong');
+      const metric = block.classList.contains('home')
+        && cellText(title).match(/^(\d[\d.,]*[+%]?)\s+(.+)$/);
+      if (metric) {
+        const detail = item.cloneNode(true);
+        detail.querySelector('strong').remove();
+        appendStat(stats, metric[1], metric[2], cellText(detail));
+      } else if (item.textContent.trim() || item.querySelector('img')) trust.append(item);
     } else {
       // Retain the original single-cell EDS hero and unknown authored content.
       cells.forEach((cell) => content.append(...cell.childNodes));
@@ -208,7 +254,29 @@ export default function decorate(block) {
     block.append(media);
   }
   if (badges.textContent.trim() || badges.querySelector('img')) block.append(badges);
-  if (trust.hasChildNodes()) block.append(trust);
+  if (stats.hasChildNodes()) {
+    const proof = document.createElement('div');
+    proof.className = 'hero-proof';
+    stats.style.setProperty('--hero-stat-columns', Math.min(3, stats.children.length));
+    proof.append(stats);
+    if (trust.hasChildNodes()) {
+      trust.querySelectorAll(':scope > li').forEach((item) => {
+        const title = cellText(item.querySelector('strong')).toLowerCase();
+        const logo = title === 'adobe' ? 'badge-adobe-silver.webp' : title === 'clutch' && 'badge-clutch.webp';
+        if (logo && !item.querySelector('img')) {
+          // The adjacent authored title supplies the accessible name of this logo.
+          item.prepend(createOptimizedPicture(`/blocks/hero/${logo}`, '', false, [{ width: '120' }]));
+        }
+        item.querySelectorAll(':scope > p').forEach((paragraph) => {
+          if (paragraph.querySelector('img') && !paragraph.textContent.trim()) {
+            paragraph.classList.add('hero-trust-image');
+          }
+        });
+      });
+      proof.append(trust);
+    }
+    block.append(proof);
+  } else if (trust.hasChildNodes()) block.append(trust);
   // Do not make EDS wait for the decorative background before loading fonts/header.
   if (backgroundImage) block.append(background);
   // the live contour field draws here once scripts/delayed.js has loaded
