@@ -6,7 +6,7 @@
 }
 
 /* Preserve the original EDS hero outside the authored home/services/blog/case variants. */
-.hero:where(:not(.home, .services, .blog, .case)) {
+.hero:where(:not(.home, .services, .blog, .case, .about)) {
   position: relative;
   isolation: isolate;
   display: grid;
@@ -21,7 +21,7 @@
   color: var(--text-primary);
 }
 
-.hero:where(:not(.home, .services, .blog, .case))::after {
+.hero:where(:not(.home, .services, .blog, .case, .about))::after {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -29,16 +29,16 @@
   content: '';
 }
 
-.hero:where(:not(.home, .services, .blog, .case)) > div,
-.hero:where(:not(.home, .services, .blog, .case)) > div > div {
+.hero:where(:not(.home, .services, .blog, .case, .about)) > div,
+.hero:where(:not(.home, .services, .blog, .case, .about)) > div > div {
   display: contents;
 }
 
-.hero:where(:not(.home, .services, .blog, .case)) p {
+.hero:where(:not(.home, .services, .blog, .case, .about)) p {
   margin: 0;
 }
 
-.hero:where(:not(.home, .services, .blog, .case)) h1 {
+.hero:where(:not(.home, .services, .blog, .case, .about)) h1 {
   max-width: 18ch;
   margin: 0;
   color: var(--text-primary);
@@ -50,14 +50,14 @@
   text-wrap: balance;
 }
 
-.hero:where(:not(.home, .services, .blog, .case)) picture {
+.hero:where(:not(.home, .services, .blog, .case, .about)) picture {
   position: absolute;
   z-index: -2;
   inset: 0;
   box-sizing: border-box;
 }
 
-.hero:where(:not(.home, .services, .blog, .case)) img {
+.hero:where(:not(.home, .services, .blog, .case, .about)) img {
   display: block;
   width: 100%;
   height: 100%;
@@ -65,7 +65,7 @@
   object-position: center;
 }
 
-main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
+main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog, .about)) {
   max-width: none;
   padding: 0;
 }
@@ -82,8 +82,8 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   text-align: center;
 }
 
-.hero:is(.services, .blog) p,
-.hero:is(.services, .blog) h1 {
+.hero:is(.services, .blog, .about) p,
+.hero:is(.services, .blog, .about) h1 {
   margin: 0;
   overflow-wrap: anywhere;
 }
@@ -157,7 +157,7 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   margin-top: var(--spacing-24);
 }
 
-.hero:is(.home, .services, .blog) .hero-actions a.button {
+.hero:is(.home, .services, .blog, .about) .hero-actions a.button {
   min-height: var(--size-control-lg);
   padding: var(--spacing-16) var(--spacing-24);
   border: var(--size-border) solid var(--action-ghost-border);
@@ -174,30 +174,30 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   text-decoration: none;
 }
 
-.hero:is(.home, .services, .blog) .hero-actions a.primary {
+.hero:is(.home, .services, .blog, .about) .hero-actions a.primary {
   border-color: var(--action-primary);
   background: var(--action-primary);
 }
 
-.hero:is(.home, .services, .blog) .hero-actions a.primary:hover {
+.hero:is(.home, .services, .blog, .about) .hero-actions a.primary:hover {
   border-color: var(--action-primary-hover);
   background: var(--action-primary-hover);
 }
 
-.hero:is(.home, .services, .blog) .hero-actions a.primary:active {
+.hero:is(.home, .services, .blog, .about) .hero-actions a.primary:active {
   background: var(--action-primary-active);
 }
 
-.hero:is(.home, .services, .blog) .hero-actions a.secondary:hover {
+.hero:is(.home, .services, .blog, .about) .hero-actions a.secondary:hover {
   border-color: var(--action-ghost-border-hover);
   background: var(--bg-hover-row);
 }
 
-.hero:is(.home, .services, .blog) .hero-actions a.secondary:active {
+.hero:is(.home, .services, .blog, .about) .hero-actions a.secondary:active {
   background: var(--bg-surface-2);
 }
 
-.hero:is(.home, .services, .blog) a:focus-visible {
+.hero:is(.home, .services, .blog, .about) a:focus-visible {
   outline: var(--size-border-strong) solid var(--focus-ring);
   outline-offset: var(--spacing-4);
 }
@@ -297,11 +297,11 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
 }
 
 @media (width >= 900px) {
-  .hero:where(:not(.home, .services, .blog)) {
+  .hero:where(:not(.home, .services, .blog, .about)) {
     min-height: 640px;
   }
 
-  .hero:where(:not(.home, .services, .blog))::after {
+  .hero:where(:not(.home, .services, .blog, .about))::after {
     background: linear-gradient(90deg, var(--bg-hero-dark) 0%, transparent 78%);
   }
 
@@ -363,7 +363,7 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
     margin-top: var(--spacing-32);
   }
 
-  .hero:is(.home, .services, .blog) .hero-actions a.button {
+  .hero:is(.home, .services, .blog, .about) .hero-actions a.button {
     padding-inline: var(--spacing-32);
   }
 
@@ -384,7 +384,7 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   }
 }
 
-.hero:is(.services, .blog) {
+.hero:is(.services, .blog, .about) {
   box-sizing: border-box;
   padding: var(--spacing-40) var(--grid-margin-mobile) var(--spacing-48);
   background: var(--hero-background-color, var(--bg-hero-dark));
@@ -392,14 +392,14 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   text-align: left;
 }
 
-.hero:is(.services, .blog) .hero-content {
+.hero:is(.services, .blog, .about) .hero-content {
   max-width: var(--grid-max-width);
   margin-inline: auto;
 }
 
-.hero:is(.services, .blog) .hero-breadcrumbs { margin-bottom: var(--spacing-40); }
+.hero:is(.services, .blog, .about) .hero-breadcrumbs { margin-bottom: var(--spacing-40); }
 
-.hero:is(.services, .blog) .hero-breadcrumbs ol {
+.hero:is(.services, .blog, .about) .hero-breadcrumbs ol {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-12);
@@ -410,19 +410,19 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   font-size: var(--type-body-xs-font-size);
 }
 
-.hero:is(.services, .blog) .hero-breadcrumbs li + li::before {
+.hero:is(.services, .blog, .about) .hero-breadcrumbs li + li::before {
   content: '/';
   margin-right: var(--spacing-12);
 }
 
-.hero:is(.services, .blog) .hero-breadcrumbs a { color: var(--text-secondary); }
+.hero:is(.services, .blog, .about) .hero-breadcrumbs a { color: var(--text-secondary); }
 
-.hero:is(.services, .blog) .hero-breadcrumbs a:focus-visible {
+.hero:is(.services, .blog, .about) .hero-breadcrumbs a:focus-visible {
   outline: var(--size-border-strong) solid var(--focus-ring);
   outline-offset: var(--spacing-4);
 }
 
-.hero:is(.services, .blog) .hero-eyebrow {
+.hero:is(.services, .blog, .about) .hero-eyebrow {
   margin-bottom: var(--spacing-24);
   color: var(--accent-blue-light);
   font-family: var(--type-label-overline-font-family);
@@ -433,7 +433,7 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   text-transform: var(--type-label-overline-text-transform);
 }
 
-.hero:is(.services, .blog) h1 {
+.hero:is(.services, .blog, .about) h1 {
   max-width: 760px;
   font-family: var(--type-display-subsection-font-family);
   font-size: var(--type-display-subsection-font-size);
@@ -442,7 +442,7 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   letter-spacing: var(--type-display-subsection-letter-spacing);
 }
 
-.hero:is(.services, .blog) .hero-content > p:not(.hero-eyebrow) {
+.hero:is(.services, .blog, .about) .hero-content > p:not(.hero-eyebrow) {
   max-width: 720px;
   margin-top: var(--spacing-24);
   color: var(--text-secondary);
@@ -452,7 +452,7 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   line-height: var(--type-body-sm-line-height);
 }
 
-.hero:is(.services, .blog) .hero-actions {
+.hero:is(.services, .blog, .about) .hero-actions {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
@@ -460,30 +460,30 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
 }
 
 @media (width >= 600px) {
-  .hero:is(.services, .blog) h1 {
+  .hero:is(.services, .blog, .about) h1 {
     font-size: var(--type-display-section-font-size);
     line-height: var(--type-display-section-line-height);
     letter-spacing: var(--type-display-section-letter-spacing);
   }
 
-  .hero:is(.services, .blog) .hero-actions {
+  .hero:is(.services, .blog, .about) .hero-actions {
     flex-flow: row wrap;
     gap: var(--spacing-16);
   }
 }
 
 @media (width >= 900px) {
-  .hero:is(.services, .blog) {
+  .hero:is(.services, .blog, .about) {
     padding: var(--spacing-20) var(--grid-margin-mobile) var(--spacing-80);
   }
 
-  .hero:is(.services, .blog) h1 {
+  .hero:is(.services, .blog, .about) h1 {
     font-size: var(--type-display-hero-font-size);
     line-height: var(--type-display-hero-line-height);
     letter-spacing: var(--type-display-hero-letter-spacing);
   }
 
-  .hero:is(.services, .blog) .hero-content > p:not(.hero-eyebrow) {
+  .hero:is(.services, .blog, .about) .hero-content > p:not(.hero-eyebrow) {
     font-size: var(--type-body-lg-font-size);
     line-height: var(--type-body-lg-line-height);
   }
@@ -497,8 +497,8 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
 }
 
 /* Blog shares the Services text hero; only its composition differs. */
-.hero.blog h1,
-.hero.blog .hero-content > p:not(.hero-eyebrow) {
+.hero:is(.blog, .about) h1,
+.hero:is(.blog, .about) .hero-content > p:not(.hero-eyebrow) {
   max-width: none;
 }
 
@@ -568,3 +568,82 @@ main > .section > .hero-wrapper:has(> .hero:is(.home, .services, .blog)) {
   }
 }
 /* stylelint-enable no-descending-specificity */
+
+/* About: the Blog text hero plus a row of partner/proof badges below the copy. */
+/* stylelint-disable no-descending-specificity */
+.hero.about {
+  padding-bottom: var(--spacing-48);
+}
+
+.hero.about .hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+  max-width: var(--grid-max-width);
+  margin: var(--spacing-32) auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero.about .hero-trust li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
+  column-gap: var(--spacing-12);
+  box-sizing: border-box;
+  min-width: 222px;
+  padding: var(--spacing-12) var(--spacing-20);
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: var(--type-meta-sm-font-size);
+  font-weight: var(--type-label-sm-font-weight);
+  line-height: var(--type-body-xs-line-height);
+}
+
+.hero.about .hero-trust li > p {
+  grid-column: 2;
+  margin: 0;
+}
+
+.hero.about .hero-trust li > p:has(picture, img) {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  line-height: 0;
+}
+
+.hero.about .hero-trust li img {
+  display: block;
+  box-sizing: border-box;
+  width: auto;
+  height: var(--size-control-sm);
+  max-width: 48px;
+  padding: var(--spacing-2);
+  border-radius: 6px;
+  background: var(--text-primary);
+  object-fit: contain;
+}
+
+.hero.about .hero-trust li strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: var(--type-label-md-font-size);
+  font-weight: var(--type-label-md-font-weight);
+  line-height: var(--type-label-md-line-height);
+}
+
+@media (width >= 900px) {
+  .hero.about {
+    padding-block: var(--spacing-96) 0;
+  }
+
+  .hero.about .hero-trust {
+    margin-top: var(--spacing-48);
+  }
+}
+
+.hero.about h1 strong {
+  color: var(--action-primary);
+  font-weight: inherit;
+}

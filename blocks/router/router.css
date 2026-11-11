@@ -151,3 +151,33 @@ main > .router-container > .section-intro-wrapper + .router-wrapper {
     transform: none;
   }
 }
+
+/* Ecosystem: compact static rows with a mint product name (About). */
+/* stylelint-disable no-descending-specificity */
+.router.ecosystem .router-list {
+  gap: var(--spacing-16);
+}
+
+.router.ecosystem .router-entry {
+  min-height: 0;
+  gap: var(--spacing-20);
+  background: color-mix(in srgb, var(--bg-card) 60%, transparent);
+}
+
+.router.ecosystem .router-index {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.router.ecosystem .router-title {
+  color: var(--accent-mint);
+  font-family: var(--type-heading-sm-font-family);
+  font-weight: var(--type-heading-sm-font-weight);
+}
+
+@media (width >= 900px) {
+  .router.ecosystem .router-list {
+    gap: var(--spacing-24);
+  }
+}
+

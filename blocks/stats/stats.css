@@ -106,3 +106,46 @@ main > .section > .stats-wrapper {
     color: CanvasText;
   }
 }
+
+/* Tiles: each metric is its own bordered card (About). */
+/* stylelint-disable no-descending-specificity */
+.stats.tiles .stats-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+  padding: 0;
+  border: 0;
+}
+
+.stats.tiles .stats-item {
+  box-sizing: border-box;
+  gap: var(--spacing-12);
+  padding: var(--spacing-24);
+  border: var(--size-border) solid var(--border-dark);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.stats.tiles dd {
+  background: none;
+  color: var(--accent-mint);
+  font-size: var(--type-display-subsection-font-size);
+  line-height: var(--type-display-subsection-line-height);
+}
+
+.stats.tiles dt {
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+}
+
+@media (width >= 900px) {
+  .stats.tiles .stats-list {
+    grid-template-columns: repeat(var(--stats-columns), minmax(0, 1fr));
+    justify-content: normal;
+    padding: 0;
+    border-width: 0;
+  }
+
+  .stats.tiles .stats-item {
+    padding: var(--spacing-32);
+  }
+}

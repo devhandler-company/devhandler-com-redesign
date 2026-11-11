@@ -1,5 +1,5 @@
 /* Default cards follow the Card / Case look. */
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) {
   box-sizing: border-box;
   width: 100%;
   max-width: var(--grid-max-width);
@@ -7,7 +7,7 @@
   color: var(--text-primary);
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--grid-gutter);
@@ -16,7 +16,7 @@
   list-style: none;
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul > li {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -27,19 +27,19 @@
   background: var(--bg-card);
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-image {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-image {
   line-height: 0;
   background: var(--bg-surface-2);
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li img {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul > li img {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-body {
   flex: 1;
   margin: 0;
   padding: var(--spacing-24);
@@ -47,16 +47,16 @@
   overflow-wrap: anywhere;
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > :first-child {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-body > :first-child {
   margin-top: 0;
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > :last-child {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-body > :last-child {
   margin-bottom: 0;
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > p:first-child,
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > :is(h2, h3, h4, h5, h6) {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-body > p:first-child,
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-body > :is(h2, h3, h4, h5, h6) {
   color: var(--text-primary);
   font-family: var(--type-display-caption-font-family);
   font-size: var(--type-display-caption-font-size);
@@ -65,29 +65,29 @@
   line-height: var(--type-display-caption-line-height);
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card-body > p:first-child strong {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card-body > p:first-child strong {
   font-weight: inherit;
 }
 
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) a:focus-visible {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) a:focus-visible {
   border-radius: var(--radius-sm);
   outline: var(--size-border-strong) solid var(--focus-ring);
   outline-offset: var(--spacing-4);
 }
 
 @media (width >= 600px) {
-  .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul {
+  .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (width >= 1200px) {
-  .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul {
+  .cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) {
+.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) {
   box-sizing: border-box;
   width: 100%;
   max-width: var(--grid-max-width);
@@ -95,7 +95,7 @@
   color: var(--text-primary);
 }
 
-.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-list {
+.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-list {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--grid-gutter);
@@ -104,12 +104,12 @@
   list-style: none;
 }
 
-.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-item {
+.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-item {
   display: flex;
   min-width: 0;
 }
 
-.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) .cards-card {
+.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) .cards-card {
   box-sizing: border-box;
   display: flex;
   flex: 1;
@@ -123,7 +123,7 @@
   background: var(--bg-card);
 }
 
-.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason)
+.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team)
   .cards-title {
   margin: 0;
   color: var(--text-primary);
@@ -135,7 +135,7 @@
   overflow-wrap: anywhere;
 }
 
-.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason)
+.cards:is(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team)
   a:focus-visible {
   border-radius: var(--radius-sm);
   outline: var(--size-border-strong) solid var(--focus-ring);
@@ -1024,8 +1024,8 @@
 }
 
 /* Default card hover, kept last for specificity order. */
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li:hover,
-.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason) > ul > li:focus-within {
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul > li:hover,
+.cards:not(.case, .service, .insight, .featured, .model, .challenge, .outcome, .reason, .panel, .team) > ul > li:focus-within {
   border-color: var(--border-hover);
   background: linear-gradient(var(--bg-hover-row), var(--bg-hover-row)), var(--bg-card);
 }
@@ -1094,3 +1094,91 @@
 }
 
 /* stylelint-enable no-descending-specificity */
+
+/* About: four-up info tiles, Mission/Vision panels and the Team grid. */
+/* stylelint-disable no-descending-specificity */
+.cards.panel .cards-card {
+  gap: var(--spacing-16);
+  padding: var(--spacing-24);
+  border-radius: var(--radius-lg);
+}
+
+.cards.panel .cards-panel-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+  overflow-wrap: anywhere;
+}
+
+.cards.team .cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cards.team .cards-item {
+  flex: 0 0 100%;
+}
+
+.cards.team .cards-media {
+  aspect-ratio: 282 / 200;
+  overflow: hidden;
+  background: var(--bg-surface-2);
+}
+
+.cards.team .cards-media picture,
+.cards.team .cards-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cards.team .cards-team-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-24);
+}
+
+.cards.team .cards-team-role {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+}
+
+@media (width >= 600px) {
+  .cards.four-up .cards-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards.team .cards-item {
+    flex-basis: calc((100% - var(--grid-gutter)) / 2);
+  }
+}
+
+@media (width >= 900px) {
+  .cards.panel .cards-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards.panel .cards-card {
+    padding: var(--spacing-40);
+  }
+
+  .cards.team .cards-item {
+    flex-basis: calc((100% - 2 * var(--grid-gutter)) / 3);
+  }
+}
+
+@media (width >= 1200px) {
+  .cards.four-up .cards-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cards.team .cards-item {
+    flex-basis: calc((100% - 3 * var(--grid-gutter)) / 4);
+  }
+}

@@ -32,5 +32,5 @@
 :root body footer .footer { background: var(--bg-footer); }
 
 /* Blocks whose own surface differs from the page background. */
-:root body main .hero.services,
+:root body main .hero:is(.services, .about),
 :root body main > .section.stats-container { background: transparent; }

@@ -1,0 +1,108 @@
+/* About page layout: section spacing and section-specific composition only.
+   Block appearance lives in each block's stylesheet and is the same on every page. */
+
+.about-page main > .section {
+  margin: 0;
+  padding-block: var(--spacing-40);
+}
+
+.about-page main > .section:empty {
+  display: none;
+}
+
+.about-page main > .section > div {
+  box-sizing: border-box;
+  max-width: calc(var(--grid-max-width) + 2 * var(--grid-margin-mobile));
+  padding-inline: var(--grid-margin-mobile);
+}
+
+.about-page main > .section.hero-container {
+  padding: 0;
+}
+
+.about-page main > .section.hero-container > .hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+/* The Figma hero ends at the badges; the next section supplies its own top padding. */
+.about-page main > .section.about-story > .quote-wrapper {
+  margin-top: var(--spacing-48);
+}
+
+.about-page main > .section.about-story > .columns-wrapper {
+  margin-top: var(--spacing-32);
+}
+
+.about-page main > .section.about-numbers {
+  padding-top: 0;
+}
+
+/* Only the eyebrow is authored above Mission and Vision. */
+.about-page main > .section.about-mission > .section-intro-wrapper {
+  margin-bottom: var(--spacing-32);
+}
+
+/* The map artwork bleeds past its frame; keep the page from scrolling sideways. */
+.about-page main > .section.about-reach {
+  overflow-x: clip;
+}
+
+.about-page main > .section.about-ecosystem > .router-wrapper + .default-content-wrapper {
+  margin-top: var(--spacing-32);
+}
+
+.about-page main > .section.about-ecosystem > .default-content-wrapper > p {
+  margin: 0;
+}
+
+/* The ecosystem link is plain default content; give it the mint pill used by the CTA. */
+.about-page main > .section.about-ecosystem > .default-content-wrapper a.button:any-link {
+  min-height: var(--size-control-lg);
+  padding: var(--spacing-16) var(--spacing-32);
+  border: var(--size-border) solid var(--accent-mint);
+  border-radius: var(--radius-pill);
+  background: var(--accent-mint);
+  color: var(--color-neutral-black);
+  font-family: var(--type-label-lg-font-family);
+  font-size: var(--type-label-lg-font-size);
+  font-weight: var(--type-label-lg-font-weight);
+  line-height: var(--type-label-lg-line-height);
+  text-decoration: none;
+}
+
+.about-page main > .section.about-ecosystem > .default-content-wrapper a.button:any-link:hover {
+  border-color: color-mix(in srgb, var(--accent-mint) 85%, var(--color-neutral-black));
+  background: color-mix(in srgb, var(--accent-mint) 85%, var(--color-neutral-black));
+}
+
+.about-page main > .section.about-cta > .cta-wrapper {
+  padding-block: 0;
+}
+
+@media (width >= 900px) {
+  .about-page main > .section {
+    padding-block: var(--spacing-80);
+  }
+
+  .about-page main > .section.hero-container {
+    padding: 0;
+  }
+
+  /* The founder photo overhangs the card by ~85px; the gap leaves room for it. */
+  .about-page main > .section.about-story > .quote-wrapper {
+    margin-top: 88px;
+  }
+
+  .about-page main > .section.about-story > .columns-wrapper {
+    margin-top: 0;
+  }
+
+  .about-page main > .section.about-numbers {
+    padding-top: var(--spacing-40);
+  }
+
+  .about-page main > .section.about-cta {
+    padding-bottom: var(--spacing-160);
+  }
+}

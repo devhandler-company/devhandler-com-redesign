@@ -1,7 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 const TEXT_ELEMENTS = 'p, li, h1, h2, h3, h4, h5, h6';
-const CARD_VARIANTS = ['case', 'service', 'insight', 'featured', 'model', 'challenge', 'outcome', 'reason'];
+const CARD_VARIANTS = ['case', 'service', 'insight', 'featured', 'model', 'challenge', 'outcome', 'reason', 'panel', 'team'];
 const CARD_MEDIA_WIDTHS = [{ width: '750' }];
 
 function textParts(cell, deduplicate = true) {
@@ -44,15 +44,24 @@ function createCard() {
   return { item, article };
 }
 
-function appendMedia(article, cell, fallbackAlt, reserveSpace = false) {
+/** An image cell holds an inline image or, as a fallback, one repo path to an image. */
+function mediaSource(cell) {
   const sourceImage = cell?.querySelector('picture img, img');
-  if (!sourceImage?.src && !reserveSpace) return null;
+  if (sourceImage?.src) return { src: sourceImage.src, alt: sourceImage.getAttribute('alt')?.trim() };
+  const path = cell?.textContent.trim() || '';
+  const isImagePath = /^\/(?!\/)\S+\.(?:jpe?g|png|webp|avif|svg)$/i.test(path);
+  return isImagePath ? { src: path, alt: '' } : null;
+}
+
+function appendMedia(article, cell, fallbackAlt, reserveSpace = false) {
+  const source = mediaSource(cell);
+  if (!source && !reserveSpace) return null;
 
   const media = document.createElement('div');
   media.className = 'cards-media';
-  if (sourceImage?.src) {
-    const alt = sourceImage.getAttribute('alt')?.trim() || fallbackAlt;
-    media.append(createOptimizedPicture(sourceImage.src, alt, false, CARD_MEDIA_WIDTHS));
+  if (source) {
+    const alt = source.alt || fallbackAlt;
+    media.append(createOptimizedPicture(source.src, alt, false, CARD_MEDIA_WIDTHS));
   } else {
     media.setAttribute('aria-hidden', 'true');
   }
@@ -213,6 +222,32 @@ function createInfoCard(row) {
   appendText(article, 'cards-title', title, 'h3');
   appendText(article, 'cards-info-description', textParts(cells[2]).join(' '));
   appendText(article, 'cards-info-impact', textParts(cells[3]).join(' '));
+  return item;
+}
+
+/** Team member: photo (placeholder space is always reserved), name, role. */
+function createTeamCard(row) {
+  const cells = [...row.children];
+  const name = textParts(cells[1]).join(' ');
+  if (!name) return null;
+  const { item, article } = createCard();
+  appendMedia(article, cells[0], name, true);
+  const body = document.createElement('div');
+  body.className = 'cards-team-body';
+  appendText(body, 'cards-title', name, 'h3');
+  appendText(body, 'cards-team-role', textParts(cells[2]).join(' '));
+  article.append(body);
+  return item;
+}
+
+/** Panel: a heading and a short paragraph on a large rounded surface. */
+function createPanelCard(row) {
+  const cells = [...row.children];
+  const title = textParts(cells[0]).join(' ');
+  if (!title) return null;
+  const { item, article } = createCard();
+  appendText(article, 'cards-title', title, 'h3');
+  appendText(article, 'cards-panel-description', textParts(cells[1]).join(' '));
   return item;
 }
 
@@ -496,6 +531,12 @@ export default async function decorate(block) {
     case 'outcome':
     case 'reason':
       decorateVariant(block, createInfoCard);
+      break;
+    case 'panel':
+      decorateVariant(block, createPanelCard);
+      break;
+    case 'team':
+      decorateVariant(block, createTeamCard);
       break;
     default:
       decorateDefault(block);

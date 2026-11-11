@@ -2,7 +2,7 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 
 /** One authored hero, with layout differences handled by CSS. */
 export default function decorate(block) {
-  const textHero = block.classList.contains('services') || block.classList.contains('blog');
+  const textHero = ['services', 'blog', 'about'].some((name) => block.classList.contains(name));
   const caseStudy = block.classList.contains('case');
   const article = block.classList.contains('blog') && block.classList.contains('article');
   if (!block.classList.contains('home') && !textHero && !caseStudy) return;
@@ -86,6 +86,13 @@ export default function decorate(block) {
       const item = document.createElement('li');
       if (label === 'trust (desktop)') item.className = 'hero-trust-desktop';
       cells.slice(1).forEach((cell) => item.append(...cell.childNodes));
+      // A paragraph holding only an image path (/blocks/.../badge.webp) becomes a picture.
+      item.querySelectorAll(':scope > p').forEach((para) => {
+        const path = para.textContent.trim();
+        if (!para.querySelector('img') && /^\/(?!\/)\S+\.(?:jpe?g|png|webp|avif|svg)$/i.test(path)) {
+          para.replaceChildren(createOptimizedPicture(path, '', false, [{ width: '240' }]));
+        }
+      });
       if (item.textContent.trim() || item.querySelector('img')) trust.append(item);
     } else {
       // Retain the original single-cell EDS hero and unknown authored content.

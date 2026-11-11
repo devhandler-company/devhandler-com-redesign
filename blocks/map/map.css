@@ -1,0 +1,26 @@
+.map {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+}
+
+.map:empty {
+  display: none;
+}
+
+/* The exported map is wider and taller than its frame so its glow and shadow can bleed out. */
+.map .map-figure {
+  position: relative;
+  aspect-ratio: 1200 / 592;
+}
+
+.map .map-figure img {
+  position: absolute;
+  top: -26.35%;
+  left: -15%;
+  display: block;
+  width: 130%;
+  max-width: none;
+  height: 160.7%;
+}

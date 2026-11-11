@@ -208,7 +208,7 @@ async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   if (doc.querySelector('main .hero.home')) doc.body.classList.add('home-page');
-  const visualTemplate = ['home-page', 'services-page', 'our-work-page', 'case-study-page']
+  const visualTemplate = ['home-page', 'services-page', 'our-work-page', 'case-study-page', 'about-page']
     .find((name) => doc.body.classList.contains(name));
   if (visualTemplate) {
     ['ample-alt-bold.otf', 'hind-regular.woff2', 'hind-semibold.woff2'].forEach((file) => {

@@ -31,3 +31,23 @@
     order: unset;
   }
 }
+
+/* Story: two body-text columns (About). */
+.columns.story > div {
+  gap: var(--spacing-24);
+  align-items: flex-start;
+}
+
+.columns.story p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-md-font-size);
+  line-height: var(--type-body-md-line-height);
+}
+
+@media (width >= 900px) {
+  .columns.story > div {
+    gap: var(--spacing-48);
+  }
+}
+
