@@ -211,6 +211,16 @@
   overflow-wrap: anywhere;
 }
 
+.cards.case .cards-case-date {
+  margin: 0 0 var(--spacing-12);
+  color: var(--text-secondary);
+  font-family: var(--type-meta-xs-font-family);
+  font-size: var(--type-body-xs-font-size);
+  font-weight: var(--type-meta-xs-font-weight);
+  letter-spacing: var(--type-meta-xs-letter-spacing);
+  line-height: var(--type-meta-xs-line-height);
+}
+
 .cards:is(.case, .insight, .featured) .cards-title-link:any-link {
   color: inherit;
   text-decoration: none;

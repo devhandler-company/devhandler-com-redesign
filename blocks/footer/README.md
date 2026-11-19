@@ -13,8 +13,8 @@ and legacy unstructured fragments remain visible.
 - **Brand:** link `:header-logo: DevHandler home`, then a copyright paragraph.
   The existing site logo always links to the local homepage. Copyright is authored,
   not generated from the browser date.
-- **Social:** a bulleted list of links such as `:footer-instagram: Instagram`,
-  `:footer-facebook: Facebook`, `:footer-linkedin: LinkedIn`, and `:footer-x: X`. Link the entire
+- **Social:** a bulleted list of links such as `:footer-instagram: Instagram`
+  and `:footer-linkedin: LinkedIn`. Link the entire
   icon token and label. Labels remain available to assistive technology. Links
   without icons display their text, so additional networks do not require JS changes.
   Unlinked icons and labels remain noninteractive tiles until a destination is supplied.
@@ -38,8 +38,7 @@ logo, social tiles and contacts in three columns, with copyright and legal links
 below. Mobile stacks these groups; links have comfortable touch targets.
 The document keeps the design's explicit `{phone}`, `{email}` and `{address}`
 placeholders and authored copyright. Cookie Policy remains static until its page
-destination is supplied. Unknown contacts stay static. Instagram and LinkedIn have known destinations; Facebook and X remain
-unlinked until their account URLs are supplied.
+destination is supplied. Unknown contacts stay static. Instagram and LinkedIn have known destinations.
 
 Instagram and LinkedIn SVG paths are adapted from the read-only reference site's
 `icons/social-networks/` assets; colors are adjusted for the white icon tiles.

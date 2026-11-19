@@ -90,8 +90,24 @@ function appendLink(parent, cell, className) {
   return link;
 }
 
+const CASE_DATE_PATTERN = /\b(?:19|20)\d{2}\b/;
+
+// A short line with a year in the tags cell is the project period, not a tag.
+function isCaseDate(text) {
+  return text.length <= 40 && CASE_DATE_PATTERN.test(text);
+}
+
+function createCaseDate(cells) {
+  const text = cells.flatMap((cell) => textParts(cell)).find(isCaseDate);
+  if (!text) return null;
+  const date = document.createElement('p');
+  date.className = 'cards-case-date';
+  date.textContent = text;
+  return date;
+}
+
 function createCaseTags(cells) {
-  const tags = cells.flatMap((cell) => textParts(cell)
+  const tags = cells.flatMap((cell) => textParts(cell).filter((text) => !isCaseDate(text))
     .flatMap((text) => text.split(',').map((tag) => tag.trim()).filter(Boolean)));
   if (!tags.length) return null;
 
@@ -162,6 +178,8 @@ function createCaseCard(row) {
     .filter((cell, index) => index !== imageCellIndex && textParts(cell).length);
   const tags = createCaseTags(tagCells);
   if (tags) content.append(tags);
+  const date = createCaseDate(tagCells);
+  if (date) content.append(date);
 
   const heading = document.createElement('h3');
   heading.className = 'cards-title';
