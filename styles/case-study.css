@@ -694,6 +694,15 @@
 }
 
 @media (width < 900px) {
+  /* Before/after arrow sits in the gap between the two columns, not over the "before" text. */
+  .case-study-page .table.results tr {
+    column-gap: var(--spacing-32);
+  }
+
+  .case-study-page .table.results td:nth-child(2)::after {
+    right: calc(-1 * var(--spacing-24));
+  }
+
   .case-study-page .case-hero {
     background: radial-gradient(
       ellipse 150% 80% at 100% 5% in srgb,

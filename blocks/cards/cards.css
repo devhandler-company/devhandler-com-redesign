@@ -826,11 +826,21 @@
     grid-template-columns: minmax(0, 520fr) minmax(0, 680fr);
   }
 
-  .cards.case.featured-case .cards-media { position: relative; }
+  /* Cover art fills the full height of the slot, centered; the sides are cropped. */
+  .cards.case.featured-case .cards-media {
+    position: relative;
+    height: auto;
+  }
 
   .cards.case.featured-case .cards-media picture {
     position: absolute;
     inset: 0;
+  }
+
+  .cards.case.featured-case .cards-media img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .cards.case.featured-case .cards-media,
