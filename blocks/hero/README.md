@@ -166,6 +166,33 @@ mobile image retains native lazy loading and does not delay the title; it
 loads normally when the viewport changes to desktop. Native Docs images use
 lazy loading; manually authored eager images may request before decoration.
 
+### Animated hero media
+
+The Image row also accepts a looping animation. In the same cell put the
+poster picture (inline image with meaningful alt text) and, as a separate
+paragraph, the video path:
+
+| Label | Content |
+| --- | --- |
+| Image | Poster PNG, then `/videos/<case>-hero.mp4` as text or a link |
+
+Use the **black** H.264 MP4 export (640 x 960, 24 fps, `*_hero_loop_black.mp4`). It
+plays in every browser, and the AEM backend publishes it (it rejects `.webm`).
+The loop is rendered on black, so the block blends it with `mix-blend-mode: screen`
+and the black disappears on the dark hero. Do not use an opaque video on a light
+surface. Videos live in the Drive `videos/` folder and must be previewed/published
+like any other asset; a full `https://` URL works too. A paragraph that holds only
+an `.mp4` (or `.webm`) URL is taken as a source, plain text or link alike.
+
+The poster stays the LCP image and the fallback. The video sits above it, is
+muted, loops and plays inline, and starts loading only when the media slot is
+visible (so `desktop-media` pages never download it on mobile). It is not created
+at all with `prefers-reduced-motion: reduce` or Save-Data, and a failed load
+keeps the poster. With alt text the video is exposed as an image with that
+label; without it, it is hidden from assistive technology. A video link without
+a poster still works but has no fallback image. Do not author the GIF export:
+it is 360 x 540 and several times heavier.
+
 The [Case Study authoring guide](../../styles/case-study.md) describes the full
 page, document metadata and content approval requirements.
 

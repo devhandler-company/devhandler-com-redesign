@@ -73,6 +73,20 @@ their page and shared CSS.
 The Hero illustration is visible at both widths. Desktop waits for the foreground
 image; mobile keeps it lazy below the first viewport so it does not delay navigation.
 
+The Hero illustration can be a looping animation: author the poster picture plus
+the `/videos/<case>-hero.mp4` path (Drive `videos/` folder) in the Image row (contract and fallbacks in the
+[Hero guide](../blocks/hero/README.md#animated-hero-media)). Per case: poster
+`<case>-hero-poster.png` inline in Docs, video `<case>-hero.mp4` (black H.264 loop)
+published under `/videos/`.
+
+Decision, Results and related-case images are authored in Docs from the Drive
+`images/` folder, named `<case>-<slot>.jpg`. Decision art is authored twice in the
+second cell of `Columns (case-decision)`, as two paragraphs: the desktop crop
+(588×460) first, the mobile crop (350×220) second. CSS shows the desktop one from
+900 px and the mobile one below it; a single image still works for both. Results
+takes one 588×400 image in `Columns (case-result-media)`, and each `Cards (case)`
+row takes the linked case's `<case>-card-cover.jpg` (382×216).
+
 Ordinary links in Hero descriptions, Columns and Table use a brighter semantic
 color, underline and visible keyboard focus. Table headings use secondary text
 to retain small-text contrast over the page gradient. Buttons keep their own

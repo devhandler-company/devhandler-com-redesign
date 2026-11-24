@@ -174,6 +174,34 @@ function decorateSectionMetadata(main) {
 }
 
 /**
+ * Case Results prose becomes cards: a bare list is the "Results" card, and the heading with
+ * its paragraphs ("How that pace was possible") becomes a card of bullet points.
+ * @param {Element} main The main element
+ */
+function decorateCaseResults(main) {
+  main.querySelectorAll('.case-results > .default-content-wrapper').forEach((wrapper) => {
+    const heading = wrapper.querySelector(':scope > h3');
+    if (heading) {
+      const card = document.createElement('div');
+      card.className = 'default-content-wrapper case-card case-extra';
+      const list = document.createElement('ul');
+      [...wrapper.children].slice([...wrapper.children].indexOf(heading) + 1).forEach((node) => {
+        if (node.tagName !== 'P') return;
+        const item = document.createElement('li');
+        item.append(...node.childNodes);
+        list.append(item);
+        node.remove();
+      });
+      card.append(heading, list);
+      wrapper.after(card);
+      if (!wrapper.children.length) wrapper.remove();
+    } else if (wrapper.querySelector(':scope > ul') && !wrapper.querySelector(':scope > p')) {
+      wrapper.classList.add('case-card', 'case-results-list');
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -183,6 +211,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateSectionMetadata(main);
+  if (document.body.classList.contains('case-study-page')) decorateCaseResults(main);
   if (document.body.classList.contains('home-page')) {
     const picture = main.querySelector('.home-office picture');
     const image = picture?.querySelector('img');

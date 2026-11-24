@@ -9,6 +9,74 @@ function cellText(cell) {
   return copy.textContent.trim().replace(/\s+/g, ' ');
 }
 
+const VIDEO_TYPES = { webm: 'video/webm', mp4: 'video/mp4' };
+
+/** Take authored links to .mp4/.webm files out of the Image row. */
+function takeVideoSources(media) {
+  const sources = [];
+  media.querySelectorAll('p').forEach((paragraph) => {
+    if (paragraph.querySelector('img')) return;
+    const text = paragraph.textContent.trim();
+    const href = paragraph.querySelector('a[href]')?.getAttribute('href')?.trim()
+      || (/^(https?:\/\/|\/(?!\/))\S+$/.test(text) ? text : '');
+    const extension = href.match(/\.(webm|mp4)(?:[?#].*)?$/i)?.[1].toLowerCase();
+    if (!extension) return;
+    try {
+      if (!['http:', 'https:'].includes(new URL(href, document.baseURI).protocol)) return;
+    } catch { return; }
+    sources.push({ href, type: VIDEO_TYPES[extension] });
+    paragraph.remove();
+  });
+  return sources;
+}
+
+/**
+ * Loop the authored animation above the poster. The poster stays the LCP image and the
+ * fallback; the video loads only while visible and is skipped for reduced motion or Save-Data.
+ */
+function attachVideo(media, sources) {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!sources.length || reduced || navigator.connection?.saveData) return;
+  const frame = media.querySelector('p') || media.appendChild(document.createElement('p'));
+  const alt = frame.querySelector('img')?.alt.trim();
+  if (!frame.querySelector('img')) frame.classList.add('hero-video-only');
+  const video = document.createElement('video');
+  video.className = 'hero-video';
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = 'none';
+  video.tabIndex = -1;
+  if (alt) {
+    video.setAttribute('role', 'img');
+    video.setAttribute('aria-label', alt);
+  } else video.setAttribute('aria-hidden', 'true');
+  video.addEventListener('playing', () => frame.classList.add('is-playing'));
+  frame.append(video);
+
+  let loaded = false;
+  new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) {
+      video.pause();
+      return;
+    }
+    if (!loaded) {
+      loaded = true;
+      sources.forEach(({ href, type }) => {
+        const source = document.createElement('source');
+        source.src = href;
+        source.type = type;
+        video.append(source);
+      });
+      // Every source failed: keep the poster.
+      video.lastElementChild.addEventListener('error', () => video.remove());
+      video.load();
+    }
+    video.play().catch(() => { /* Autoplay declined: the poster remains. */ });
+  }).observe(frame);
+}
+
 /** Keep the value, label and optional explanation together in the reading order. */
 function appendStat(list, value, label, detail = '') {
   if (!value || !label) return;
@@ -242,7 +310,9 @@ export default function decorate(block) {
     });
     content.append(media);
   }
-  if (caseStudy && (media.hasChildNodes() || block.classList.contains('placeholder-media'))) {
+  const videoSources = caseStudy ? takeVideoSources(media) : [];
+  if (caseStudy && (media.hasChildNodes() || videoSources.length
+    || block.classList.contains('placeholder-media'))) {
     const eager = window.matchMedia('(min-width: 900px)').matches;
     media.querySelectorAll('img').forEach((image) => {
       const picture = createOptimizedPicture(image.src, image.alt, eager, [
@@ -251,6 +321,7 @@ export default function decorate(block) {
       picture.querySelector('img').setAttribute('fetchpriority', eager ? 'high' : 'auto');
       (image.closest('picture') || image).replaceWith(picture);
     });
+    attachVideo(media, videoSources);
     block.append(media);
   }
   if (badges.textContent.trim() || badges.querySelector('img')) block.append(badges);
