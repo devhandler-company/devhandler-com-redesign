@@ -23,8 +23,9 @@ otherwise. Edit the form once, in that fragment.
 
 It is skipped for the `/fragments/` and `/tools/` paths, error pages, and pages
 whose Template metadata includes `no-form` (for example `case-study-page, no-form`).
-A page that still authors its own Form table, or includes the fragment itself,
-keeps a single form.
+A Form table authored in a page doc is removed and replaced by the shared form,
+so every page looks and reads the same. A page that includes the fragment itself
+keeps that single form.
 
 The section takes the template's existing style and anchor id: `home-form` /
 `contact-us-form` on Home, `services-form` / `services-contact`,

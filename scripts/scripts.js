@@ -353,15 +353,24 @@ function includesContactForm(main) {
   const { pathname } = window.location;
   if (window.isErrorPage || document.body.classList.contains('no-form')) return false;
   if (pathname.startsWith('/fragments/') || pathname.startsWith('/tools/')) return false;
-  // Pages that still author their own form, or include this fragment, keep a single form.
-  return !main.querySelector('.form')
-    && ![...main.querySelectorAll('.fragment')]
-      .some((block) => block.textContent.includes(CONTACT_FORM_FRAGMENT));
+  // Pages that include the fragment themselves keep that single form.
+  return ![...main.querySelectorAll('.fragment')]
+    .some((block) => block.textContent.includes(CONTACT_FORM_FRAGMENT));
+}
+
+/** Drops forms authored in a page doc so every page shows the shared contact form. */
+function removeAuthoredForms(main) {
+  main.querySelectorAll('.form').forEach((form) => {
+    const section = form.closest('.section');
+    (form.closest('.form-wrapper') || form).remove();
+    if (section && !section.querySelector('.block') && !section.textContent.trim()) section.remove();
+  });
 }
 
 /**
  * Appends the shared contact form fragment to every page except fragments,
- * error pages and pages whose template includes `no-form`.
+ * error pages and pages whose template includes `no-form`. A form authored in the
+ * page doc is replaced by the shared one.
  */
 async function loadContactForm(main) {
   if (!main || !includesContactForm(main)) return;
@@ -371,6 +380,7 @@ async function loadContactForm(main) {
     const fragment = await loadFragment(CONTACT_FORM_FRAGMENT);
     const sections = [...(fragment?.querySelectorAll(':scope > .section') || [])];
     if (!sections.length) return;
+    removeAuthoredForms(main);
     const template = Object.keys(CONTACT_FORM_SECTIONS)
       .find((name) => document.body.classList.contains(name));
     const [style, id] = CONTACT_FORM_SECTIONS[template] || [];

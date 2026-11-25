@@ -368,13 +368,17 @@ export function decorateBlogArticle(doc) {
   const cta = element('div', '', 'blog-article-contact');
   cta.append(element('h2', 'Talk to an expert'), element('p', 'Discuss your AEM goals with our team.'));
   const contact = element('a', 'Book a free AEM audit', 'button');
-  contact.href = '/contact-us';
+  contact.href = 'https://calendly.com/yevhen-kliakhin';
+  contact.target = '_blank';
+  contact.rel = 'noopener noreferrer';
   cta.append(contact);
   sticky.append(cta);
   aside.append(sticky);
   const mobileAudit = element('div', '', 'blog-article-mobile-audit');
   const auditLink = element('a', 'Book a free AEM audit', 'button');
   auditLink.href = contact.href;
+  auditLink.target = contact.target;
+  auditLink.rel = contact.rel;
   mobileAudit.append(auditLink);
   layout.append(article, aside, mobileAudit);
 }

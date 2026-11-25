@@ -46,6 +46,15 @@ export default function decorate(block) {
       const content = document.createElement('div');
       content.className = 'table-cell-content';
       if (source.children[index]) content.append(...source.children[index].childNodes);
+      // A cell holding only a horizontal rule marks an empty value: show a short dash.
+      if (content.querySelector('hr') && !content.textContent.trim()
+        && !content.querySelector('img, a, li')) {
+        const dash = document.createElement('span');
+        dash.setAttribute('role', 'img');
+        dash.setAttribute('aria-label', 'No value');
+        dash.textContent = '\u2014';
+        content.replaceChildren(dash);
+      }
       if (rowHeader && !content.textContent.trim()) content.append(label || 'Details');
       cell.append(content);
       row.append(cell);

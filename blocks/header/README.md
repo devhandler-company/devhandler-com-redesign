@@ -8,7 +8,7 @@ desktop and mobile navigation. Keep the sections in this order:
 3. Mobile navigation: add the `Mobile navigation` marker followed by its list.
 4. Metadata: keep `Robots` set to `noindex, nofollow`.
 
-Use nested list items for dropdown entries. Bold a linked top-level list item to
+Use nested list items for dropdown entries. Author the same nested list in both the desktop and the mobile group: on mobile the parent row becomes an accordion toggle, and a flat link there sends visitors to the page instead of expanding. Bold a linked top-level list item to
 turn it into an action. The first action in a navigation group is primary and
 later actions are secondary.
 
@@ -25,19 +25,37 @@ The current design content is:
 Desktop navigation
 - Adobe Services -> /services
 - Services
-  - Implementation -> /services/aem-project-implementation
-  - Support -> /services
+  - AEM Development -> /services/aem-development
+  - AEM Run & Operate -> /services/aem-support
+  - Edge Delivery Services -> /services/edge-delivery-services
+  - AEM Migration to Cloud Service -> /services/aem-migration-to-cloud-service
+  - Adobe Data & Analytics -> /services/adobe-data-analytics
+  - AEM Translation Connectors -> /services/aem-translation-integration
+  - Changing AEM Partners -> /services/aem-partner-change
+  - AEM Guides -> /services/aem-guides
+  - AEM Accessibility -> /services/aem-accessibility
+  - AI Search Visibility -> /services/ai-search-visibility
 - Blog -> /blog/
 - Our Work -> /our-work
-- About Us -> https://www.devhandler.com/about
+- About Us -> /about
 - Contact us -> #contact-us-form [bold]
 ---
 Mobile navigation
 - Adobe Services -> /services
-- Services -> /services
+- Services
+  - AEM Development -> /services/aem-development
+  - AEM Run & Operate -> /services/aem-support
+  - Edge Delivery Services -> /services/edge-delivery-services
+  - AEM Migration to Cloud Service -> /services/aem-migration-to-cloud-service
+  - Adobe Data & Analytics -> /services/adobe-data-analytics
+  - AEM Translation Connectors -> /services/aem-translation-integration
+  - Changing AEM Partners -> /services/aem-partner-change
+  - AEM Guides -> /services/aem-guides
+  - AEM Accessibility -> /services/aem-accessibility
+  - AI Search Visibility -> /services/ai-search-visibility
 - Blog -> /blog
 - Our Work -> /our-work
-- About Us -> https://www.devhandler.com/about
+- About Us -> /about
 - Contact us -> #contact-us-form [bold]
 ---
 Metadata

@@ -278,21 +278,6 @@ body.service-detail-page main > .section {
 
 .service-detail-page .cards.service span.cards-service-link::after { content: none; }
 
-.service-detail-page .form-eyebrow {
-  color: var(--text-placeholder);
-}
-
-.service-detail-page .form-actions { flex-wrap: wrap; }
-
-.service-detail-page :is(.form-submit, .form-schedule) {
-  min-width: 0;
-  max-width: 100%;
-  min-height: var(--size-control-md);
-  height: auto;
-  padding-block: var(--spacing-8);
-  overflow-wrap: anywhere;
-}
-
 @media (width < 900px) {
   .service-detail-page main > .section > .hero-wrapper:has(> .hero.services) {
     padding-inline: var(--grid-margin-mobile);
@@ -383,66 +368,6 @@ body.service-detail-page main > .section {
   .service-detail-page main > .service-detail-form {
     padding-top: 0;
     padding-bottom: var(--spacing-80);
-  }
-
-  .service-detail-page .form-card {
-    display: grid;
-    grid-template-columns: minmax(0, 428fr) minmax(0, 578fr);
-    gap: var(--spacing-96);
-    padding: var(--spacing-80) var(--spacing-96);
-    border-radius: var(--spacing-48);
-    min-height: 760px;
-  }
-
-  .service-detail-page .form-panel {
-    width: auto;
-    min-width: 0;
-    padding-top: var(--spacing-64);
-  }
-
-  .service-detail-page :is(.form-fields, .form-labels) {
-    gap: var(--spacing-8);
-  }
-
-  .service-detail-page .form-labels li {
-    padding: var(--spacing-8) var(--spacing-16);
-    font-size: var(--type-body-md-font-size);
-    line-height: 1.2;
-    background: var(--bg-step-light);
-  }
-
-  .service-detail-page .form-after-text {
-    margin-top: var(--spacing-24);
-    font-size: var(--type-body-md-font-size);
-  }
-
-  .service-detail-page .form-input {
-    border-color: var(--action-ghost-border);
-    font-size: var(--type-body-md-font-size);
-  }
-
-  .service-detail-page .form-consent-label input[type="checkbox"] {
-    width: var(--spacing-32);
-    height: var(--spacing-32);
-  }
-
-  .service-detail-page .form-consent-label span {
-    font-size: var(--type-body-md-font-size);
-  }
-
-  .service-detail-page :is(.form-submit, .form-schedule) {
-    min-height: var(--size-control-lg);
-    font-size: var(--type-label-lg-font-size);
-  }
-
-  .service-detail-page .form-title {
-    font-family: var(--type-display-hero-font-family);
-    font-size: var(--type-display-hero-font-size);
-    line-height: var(--type-display-hero-line-height);
-  }
-
-  .service-detail-page .form-eyebrow {
-    margin-bottom: var(--spacing-32);
   }
 
   .service-detail-page main > .service-detail-cta {

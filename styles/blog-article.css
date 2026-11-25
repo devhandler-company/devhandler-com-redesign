@@ -319,6 +319,15 @@
   margin-block: 0;
 }
 
+/* Form and CTA sections after the article keep a gap between them and above the footer. */
+.blog-article-page main > .section:not(:first-of-type) {
+  margin-block: var(--spacing-32);
+}
+
+.blog-article-page main > .section:last-of-type {
+  margin-bottom: var(--spacing-80);
+}
+
 .blog-article-page .hero.blog.article {
   padding-block: var(--spacing-48);
 }
