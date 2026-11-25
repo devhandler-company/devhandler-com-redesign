@@ -540,7 +540,12 @@ export default async function decorate(block) {
       }
       break;
     case 'featured':
-      decorateVariant(block, createFeaturedCard);
+      if (block.classList.contains('latest')) {
+        const { decorateLatestFeatured } = await import('../../scripts/cards-index.js');
+        await decorateLatestFeatured(block, createFeaturedCard);
+      } else {
+        decorateVariant(block, createFeaturedCard);
+      }
       break;
     case 'model':
       decorateVariant(block, createModelCard);

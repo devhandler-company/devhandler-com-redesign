@@ -59,6 +59,8 @@ export default function prepareBlogPage(doc) {
     hero.classList.add('blog');
     legacy.replaceWith(hero);
   });
+  // The listing's top "Latest" card always shows the newest indexed article.
+  main.querySelector('.cards.featured')?.classList.add('latest');
   main.querySelectorAll('.blog-cards.mobile-hidden').forEach((duplicate) => {
     const fields = labeledFields(duplicate);
     const first = duplicate.parentElement.querySelector('.blog-cards:not(.mobile-hidden)');

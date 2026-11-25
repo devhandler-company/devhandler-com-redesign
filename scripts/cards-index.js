@@ -224,3 +224,103 @@ export async function decorateLatest(block, createCard) {
   }
   if (!list.children.length) block.hidden = true;
 }
+
+/* Latest featured post: newest article from the index as the Featured card. */
+const DEFAULT_AUTHOR = {
+  name: 'Yevhen Kliakhin',
+  title: 'CEO, DevHandler',
+  image: '/blog/media_1729f1ee89b0906b7c66c98c778581dae957f641c.png',
+};
+
+function formatDate(date) {
+  const formatted = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC',
+  }).formatToParts(date)
+    .map((part) => (part.type === 'month' ? part.value.slice(0, 3) : part.value)).join('');
+  return formatted;
+}
+
+/** Author, publication date and reading time come from the article itself; the index lacks them. */
+async function articleDetails(article) {
+  const details = {};
+  try {
+    const response = await fetch(article.path);
+    if (!response.ok) return details;
+    const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+    const meta = (...names) => names.map((name) => doc.querySelector(`meta[name="${name}"], meta[property="${name}"]`)?.content.trim()).find(Boolean) || '';
+    const main = doc.querySelector('main');
+    const byline = [...(main?.querySelectorAll('p') || [])]
+      .map((p) => p.textContent.trim().match(/^By\s+(.+?)(?:\s*\|\s*Published\s+(.+))?$/i))
+      .find(Boolean);
+    details.author = meta('author', 'article:author') || byline?.[1] || '';
+    details.authorTitle = meta('author-title', 'author-position');
+    details.authorImage = safeURL(meta('author-image'), document.baseURI);
+    const dateText = meta('publication-date', 'published-date', 'article:published_time') || byline?.[2] || '';
+    const parsed = Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(dateText) ? `${dateText}T00:00:00Z` : `${dateText} UTC`);
+    if (dateText && Number.isFinite(parsed)) details.date = new Date(parsed);
+    if (main) {
+      const copy = main.cloneNode(true);
+      copy.querySelectorAll('.blog-hero, .blog-lets-talk, .blog-table-of-contents, .cta').forEach((n) => n.remove());
+      const words = copy.textContent.trim().split(/\s+/).filter(Boolean).length;
+      details.readingTime = `${Math.max(1, Math.ceil(words / 200))} min read`;
+    }
+  } catch { /* Fall back to index data only. */ }
+  return details;
+}
+
+/** Replaces the block's rows with the newest indexed article; authored rows remain the fallback. */
+export async function decorateLatestFeatured(block, createCard) {
+  const config = configOf(block);
+  const indexPath = config.queryindexlink || config.source || DEFAULT_SOURCE;
+  const source = safeURL(indexPath, document.baseURI);
+  let row;
+  try {
+    if (!source) throw new Error('Invalid index URL.');
+    const records = await loadIndex(source);
+    const [article] = sortArticles(normalizeArticles(records, source, {
+      template: config.pagetemplate, prefix: config.pathprefix || '/blog/',
+    }));
+    if (article) {
+      const details = await articleDetails(article);
+      const image = article.image ? node('img') : null;
+      if (image) { image.src = article.image; image.alt = ''; }
+      const meta = [article.category, details.date ? formatDate(details.date) : '',
+        article.readingTime || details.readingTime || '']
+        .filter(Boolean).map((text) => node('p', text));
+      const link = node('a', article.title);
+      link.href = article.path;
+      const authorImage = node('img');
+      const portrait = node('p');
+      portrait.append(authorImage);
+      authorImage.src = article.authorImage || details.authorImage || DEFAULT_AUTHOR.image;
+      authorImage.alt = '';
+      // Index fields first, then the article's own metadata, then the company default.
+      const authorName = article.author || details.author || DEFAULT_AUTHOR.name;
+      const authorTitle = article.author ? article.authorTitle
+        : details.authorTitle || (authorName === DEFAULT_AUTHOR.name ? DEFAULT_AUTHOR.title : '');
+      const authorText = node('p', [authorName, authorTitle].filter(Boolean).join(' · '));
+      const cta = node('a', 'article');
+      cta.href = article.path;
+      const read = node('p');
+      read.append('Read the ', cta);
+      [row] = buildBlock('cards', [[
+        { elems: image ? [image] : [] },
+        { elems: meta },
+        { elems: [link] },
+        { elems: [node('p', article.description)] },
+        { elems: [portrait, authorText] },
+        { elems: [read] },
+      ]]).children;
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Latest featured article loading failed', error);
+  }
+  const card = row ? createCard(row) : createCard(block.firstElementChild);
+  if (card) {
+    const list = node('ul', '', 'cards-list');
+    list.setAttribute('role', 'list');
+    list.append(card);
+    block.replaceChildren(list);
+  } else block.hidden = true;
+}

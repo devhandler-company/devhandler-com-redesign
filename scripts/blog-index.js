@@ -65,6 +65,9 @@ export function normalizeArticles(records, source, options = {}) {
       readingTime: typeof readingTime === 'number' || /^\d+$/.test(text(readingTime))
         ? `${readingTime} min read` : text(readingTime),
       sortDate: date,
+      author: text(record.author),
+      authorTitle: text(record.authorTitle) || text(record['author-title']),
+      authorImage: safeURL(record.authorImage || record['author-image'], source),
     }];
   }).sort((a, b) => b.sortDate - a.sortDate);
 }
