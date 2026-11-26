@@ -1,0 +1,46 @@
+.image figure {
+  margin: 0;
+}
+
+.image picture {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  line-height: 0;
+}
+
+.image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.image figcaption {
+  margin-top: var(--spacing-12);
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm-font-size);
+  line-height: var(--type-body-sm-line-height);
+}
+
+.image.radius-md picture {
+  border-radius: var(--radius-md);
+}
+
+.image.radius-sm picture {
+  border-radius: var(--radius-sm);
+}
+
+.image:empty {
+  display: none;
+}
+
+@media (width < 900px) {
+  .image picture {
+    border-radius: var(--radius-md);
+  }
+
+  .image.radius-sm picture {
+    border-radius: var(--radius-sm);
+  }
+}
