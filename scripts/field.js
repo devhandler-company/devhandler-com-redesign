@@ -14,8 +14,9 @@ return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(
 float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
 void main(){
   vec2 uv=gl_FragCoord.xy/r;
-  vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
-  vec2 d=p-((m-.5)*vec2(r.x/r.y,1.));
+  float s=min(r.y,r.x*.9);
+  vec2 p=(gl_FragCoord.xy-.5*r)/s;
+  vec2 d=p-((m-.5)*r/s);
   float near=exp(-dot(d,d)*7.);
   vec2 q=p*1.35+vec2(t*.018,-t*.012);
   float h=fbm(q+.55*fbm(q*1.4-t*.02))+near*.16;
